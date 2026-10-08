@@ -1,5 +1,7 @@
 # SetHarbor
 
+[![Android E2E](https://github.com/william-gr/setharbor/actions/workflows/android-e2e.yml/badge.svg)](https://github.com/william-gr/setharbor/actions/workflows/android-e2e.yml)
+
 A free, open-source Android workout tracker. Record your sets, keep your workout history and update your training plan without rebuilding the app.
 
 SetHarbor works offline, with no account, subscription or advertising. The current interface is in Portuguese. Android 8.0 or later is required.
