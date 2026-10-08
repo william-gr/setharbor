@@ -1,19 +1,26 @@
 # Verificação local — 2026-10-08
 
-## Verificado
+## Resultado
 
-- APK pessoal e APK E2E compilados com as ferramentas do SDK.
-- Assinaturas verificadas.
-- Certificado/configuração E2E ausentes no APK pessoal.
-- Sintaxe de todos os scripts Python validada.
-- 30 cenários E2E descobertos no código.
-- YAML, gatilhos PR/main e matriz API 29/35 do workflow validados.
-- Validador de fichas: oito verificações passaram em execução JVM anterior.
+**30 de 30 cenários E2E passaram**, sem falhas, erros ou skips, em uma execução completa de `python3 e2e/run.py` (2164,456 segundos, cerca de 36 minutos).
 
-## Execução em emulador
+Ambiente: macOS Apple Silicon, JDK 17 (Temurin), Gradle 8.9, Android SDK 35 e emulador Google APIs Android API 35 ARM64 com aceleração e animações desativadas. Pacote testado: `com.william.treino.e2e`. Nenhum aparelho físico foi utilizado.
 
-Emulador Android API 29 iniciado sem KVM. Primeira tentativa de instalação excedeu 45 segundos; a tentativa seguinte, com prazo maior, instalou o APK e começou a suíte. Os cenários iniciais falharam na preparação da interface. Uma captura mostrou o diálogo Android “System UI isn't responding” sobre o aplicativo aberto, bloqueando a UI. A execução foi interrompida após confirmar esse impedimento da infraestrutura.
+- `./gradlew assembleDebug assembleE2e lintDebug`: passou. Lint sem erros; seis avisos permanecem sobre internacionalização, target SDK e uma gravação síncrona de preferências.
+- `python3 -m py_compile e2e/*.py` e `git diff --check`: passaram.
+- Inspeção dos APKs: CA/configuração de rede das fixtures presentes somente no APK E2E e ausentes no APK debug pessoal.
+- Importação, exportação, restauração e HTTPS exercitados pela UI e por arquivos/conexões reais.
 
-**A suíte completa não passou nem foi concluída localmente.** Não interpretar compilação ou descoberta de testes como aprovação E2E. O CI foi preparado para uma execução completa com KVM, mas só se pode afirmar aprovação após consultar seus resultados reais.
+## Correções feitas durante o diagnóstico
 
-Uma screenshot do bloqueio e o log dessa execução ficam disponíveis como diagnóstico separado da entrega. Os testes normais não ignoram ANRs do aplicativo ou do sistema.
+- Substituídos valores numéricos de orientação por `LinearLayout.VERTICAL`, corrigindo três erros de lint.
+- Driver aguarda o foco e confirma o texto digitado antes de fechar o teclado, evitando comandos antes de a UI processar o toque.
+- Seletores de botões aceitam a capitalização nativa do Android; seletores de documentos aceitam os pacotes AOSP e Google do DocumentsUI.
+
+O impedimento anterior de System UI ANR ocorreu em um emulador API 29 sem aceleração. A execução concluída acima utilizou outro emulador, acelerado. API 29 não foi executada localmente nesta continuação; a matriz de CI cobre APIs 29 e 35.
+
+## Evidências
+
+Resultados por cenário: `e2e/artifacts/results.json`, com `complete: true`, `tests_run: 30` e `success: true`. Screenshots, XML e logcat ficam em `e2e/artifacts/<cenário>/`. Artefatos locais são ignorados pelo Git; CI publica seus próprios resultados e relatórios.
+
+Esta aprovação local não equivale a uma aprovação da matriz de CI. Consulte a execução real do GitHub Actions para esse resultado.

@@ -40,8 +40,15 @@ class AndroidUI:
 
     def nodes(self, **attrs):
         def match(node):
-            return all(node.get({'desc':'content-desc','cls':'class'}.get(k,k),'')==v
-                       for k,v in attrs.items())
+            for key,value in attrs.items():
+                actual=node.get({'desc':'content-desc','cls':'class'}.get(key,key),'')
+                # Native Android dialog buttons may render labels in ALL CAPS.
+                if key=='text' and node.get('class')=='android.widget.Button':
+                    if actual.casefold()!=value.casefold(): return False
+                elif key=='package' and value=='com.android.documentsui':
+                    if actual not in {'com.android.documentsui','com.google.android.documentsui'}: return False
+                elif actual!=value: return False
+            return True
         return [n for n in self.dump().iter('node') if match(n)]
 
     def has(self, **attrs):
@@ -61,6 +68,8 @@ class AndroidUI:
         bounds=[int(x) for x in re.findall(r'\d+',node.get('bounds',''))]
         if len(bounds)!=4: raise AssertionError('Node has no bounds')
         self.shell(f'input tap {(bounds[0]+bounds[2])//2} {(bounds[1]+bounds[3])//2}')
+        # ADB returning does not mean Android has dispatched the tap/layout yet.
+        time.sleep(.3)
 
     def tap(self, scroll=False, **attrs):
         matches=self.nodes(**attrs)
@@ -100,12 +109,18 @@ class AndroidUI:
     def fill(self, value, **attrs):
         self.scroll_to(**attrs)
         node=self.nodes(**attrs)[-1]
-        old=node.get('text','')
         self.tap_node(node)
+        focused=self.wait(lambda: [n for n in self.nodes(**attrs)
+                                  if n.get('focused')=='true'])[0]
+        # Empty EditTexts expose their hint as text in UI Automator.
+        old=focused.get('text','')
         self.shell('input keyevent 123')
         if old: self.shell('input keyevent '+' '.join(['67']*len(old)))
         if value: self.shell('input text '+shlex.quote(str(value)))
+        if value:
+            self.wait(lambda: any(n.get('text')==str(value) for n in self.nodes(**attrs)))
         self.shell('input keyevent 4')
+        time.sleep(.3)
 
     def choose_day(self, day):
         self.top(); self.tap(desc='Dia do treino'); self.tap(text=day)

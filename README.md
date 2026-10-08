@@ -35,7 +35,7 @@ ANDROID_SERIAL=emulator-5554 python3 e2e/run.py
 
 The 30 E2E scenarios use the real Android interface and document picker. They run only on emulators and clear only the separate E2E application. See [E2E instructions](e2e/README.md) and [local execution report](e2e/LOCAL_TEST_REPORT.md).
 
-GitHub Actions builds, runs lint and executes E2E on Android APIs 29 and 35 for pull requests, pushes to `main` and manual runs. Logs, screenshots and results are retained as artifacts. Implementation does not imply a passing full test run; see actual CI results.
+GitHub Actions builds, runs lint and executes E2E on Android APIs 29 and 35 for pull requests, pushes to `main` and manual runs. Logs, screenshots and results are retained as artifacts. All 30 scenarios passed locally on API 35; see the local report for the environment and fixes. Consult actual CI results for the API 29/35 matrix.
 
 ## Plans and compatibility
 
