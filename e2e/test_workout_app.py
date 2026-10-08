@@ -157,19 +157,19 @@ class WorkoutAppE2E(unittest.TestCase):
 
     def test_13_cancel_plan_import_does_not_change_plan(self):
         self.ui.import_plan(FIXTURES/'updated.json');self.ui.wait(lambda:self.ui.has(text='Importar ficha?'))
-        self.ui.tap(text='Cancelar');self.ui.restart();self.assertTrue(self.ui.has(text='William · Segunda a sexta'))
+        self.ui.tap(text='Cancelar');self.ui.restart();self.assertTrue(self.ui.has(text='5-Day Workout Plan'))
 
     def test_14_import_is_blocked_while_draft_exists(self):
         self.ui.set_series();self.ui.import_plan(FIXTURES/'updated.json')
         self.ui.wait(lambda:self.ui.has(text='Importar ficha?'));self.ui.tap(text='Importar')
-        self.ui.restart();self.assertTrue(self.ui.has(text='William · Segunda a sexta'))
+        self.ui.restart();self.assertTrue(self.ui.has(text='5-Day Workout Plan'))
         self.ui.scroll_to(desc='Carga · legacy-0-0 · 1');self.assertEqual('40',self.ui.nodes(desc='Carga · legacy-0-0 · 1')[-1].get('text'))
 
     def test_15_invalid_and_malformed_plan_rejected(self):
         for name in ['invalid.json','malformed.json']:
-            self.ui.import_plan(FIXTURES/name);self.ui.wait(lambda:self.ui.has(text='Meu Treino'))
+            self.ui.import_plan(FIXTURES/name);self.ui.wait(lambda:self.ui.has(text='SetHarbor'))
             self.assertFalse(self.ui.has(text='Importar ficha?'))
-            self.ui.restart();self.assertTrue(self.ui.has(text='William · Segunda a sexta'))
+            self.ui.restart();self.assertTrue(self.ui.has(text='5-Day Workout Plan'))
 
     def test_16_export_restore_roundtrip_with_history_and_draft(self):
         self.save_session();self.ui.set_series(kg='47.5',reps='6')
@@ -189,12 +189,12 @@ class WorkoutAppE2E(unittest.TestCase):
     def test_18_legacy_backup_restores_original_plan(self):
         self.plan_import();legacy={'version':1,'phase':2,'history':[{'day':0,'date':'01/10/2026 10:00','sets':{'0_0done':True,'0_0kg':'35','0_0reps':'10'}}],**{f'draft{i}':{} for i in range(5)}}
         self.ui.restore_backup(self.json_file('legacy-backup.json',legacy));self.ui.wait(lambda:self.ui.has(text='Restaurar backup?'));self.ui.tap(text='Restaurar')
-        self.ui.restart();self.assertTrue(self.ui.has(text='William · Segunda a sexta'))
+        self.ui.restart();self.assertTrue(self.ui.has(text='5-Day Workout Plan'))
         self.ui.history();self.assertTrue(self.ui.has(text='Supino reto barra\n35 kg × 10'))
 
     def test_19_invalid_backup_cannot_replace_history(self):
         self.save_session();bad={'version':2,'phase':9,'history':[]}
-        self.ui.restore_backup(self.json_file('bad-backup.json',bad));self.ui.wait(lambda:self.ui.has(text='Meu Treino'))
+        self.ui.restore_backup(self.json_file('bad-backup.json',bad));self.ui.wait(lambda:self.ui.has(text='SetHarbor'))
         self.assertFalse(self.ui.has(text='Restaurar backup?'));self.ui.history();self.assertTrue(self.ui.has(text='Supino reto barra\n40 kg × 8'))
 
     def test_20_https_update_applies_new_revision(self):
@@ -206,7 +206,7 @@ class WorkoutAppE2E(unittest.TestCase):
     def test_21_auto_update_on_launch_after_pending_draft_saved(self):
         self.ui.set_series();self.ui.configure_url(self.url+'/updated.json')
         self.ui.wait(lambda:bool(FixtureHandler.requests),30);self.ui.restart()
-        self.assertTrue(self.ui.has(text='William · Segunda a sexta'))
+        self.assertTrue(self.ui.has(text='5-Day Workout Plan'))
         self.ui.check_series();self.ui.finish();self.ui.restart()
         self.ui.wait(lambda:self.ui.has(text='Ficha E2E revisada'),30)
         self.ui.history();self.assertTrue(self.ui.has(text='Supino reto barra\n40 kg × 8'))
@@ -220,7 +220,7 @@ class WorkoutAppE2E(unittest.TestCase):
         for endpoint in ['/fail','/invalid.json','/malformed.json','/redirect']:
             FixtureHandler.requests=[];self.ui.configure_url(self.url+endpoint)
             self.ui.wait(lambda:bool(FixtureHandler.requests),30)
-            self.ui.restart();self.assertTrue(self.ui.has(text='William · Segunda a sexta'))
+            self.ui.restart();self.assertTrue(self.ui.has(text='5-Day Workout Plan'))
         self.ui.set_series();self.ui.check_series();self.ui.finish();self.ui.history()
         self.assertTrue(self.ui.has(text='Supino reto barra\n40 kg × 8'))
 
@@ -245,9 +245,9 @@ class WorkoutAppE2E(unittest.TestCase):
         self.ui.set_series(kg='45',reps='7');self.ui.top();self.ui.tap(text='120 s')
         self.ui.shell('settings put system accelerometer_rotation 0')
         self.ui.shell('settings put system user_rotation 1')
-        self.ui.wait(lambda:self.ui.has(text='Meu Treino'),30)
+        self.ui.wait(lambda:self.ui.has(text='SetHarbor'),30)
         self.ui.shell('settings put system user_rotation 0')
-        self.ui.wait(lambda:self.ui.has(text='Meu Treino'),30)
+        self.ui.wait(lambda:self.ui.has(text='SetHarbor'),30)
         self.ui.scroll_to(desc='Carga · legacy-0-0 · 1')
         self.assertEqual('45',self.ui.nodes(desc='Carga · legacy-0-0 · 1')[-1].get('text'))
         self.ui.top();self.assertTrue(any(n.get('text','').startswith('Descanso  ') for n in self.ui.dump().iter('node')))
@@ -257,8 +257,8 @@ class WorkoutAppE2E(unittest.TestCase):
         for button in ['Importar ficha de treino','Exportar backup','Restaurar backup']:
             self.ui.tap(scroll=True,text=button)
             self.ui.wait(lambda:self.ui.has(package='com.android.documentsui'),30)
-            self.ui.shell('input keyevent 4');self.ui.wait(lambda:self.ui.has(text='Meu Treino'),30)
-        self.ui.restart();self.assertTrue(self.ui.has(text='William · Segunda a sexta'))
+            self.ui.shell('input keyevent 4');self.ui.wait(lambda:self.ui.has(text='SetHarbor'),30)
+        self.ui.restart();self.assertTrue(self.ui.has(text='5-Day Workout Plan'))
 
     def test_29_zero_weight_valid_zero_repetitions_invalid(self):
         self.ui.set_series(kg='0',reps='0');self.ui.check_series()

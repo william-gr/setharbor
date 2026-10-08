@@ -21,7 +21,7 @@ class AndroidUI:
         self.shell('input keyevent 82')
         self.shell('wm dismiss-keyguard')
         self.shell(f'am start -W -n {PACKAGE}/{ACTIVITY}')
-        self.wait(lambda: self.has(text='Meu Treino'), 30)
+        self.wait(lambda: self.has(text='SetHarbor'), 30)
 
     def reset(self):
         # Never clear the user's personal package: E2E has a different applicationId.
@@ -162,7 +162,7 @@ class AndroidUI:
         self.fill(filename, cls='android.widget.EditText')
         for label in ['SAVE','Save','SALVAR','Salvar']:
             if self.has(text=label): self.tap(text=label); break
-        self.wait(lambda:self.has(text='Meu Treino'))
+        self.wait(lambda:self.has(text='SetHarbor'))
         raw=self.shell('cat /sdcard/Download/'+shlex.quote(filename))
         return json.loads(raw)
 

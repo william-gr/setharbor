@@ -6,8 +6,8 @@ android {
         applicationId 'com.william.treino'
         minSdk 26
         targetSdk 35
-        versionCode 4
-        versionName '1.3'
+        versionCode 5
+        versionName '1.4'
     }
     // The personal update key stays local and is not committed to Git.
     def personalKey = file('../signing/personal-debug.jks')

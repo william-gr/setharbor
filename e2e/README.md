@@ -1,4 +1,4 @@
-# Testes E2E — Meu Treino
+# Testes E2E — SetHarbor
 
 A suíte usa `unittest` e ADB, sem dependências Python externas. Ela abre o APK instalado, toca e preenche a interface, navega no seletor real de documentos, reinicia o processo e consulta o resultado pela interface. Não injeta resultados de Activities nem acessa diretamente SharedPreferences.
 

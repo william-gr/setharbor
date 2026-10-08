@@ -5,3 +5,6 @@ app/build/
 *.jks
 e2e/artifacts/
 __pycache__/
+
+# Private handoff artifacts
+local-artifacts/

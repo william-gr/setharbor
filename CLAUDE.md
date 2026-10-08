@@ -1,8 +1,8 @@
-# Meu Treino — documentação para agentes
+# SetHarbor — documentação para agentes
 
 ## Objetivo
 
-Aplicativo Android pessoal para controlar a ficha de musculação de William. O programa original tem cinco dias, de segunda a sexta, com pernas distribuídas entre sessões. O app registra carga/repetições, oculta séries concluídas, conserva histórico, cronometra descanso e recebe fichas atualizadas sem recompilar.
+Aplicativo Android gratuito e open source (MIT) para registrar treinos de musculação. A ficha de exemplo tem cinco dias e pode ser substituída por qualquer programa compatível. O app registra carga/repetições, oculta séries concluídas, conserva histórico, cronometra descanso e recebe fichas atualizadas sem recompilar.
 
 ## Arquitetura e arquivos
 
@@ -27,7 +27,7 @@ JDK 17, Gradle 8.9, Android Gradle Plugin 8.7.3, compile/target SDK 35, min SDK 
 ./gradlew assembleE2e
 ```
 
-Pacote pessoal: `com.william.treino`. Pacote de testes: `com.william.treino.e2e`.
+Application ID preservado por compatibilidade: `com.william.treino`. Pacote de testes: `com.william.treino.e2e`.
 
 A assinatura debug padrão é usada quando a chave pessoal não existe. `signing/personal-debug.jks` é opcional, local e ignorada pelo Git; não a versione. Para atualizar a instalação pessoal preservando dados, mantenha a assinatura original e aumente `versionCode`. APKs de CI usam outra chave debug e não substituem automaticamente a instalação pessoal.
 
