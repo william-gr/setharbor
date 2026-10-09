@@ -167,7 +167,17 @@ class AndroidUI:
                 if self.has(desc=desc): self.tap(desc=desc); break
             for label in ['Downloads','Download']:
                 if self.has(text=label): self.tap(text=label); break
-        self.tap(scroll=True,text=filename)
+        # Search the real picker so recycled list/grid accessibility rows cannot
+        # hide a document after scrolling. This also handles crowded Downloads.
+        for desc in ['Search','Pesquisar']:
+            if self.has(desc=desc):
+                self.tap(desc=desc)
+                break
+        else: raise AssertionError('Document picker search control not found')
+        self.fill(filename,cls='android.widget.AutoCompleteTextView')
+        target={'text':filename,'resource-id':'android:id/title'}
+        self.wait(lambda: self.has(**target),30)
+        self.tap(**target)
 
     def import_plan(self, path):
         name=self.push_fixture(path)

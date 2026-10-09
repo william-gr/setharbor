@@ -49,7 +49,7 @@ Para um cenário específico, execute, com as mesmas variáveis:
 python3 -m unittest discover -s e2e -p 'test_*.py' -k test_12 -v
 ```
 
-A automação aceita os pacotes AOSP e Google do DocumentsUI, os rótulos comuns de Downloads e salvar em inglês/português e a capitalização de botões nativos do Android. Para imagens de emulador que mudem esses rótulos, ajuste `android_ui.py`. O driver descarta dumps antigos quando o UI Automator falha e ignora nós sem área visível, inclusive arquivos fora da área rolada no DocumentsUI. O driver aguarda o foco dos campos e confirma o texto digitado antes de fechar o teclado; comandos ADB concluídos não garantem que a UI já processou o toque. Antes de tratar uma falha como defeito do produto, examine XML e screenshot para diferenciar problemas da automação.
+A automação aceita os pacotes AOSP e Google do DocumentsUI, os rótulos comuns de Downloads e salvar em inglês/português e a capitalização de botões nativos do Android. Para imagens de emulador que mudem esses rótulos, ajuste `android_ui.py`. O driver descarta dumps antigos quando o UI Automator falha e ignora nós sem área visível, inclusive arquivos fora da área rolada no DocumentsUI. Para selecionar um documento, usa a busca real por nome e o elemento de título do arquivo; isso evita inconsistências de acessibilidade em listas/grades recicladas durante rolagem. O driver aguarda o foco dos campos e confirma o texto digitado antes de fechar o teclado; comandos ADB concluídos não garantem que a UI já processou o toque. Antes de tratar uma falha como defeito do produto, examine XML e screenshot para diferenciar problemas da automação.
 
 ## CI nos PRs e na main
 

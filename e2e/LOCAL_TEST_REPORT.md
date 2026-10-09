@@ -30,3 +30,7 @@ Esta aprovação local não equivale a uma aprovação da matriz de CI. Consulte
 Na execução https://github.com/william-gr/setharbor/actions/runs/37833596780, API 35 passou 30/30; API 29 passou 27/30. Falhas: 11/27 consultaram XML antigo enquanto a screenshot mostrava o cronômetro funcionando; 30 tentou tocar um nome de arquivo com bounds `[0,0][0,0]`.
 
 Correções: dumps exigem arquivo novo e confirmação do UI Automator; nós sem área visível são ignorados; cronômetro só chama setText quando o texto muda, evitando eventos redundantes a cada 250 ms. Build/lint e sintaxe passaram; cenários 11, 27 e 30 passaram localmente em API 35 em 229,641 segundos. A nova matriz de CI ainda precisa confirmar o resultado em API 29.
+
+Na execução https://github.com/william-gr/setharbor/actions/runs/37928823706, API 29 passou **30/30**, confirmado no results.json do artefato; API 35 passou 29/30. A falha restante (18) reproduziu XML reciclado da lista/grade do DocumentsUI, com arquivo visível na screenshot mas ausente no XML.
+
+O driver agora seleciona documentos pela busca real de nome no picker e identifica o título pelo resource-id `android:id/title`. Cenários 18 e 30 passaram em uma pasta Downloads com 12 arquivos adicionais (297,255 segundos); o seletor final de título passou no cenário 13 (66,299 segundos), em API 35 local. Não há injeção de resultado de Activity nem acesso a preferências para selecionar arquivos. Nova execução da matriz pendente.
