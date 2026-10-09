@@ -34,12 +34,20 @@ class AndroidUI:
         self.launch()
 
     def dump(self):
-        self.shell('uiautomator dump /sdcard/e2e-window.xml')
-        self.last_xml = self.shell('cat /sdcard/e2e-window.xml')
-        return ET.fromstring(self.last_xml)
+        # Failed dumps can leave an older file behind, especially on a ticking UI.
+        for _ in range(3):
+            self.shell('rm -f /sdcard/e2e-window.xml')
+            output=self.shell('uiautomator dump /sdcard/e2e-window.xml')
+            if 'dumped to' in output:
+                self.last_xml=self.shell('cat /sdcard/e2e-window.xml')
+                return ET.fromstring(self.last_xml)
+            time.sleep(.3)
+        raise AssertionError(f'Cannot obtain fresh UI hierarchy: {output}')
 
     def nodes(self, **attrs):
         def match(node):
+            bounds=[int(x) for x in re.findall(r'\d+',node.get('bounds',''))]
+            if len(bounds)!=4 or bounds[2]<=bounds[0] or bounds[3]<=bounds[1]: return False
             for key,value in attrs.items():
                 actual=node.get({'desc':'content-desc','cls':'class'}.get(key,key),'')
                 # Native Android dialog buttons may render labels in ALL CAPS.
@@ -66,7 +74,8 @@ class AndroidUI:
 
     def tap_node(self, node):
         bounds=[int(x) for x in re.findall(r'\d+',node.get('bounds',''))]
-        if len(bounds)!=4: raise AssertionError('Node has no bounds')
+        if len(bounds)!=4 or bounds[2]<=bounds[0] or bounds[3]<=bounds[1]:
+            raise AssertionError('Node has no visible bounds')
         self.shell(f'input tap {(bounds[0]+bounds[2])//2} {(bounds[1]+bounds[3])//2}')
         # ADB returning does not mean Android has dispatched the tap/layout yet.
         time.sleep(.3)

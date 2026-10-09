@@ -24,3 +24,9 @@ O impedimento anterior de System UI ANR ocorreu em um emulador API 29 sem aceler
 Resultados por cenário: `e2e/artifacts/results.json`, com `complete: true`, `tests_run: 30` e `success: true`. Screenshots, XML e logcat ficam em `e2e/artifacts/<cenário>/`. Artefatos locais são ignorados pelo Git; CI publica seus próprios resultados e relatórios.
 
 Esta aprovação local não equivale a uma aprovação da matriz de CI. Consulte a execução real do GitHub Actions para esse resultado.
+
+## Diagnóstico de CI — 2026-10-09
+
+Na execução https://github.com/william-gr/setharbor/actions/runs/37833596780, API 35 passou 30/30; API 29 passou 27/30. Falhas: 11/27 consultaram XML antigo enquanto a screenshot mostrava o cronômetro funcionando; 30 tentou tocar um nome de arquivo com bounds `[0,0][0,0]`.
+
+Correções: dumps exigem arquivo novo e confirmação do UI Automator; nós sem área visível são ignorados; cronômetro só chama setText quando o texto muda, evitando eventos redundantes a cada 250 ms. Build/lint e sintaxe passaram; cenários 11, 27 e 30 passaram localmente em API 35 em 229,641 segundos. A nova matriz de CI ainda precisa confirmar o resultado em API 29.
