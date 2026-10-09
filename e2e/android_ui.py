@@ -9,10 +9,16 @@ class AndroidUI:
     def __init__(self, adb='adb', serial=None):
         self.prefix = [adb] + (['-s', serial] if serial else [])
         self.last_xml = ''
+        self.last_adb_error = None
 
     def adb(self, *args, timeout=90, check=True):
-        return subprocess.run(self.prefix + list(args), capture_output=True, text=True,
-                              timeout=timeout, check=check).stdout.strip()
+        try:
+            return subprocess.run(self.prefix + list(args), capture_output=True, text=True,
+                                  timeout=timeout, check=check).stdout.strip()
+        except subprocess.CalledProcessError as err:
+            self.last_adb_error={'command':list(args),'returncode':err.returncode,
+                                 'stdout':err.stdout,'stderr':err.stderr}
+            raise
 
     def shell(self, command):
         return self.adb('shell', command)
@@ -25,7 +31,19 @@ class AndroidUI:
 
     def reset(self):
         # Never clear the user's personal package: E2E has a different applicationId.
-        self.shell(f'pm clear {PACKAGE}')
+        self.last_adb_error=None
+        self.shell(f'am force-stop {PACKAGE}')
+        try:
+            cleared=self.shell(f'pm clear {PACKAGE}')
+        except subprocess.CalledProcessError as err:
+            detail=((err.stdout or '')+' '+(err.stderr or '')).lower()
+            if not any(message in detail for message in
+                       ['error: closed','device offline','transport error',
+                        'connection reset','protocol fault']): raise
+            # Only retry idempotent setup after a diagnosed ADB transport failure.
+            self.adb('wait-for-device',timeout=30)
+            cleared=self.shell(f'pm clear {PACKAGE}')
+        if cleared!='Success': raise AssertionError(f'E2E data reset failed: {cleared}')
         self.launch()
         self.choose_day('Segunda')
 
@@ -174,7 +192,9 @@ class AndroidUI:
                 self.tap(desc=desc)
                 break
         else: raise AssertionError('Document picker search control not found')
-        self.fill(filename,cls='android.widget.AutoCompleteTextView')
+        search=self.wait(lambda: [n for n in self.nodes()
+                                 if n.get('resource-id','').endswith(':id/search_src_text')])[0]
+        self.fill(filename,**{'resource-id':search.get('resource-id')})
         target={'text':filename,'resource-id':'android:id/title'}
         self.wait(lambda: self.has(**target),30)
         self.tap(**target)
@@ -213,6 +233,8 @@ class AndroidUI:
     def artifacts(self, directory):
         directory=Path(directory); directory.mkdir(parents=True,exist_ok=True)
         (directory/'window.xml').write_text(self.last_xml)
+        if self.last_adb_error:
+            (directory/'adb-error.json').write_text(json.dumps(self.last_adb_error,indent=2))
         try:(directory/'logcat.txt').write_text(self.adb('logcat','-d','-t','1000',check=False))
         except subprocess.SubprocessError as err:(directory/'artifact-error.txt').write_text(str(err))
         try:
