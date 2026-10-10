@@ -75,7 +75,7 @@ public final class ExerciseCatalog {
    case "per-dumbbell":return "Carga por halter";
    case "per-side":return "Carga por lado";
    case "bodyweight":return "0 kg sem carga adicional";
-   case "assistance":return "Registre a assistência em kg";
+   case "assistance":return "Assistência em kg · reduza para progredir";
    case "band":return "Resistência de elástico";
    default:return "Carga total em kg";
   }

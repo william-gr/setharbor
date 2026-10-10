@@ -6,7 +6,7 @@
 - [x] Criar documentação CLAUDE.md.
 - [x] Concluir execução e diagnóstico dos testes em emulador (30/30 em API 35; ver e2e/LOCAL_TEST_REPORT.md).
 - [x] Publicar o repositório público MIT: https://github.com/william-gr/setharbor.
-- [ ] Confirmar aprovação da matriz de CI API 29/35 (compatibilidade de campo de busca e preparação ADB corrigidas; aguardando nova execução).
+- [x] Confirmar matriz original de CI API 29/35: 30/30 em cada API, execução 38045908448.
 
 Não marcar execução/CI como concluídos sem consultar os resultados reais.
 

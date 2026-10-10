@@ -53,9 +53,16 @@ class AndroidUI:
 
     def dump(self):
         # Failed dumps can leave an older file behind, especially on a ticking UI.
-        for _ in range(3):
+        for attempt in range(3):
             self.shell('rm -f /sdcard/e2e-window.xml')
-            output=self.shell('uiautomator dump /sdcard/e2e-window.xml')
+            try:
+                output=self.shell('uiautomator dump /sdcard/e2e-window.xml')
+            except subprocess.CalledProcessError as err:
+                # CI can kill the read-only UI Automator process (exit 137),
+                # even after it writes XML. Discard it and request a fresh dump.
+                if err.returncode!=137 or attempt==2: raise
+                time.sleep(.3)
+                continue
             if 'dumped to' in output:
                 self.last_xml=self.shell('cat /sdcard/e2e-window.xml')
                 return ET.fromstring(self.last_xml)

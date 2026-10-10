@@ -48,6 +48,7 @@ jobs:
           chmod +x gradlew
           ./gradlew --no-daemon testDebugUnitTest assembleDebug assembleE2e lintDebug
           python3 -m py_compile e2e/*.py
+          python3 e2e/driver_checks.py
       - name: Execute all end-to-end scenarios
         uses: reactivecircus/android-emulator-runner@v2
         with:

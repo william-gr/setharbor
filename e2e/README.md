@@ -61,4 +61,6 @@ A preparação força a parada do pacote E2E e exige confirmação de limpeza do
 
 ## Exercise catalog coverage
 
-Scenarios 31–35 cover immediate random changes excluding the current exercise, session reset after saving, restart persistence, entered/hidden set protection, valid and invalid real-document backup restoration, and load history across catalog IDs and plan positions. Local JVM tests validate catalog references and session rules before the CI emulator suite.
+Scenarios 31–35 cover immediate random changes excluding the current exercise, session reset after saving, restart persistence, entered/hidden set protection, valid and invalid real-document backup restoration, load history across catalog IDs and plan positions, and the details icon toggling initially hidden information without losing entered data. Local JVM tests validate catalog references and session rules before the CI emulator suite.
+
+`python3 e2e/driver_checks.py` verifica separadamente a recuperação limitada de dumps UI Automator mortos (exit 137). Assertions e outros erros não são repetidos; cada tentativa remove XML anterior. Esses três checks também rodam antes do emulador no CI.
