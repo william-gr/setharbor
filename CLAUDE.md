@@ -112,6 +112,8 @@ Eventos: todos os PRs, push na `main` e workflow_dispatch. Matriz API 29/35, Ubu
 
 ## Regras ao modificar
 
+O usuário prefere merge/push direto na `main` após todos os testes passarem. Não abra PR sem pedido explícito.
+
 1. Preserve histórico, migração de backups e assinatura das atualizações pessoais.
 2. Mantenha fixtures e certificados fora do build pessoal.
 3. Execute build/lint e E2E apropriados; relate explicitamente testes que não puder executar.
