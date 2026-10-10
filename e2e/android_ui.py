@@ -179,14 +179,19 @@ class AndroidUI:
 
     def select_document(self, filename):
         # Exercise the real system DocumentsUI, not an injected activity result.
-        self.wait(lambda: self.has(package='com.android.documentsui'),30)
+        picker=self.wait(lambda: self.nodes(package='com.android.documentsui'),30)[0].get('package')
         if not self.has(text=filename):
             for desc in ['Show roots','Mostrar raízes','Open navigation drawer','Show navigation']:
                 if self.has(desc=desc): self.tap(desc=desc); break
             for label in ['Downloads','Download']:
                 if self.has(text=label): self.tap(text=label); break
-        # Search the real picker so recycled list/grid accessibility rows cannot
-        # hide a document after scrolling. This also handles crowded Downloads.
+        # Android 10's AOSP search has a SearchFragment lifecycle crash and drops
+        # characters during live filtering. Its normal browser is reliable.
+        if picker=='com.android.documentsui':
+            self.tap(scroll=True,text=filename,**{'resource-id':'android:id/title'})
+            return
+        # Search Google's newer picker to avoid recycled accessibility rows
+        # while scrolling its grid/list. Both paths select a real document.
         for desc in ['Search','Pesquisar']:
             if self.has(desc=desc):
                 self.tap(desc=desc)
