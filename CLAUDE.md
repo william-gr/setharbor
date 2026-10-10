@@ -26,6 +26,8 @@ Não há framework de UI externo, conta de usuário, banco remoto ou integraçã
 
 JDK 17, Gradle 8.9, Android Gradle Plugin 8.7.3, compile/target SDK 35, min SDK 26.
 
+VersionCode e versionName usam a data de committer do commit compilado, YYYYMMDD, preservando a data registrada no Git independentemente do relógio/fuso da máquina de build. Commits no mesmo dia têm a mesma versão; nomes de APK incluem SHA. Archives sem .git exigem -PappVersionDate=YYYYMMDD (validado como data real). O workflow build-apk.yml compila a main mais recente em push/manual, roda cobertura/lint e publica somente APK debug do app pessoal (não E2E) com proveniência e SHA256. Artefatos expiram em 30 dias; assinatura de CI é debug, não a chave pessoal.
+
 ```bash
 ./gradlew testDebugUnitTest assembleDebug lintDebug
 ./gradlew assembleE2e

@@ -18,3 +18,4 @@ Não marcar execução/CI como concluídos sem consultar os resultados reais.
 - [x] Concluir regressão completa de 35 cenários e CI da versão 1.5 (35/35 em API 29 e 35; execução 38054423441).
 - [x] Acrescentar 13 regressões JVM para catálogo, sessão e validação de ficha (26 testes totais).
 - [x] Exigir cobertura por classe de lógica: 90% linhas / 80% branches, com relatório HTML/XML, gate em check/CI e falha com dados ausentes.
+- [x] Criar workflow de APK da main mais recente, com versão YYYYMMDD do commit e artefato com SHA/proveniência.

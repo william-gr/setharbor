@@ -1,4 +1,21 @@
 plugins { id 'com.android.application'; id 'jacoco' }
+
+// Use the recorded committer date, not the build machine's clock/timezone.
+// Archives without .git can supply the same value with -PappVersionDate=YYYYMMDD.
+def commitVersion = providers.gradleProperty('appVersionDate').orElse(
+    providers.exec {
+        workingDir rootProject.projectDir
+        commandLine 'git', 'log', '-1', '--format=%cs'
+    }.standardOutput.asText.map { it.trim().replace('-', '') }
+).get()
+if (!(commitVersion ==~ /[0-9]{8}/)) {
+    throw new GradleException('appVersionDate must be YYYYMMDD from the source commit')
+}
+try {
+    java.time.LocalDate.parse(commitVersion, java.time.format.DateTimeFormatter.BASIC_ISO_DATE)
+} catch (java.time.DateTimeException invalidDate) {
+    throw new GradleException('appVersionDate must be a valid calendar date', invalidDate)
+}
 android {
     namespace 'com.william.treino'
     compileSdk 35
@@ -6,8 +23,8 @@ android {
         applicationId 'com.william.treino'
         minSdk 26
         targetSdk 35
-        versionCode 6
-        versionName '1.5'
+        versionCode commitVersion.toInteger()
+        versionName commitVersion
     }
     // The personal update key stays local and is not committed to Git.
     def personalKey = file('../signing/personal-debug.jks')

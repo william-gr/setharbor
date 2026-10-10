@@ -31,6 +31,14 @@ Run `./gradlew coreCoverageVerification` to execute the JVM tests, generate HTML
 
 The APK is written to `app/build/outputs/apk/debug/app-debug.apk`. Windows users can use `gradlew.bat`. CI produces development APKs; no Play Store release is published yet. Keep the same signing key when updating an existing installation.
 
+### Download the latest main APK
+
+[Build latest main APK](https://github.com/william-gr/setharbor/actions/workflows/build-apk.yml) runs on pushes to `main` and can also be started with **Run workflow**. It always checks out the latest `main`, runs JVM tests, the coverage gate and lint, and uploads a downloadable APK artifact for 30 days. No tag is required.
+
+Both `versionName` and `versionCode` use the source commit's recorded committer date as `YYYYMMDD` (not the build date). Builds from the same day share the version; the filename `SetHarbor-YYYYMMDD-COMMIT.apk`, `build-info.json` and `SHA256SUMS` identify the exact source and APK. Local builds use the same rule; source archives without Git can pass `-PappVersionDate=YYYYMMDD`.
+
+These APKs use a CI-generated debug key, which changes between runners. They cannot replace an installation signed with another key; preserve the original signing key and export a backup before replacing an existing installation. E2E APKs and fixture certificates are excluded from this downloadable app.
+
 ## Tests
 
 ```sh
