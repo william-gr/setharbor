@@ -82,7 +82,7 @@ class WorkoutAppE2E(unittest.TestCase):
         path=Path(self.temp.name)/name;path.write_text(json.dumps(payload,ensure_ascii=False));return path
 
     def test_01_first_launch_all_five_days(self):
-        for day,exercise in [('Segunda','Supino reto barra'),('Terça','Puxada alta neutra'),('Quarta','Desenvolvimento máquina / halteres'),('Quinta','Supino inclinado Smith / máquina'),('Sexta','Rosca Scott')]:
+        for day,exercise in [('Segunda','Supino reto barra'),('Terça','Puxada alta neutra'),('Quarta','Desenvolvimento máquina'),('Quinta','Supino inclinado Smith'),('Sexta','Rosca Scott barra W')]:
             self.ui.choose_day(day);self.ui.scroll_to(text=exercise);self.assertTrue(self.ui.has(text=exercise))
 
     def test_02_readaptation_and_full_volume(self):
@@ -173,7 +173,7 @@ class WorkoutAppE2E(unittest.TestCase):
 
     def test_16_export_restore_roundtrip_with_history_and_draft(self):
         self.save_session();self.ui.set_series(kg='47.5',reps='6')
-        backup=self.ui.export_backup();self.assertEqual(2,backup['version']);self.assertEqual(1,len(backup['history']))
+        backup=self.ui.export_backup();self.assertEqual(3,backup['version']);self.assertEqual(1,len(backup['history']))
         self.assertEqual('47.5',backup['draft0']['0_0kg'])
         self.ui.reset();self.ui.restore_backup(self.json_file('roundtrip.json',backup))
         self.ui.wait(lambda:self.ui.has(text='Restaurar backup?'));self.ui.tap(text='Restaurar')
@@ -234,7 +234,7 @@ class WorkoutAppE2E(unittest.TestCase):
 
     def test_25_selected_day_and_phase_survive_restart(self):
         self.ui.choose_day('Sexta');self.ui.phase();self.ui.restart()
-        self.assertTrue(self.ui.has(text='Rosca Scott'))
+        self.assertTrue(self.ui.has(text='Rosca Scott barra W'))
         self.ui.scroll_to(desc='Carga · legacy-4-0 · 3');self.assertTrue(self.ui.has(desc='Carga · legacy-4-0 · 3'))
 
     def test_26_timer_reaches_completion(self):
@@ -270,9 +270,69 @@ class WorkoutAppE2E(unittest.TestCase):
     def test_30_version2_backup_restores_imported_plan(self):
         self.plan_import();backup=self.ui.export_backup('e2e-plan-backup.json')
         self.assertEqual(2,backup['plan']['revision'])
+        self.assertEqual(3,backup['version']);backup['version']=2  # Preserve older backup compatibility.
         self.ui.reset();self.ui.restore_backup(self.json_file('revised-backup.json',backup))
         self.ui.wait(lambda:self.ui.has(text='Restaurar backup?'));self.ui.tap(text='Restaurar')
         self.ui.restart();self.assertTrue(self.ui.has(text='Ficha E2E revisada'))
         self.ui.scroll_to(text='Supino atualizado');self.assertTrue(self.ui.has(text='1 séries × 6–8 reps'))
+
+    def swapped_name(self):
+        self.ui.scroll_to(desc='Carga · legacy-0-0 · 1')
+        descriptions=[n.get('content-desc','') for n in self.ui.dump().iter('node')]
+        return next(d.removeprefix('Série 1 concluída em ') for d in descriptions if d.startswith('Série 1 concluída em '))
+
+    def test_31_random_swap_excludes_current_and_survives_restart(self):
+        catalog=json.loads((HERE.parent/'app/src/main/assets/exercise-catalog.json').read_text())
+        names={e['name']['pt'] for e in catalog['exercises'] if e['substitutionFamily']=='flat-chest-press'}
+        self.ui.tap(scroll=True,desc='Trocar por similar · legacy-0-0')
+        first=self.swapped_name();self.assertIn(first,names);self.assertNotEqual('Supino reto barra',first)
+        self.assertFalse(self.ui.has(cls='android.app.Dialog'))
+        self.ui.tap(scroll=True,desc='Trocar por similar · legacy-0-0')
+        second=self.swapped_name();self.assertIn(second,names);self.assertNotEqual(first,second)
+        self.ui.restart();self.assertEqual(second,self.swapped_name())
+        self.ui.set_series(kg='15',reps='10');self.ui.check_series(name=second);self.ui.finish()
+        self.assertEqual('Supino reto barra',self.swapped_name())
+        self.ui.history();self.assertTrue(self.ui.has(text=second+'\n15 kg × 10'))
+
+    def test_32_entered_data_blocks_swap_including_hidden_sets(self):
+        self.ui.fill('0',desc='Carga · legacy-0-0 · 1')
+        self.ui.top();self.ui.tap(scroll=True,desc='Trocar por similar · legacy-0-0')
+        self.assertEqual('Supino reto barra',self.swapped_name())
+        self.ui.fill('8',desc='Repetições · legacy-0-0 · 1');self.ui.check_series()
+        self.ui.top();self.ui.tap(scroll=True,desc='Trocar por similar · legacy-0-0')
+        backup=self.ui.export_backup('e2e-blocked-swap.json')
+        self.assertNotIn('exerciseOverrides',backup['draft0']);self.assertEqual('0',backup['draft0']['0_0kg'])
+        self.assertTrue(backup['draft0']['0_0done'])
+
+    def test_33_swapped_backup_restores_and_history_loads_stay_separate(self):
+        self.ui.tap(scroll=True,desc='Trocar por similar · legacy-0-0');name=self.swapped_name()
+        self.ui.set_series(kg='17',reps='9');backup=self.ui.export_backup('e2e-swapped-backup.json')
+        self.assertEqual(3,backup['version'])
+        target=backup['draft0']['exerciseOverrides']['legacy-0-0']
+        self.ui.reset();self.ui.restore_backup(self.json_file('swapped-restore.json',backup))
+        self.ui.wait(lambda:self.ui.has(text='Restaurar backup?'));self.ui.tap(text='Restaurar')
+        self.ui.restart();self.assertEqual(name,self.swapped_name())
+        self.assertEqual('17',self.ui.nodes(desc='Carga · legacy-0-0 · 1')[-1].get('text'))
+        self.ui.check_series(name=name);self.ui.finish()
+        saved=self.ui.export_backup('e2e-swapped-history.json')
+        self.assertEqual(target,saved['history'][0]['plan']['days'][0]['exercises'][0]['catalogId'])
+        self.assertEqual('barbell-bench-press',saved['plan']['days'][0]['exercises'][0]['catalogId'])
+        self.assertFalse(saved['draft0'])
+        self.ui.restart();self.ui.scroll_to(desc='Carga · legacy-0-0 · 1')
+        self.assertFalse(self.ui.has(text='Último: 17 kg × 9'))
+        # Recreate the same exercise in a different plan position: loads follow
+        # catalog identity, while a different movement in the same slot does not.
+        plan=saved['plan'];plan['days'][0]['exercises'][0]['catalogId']=target
+        plan['days'][0]['exercises'][0]['id']='new-slot';plan['days'][0]['exercises'][0]['name']=name
+        self.ui.import_plan(self.json_file('same-exercise-new-slot.json',plan))
+        self.ui.wait(lambda:self.ui.has(text='Importar ficha?'));self.ui.tap(text='Importar')
+        self.ui.scroll_to(text='Último: 17 kg × 9');self.assertTrue(self.ui.has(text='Último: 17 kg × 9'))
+
+    def test_34_incompatible_swap_backup_cannot_replace_history(self):
+        self.save_session();backup=self.ui.export_backup('e2e-swap-invalid-base.json')
+        backup['history']=[];backup['draft0']={'exerciseOverrides':{'legacy-0-0':'seated-leg-curl'}}
+        self.ui.restore_backup(self.json_file('bad-swap-backup.json',backup))
+        self.ui.wait(lambda:self.ui.has(text='SetHarbor'));self.assertFalse(self.ui.has(text='Restaurar backup?'))
+        self.ui.history();self.assertTrue(self.ui.has(text='Supino reto barra\n40 kg × 8'))
 
 if __name__=='__main__': unittest.main(verbosity=2)

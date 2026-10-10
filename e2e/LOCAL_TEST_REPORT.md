@@ -40,3 +40,9 @@ Na execução https://github.com/william-gr/setharbor/actions/runs/37961278915, 
 Preparação agora força a parada antes de limpar, exige retorno Success e permite uma única repetição da limpeza somente para erros reconhecidos de transporte; stderr/stdout são preservados. Permissões e assertions não são repetidas. Cenários 13/27/28 passaram localmente com esse driver (173,495 segundos); verificação isolada confirmou que transporte fechado permite a repetição e erro de permissão falha imediatamente. Nova matriz pendente.
 
 Na execução https://github.com/william-gr/setharbor/actions/runs/37974858007, API 35 passou 30/30. API 29 revelou falhas da busca do picker AOSP: caracteres perdidos durante filtragem e crash de SearchFragment (`Can not perform this action after onSaveInstanceState`) em onDestroy/onSearchViewFocusChanged. O driver usa novamente a navegação normal no AOSP, que passou 30/30 na execução 37928823706, e mantém busca real no Google DocumentsUI, aprovada 30/30 em API 35. Nova matriz combinando os dois caminhos pendente.
+
+## Catálogo — 2026-10-10
+
+Requisitos e dados recuperados da continuação em cloud. Catálogo com 90 exercícios, 12 grupos e 35 músculos; troca aleatória por família só na sessão, bloqueio com dados, identidade de movimento separada da posição, snapshots reais e backups v3 (aceitando v1/v2).
+
+13 testes JVM passaram, build/lint de debug e E2E passou sem erros. Os quatro cenários novos 31–34 passaram em API 35 em 621,166 segundos, antes do ajuste final de exportação v3 e nomes explícitos na ficha. A regressão final com 34 cenários e o backup v3 está em andamento; ainda não está aprovada. Os artefatos locais ficam em e2e/artifacts/catalog-targeted e catalog-full (ignorados pelo Git).

@@ -1,0 +1,3524 @@
+{
+  "format": "setharbor-exercise-catalog",
+  "schemaVersion": 1,
+  "revision": 1,
+  "groups": [
+    {
+      "id": "chest",
+      "name": {
+        "pt": "Peito",
+        "en": "Chest"
+      }
+    },
+    {
+      "id": "back",
+      "name": {
+        "pt": "Costas",
+        "en": "Back"
+      }
+    },
+    {
+      "id": "shoulders",
+      "name": {
+        "pt": "Ombros",
+        "en": "Shoulders"
+      }
+    },
+    {
+      "id": "biceps",
+      "name": {
+        "pt": "Bíceps",
+        "en": "Biceps"
+      }
+    },
+    {
+      "id": "triceps",
+      "name": {
+        "pt": "Tríceps",
+        "en": "Triceps"
+      }
+    },
+    {
+      "id": "quadriceps",
+      "name": {
+        "pt": "Quadríceps",
+        "en": "Quadriceps"
+      }
+    },
+    {
+      "id": "hamstrings",
+      "name": {
+        "pt": "Posteriores da coxa",
+        "en": "Hamstrings"
+      }
+    },
+    {
+      "id": "glutes",
+      "name": {
+        "pt": "Glúteos",
+        "en": "Glutes"
+      }
+    },
+    {
+      "id": "calves",
+      "name": {
+        "pt": "Panturrilhas",
+        "en": "Calves"
+      }
+    },
+    {
+      "id": "core",
+      "name": {
+        "pt": "Abdômen e tronco",
+        "en": "Core"
+      }
+    },
+    {
+      "id": "adductors",
+      "name": {
+        "pt": "Adutores",
+        "en": "Adductors"
+      }
+    },
+    {
+      "id": "abductors",
+      "name": {
+        "pt": "Abdutores",
+        "en": "Abductors"
+      }
+    }
+  ],
+  "muscles": [
+    {
+      "id": "pectoralis-major",
+      "name": {
+        "pt": "Peitoral maior",
+        "en": "Pectoralis major"
+      }
+    },
+    {
+      "id": "latissimus-dorsi",
+      "name": {
+        "pt": "Latíssimo do dorso",
+        "en": "Latissimus dorsi"
+      }
+    },
+    {
+      "id": "teres-major",
+      "name": {
+        "pt": "Redondo maior",
+        "en": "Teres major"
+      }
+    },
+    {
+      "id": "trapezius-middle",
+      "name": {
+        "pt": "Trapézio médio",
+        "en": "Middle trapezius"
+      }
+    },
+    {
+      "id": "trapezius-lower",
+      "name": {
+        "pt": "Trapézio inferior",
+        "en": "Lower trapezius"
+      }
+    },
+    {
+      "id": "trapezius-upper",
+      "name": {
+        "pt": "Trapézio superior",
+        "en": "Upper trapezius"
+      }
+    },
+    {
+      "id": "rhomboids",
+      "name": {
+        "pt": "Romboides",
+        "en": "Rhomboids"
+      }
+    },
+    {
+      "id": "deltoid-anterior",
+      "name": {
+        "pt": "Deltoide anterior",
+        "en": "Anterior deltoid"
+      }
+    },
+    {
+      "id": "deltoid-lateral",
+      "name": {
+        "pt": "Deltoide lateral",
+        "en": "Lateral deltoid"
+      }
+    },
+    {
+      "id": "deltoid-posterior",
+      "name": {
+        "pt": "Deltoide posterior",
+        "en": "Posterior deltoid"
+      }
+    },
+    {
+      "id": "biceps-brachii",
+      "name": {
+        "pt": "Bíceps braquial",
+        "en": "Biceps brachii"
+      }
+    },
+    {
+      "id": "brachialis",
+      "name": {
+        "pt": "Braquial",
+        "en": "Brachialis"
+      }
+    },
+    {
+      "id": "brachioradialis",
+      "name": {
+        "pt": "Braquiorradial",
+        "en": "Brachioradialis"
+      }
+    },
+    {
+      "id": "triceps-brachii",
+      "name": {
+        "pt": "Tríceps braquial",
+        "en": "Triceps brachii"
+      }
+    },
+    {
+      "id": "rectus-femoris",
+      "name": {
+        "pt": "Reto femoral",
+        "en": "Rectus femoris"
+      }
+    },
+    {
+      "id": "vastus-lateralis",
+      "name": {
+        "pt": "Vasto lateral",
+        "en": "Vastus lateralis"
+      }
+    },
+    {
+      "id": "vastus-medialis",
+      "name": {
+        "pt": "Vasto medial",
+        "en": "Vastus medialis"
+      }
+    },
+    {
+      "id": "vastus-intermedius",
+      "name": {
+        "pt": "Vasto intermédio",
+        "en": "Vastus intermedius"
+      }
+    },
+    {
+      "id": "biceps-femoris",
+      "name": {
+        "pt": "Bíceps femoral",
+        "en": "Biceps femoris"
+      }
+    },
+    {
+      "id": "semitendinosus",
+      "name": {
+        "pt": "Semitendíneo",
+        "en": "Semitendinosus"
+      }
+    },
+    {
+      "id": "semimembranosus",
+      "name": {
+        "pt": "Semimembranáceo",
+        "en": "Semimembranosus"
+      }
+    },
+    {
+      "id": "gluteus-maximus",
+      "name": {
+        "pt": "Glúteo máximo",
+        "en": "Gluteus maximus"
+      }
+    },
+    {
+      "id": "gluteus-medius",
+      "name": {
+        "pt": "Glúteo médio",
+        "en": "Gluteus medius"
+      }
+    },
+    {
+      "id": "gluteus-minimus",
+      "name": {
+        "pt": "Glúteo mínimo",
+        "en": "Gluteus minimus"
+      }
+    },
+    {
+      "id": "adductor-magnus",
+      "name": {
+        "pt": "Adutor magno",
+        "en": "Adductor magnus"
+      }
+    },
+    {
+      "id": "adductor-longus",
+      "name": {
+        "pt": "Adutor longo",
+        "en": "Adductor longus"
+      }
+    },
+    {
+      "id": "adductor-brevis",
+      "name": {
+        "pt": "Adutor curto",
+        "en": "Adductor brevis"
+      }
+    },
+    {
+      "id": "gracilis",
+      "name": {
+        "pt": "Grácil",
+        "en": "Gracilis"
+      }
+    },
+    {
+      "id": "gastrocnemius",
+      "name": {
+        "pt": "Gastrocnêmio",
+        "en": "Gastrocnemius"
+      }
+    },
+    {
+      "id": "soleus",
+      "name": {
+        "pt": "Sóleo",
+        "en": "Soleus"
+      }
+    },
+    {
+      "id": "rectus-abdominis",
+      "name": {
+        "pt": "Reto abdominal",
+        "en": "Rectus abdominis"
+      }
+    },
+    {
+      "id": "obliques",
+      "name": {
+        "pt": "Oblíquos abdominais",
+        "en": "Abdominal obliques"
+      }
+    },
+    {
+      "id": "transversus-abdominis",
+      "name": {
+        "pt": "Transverso do abdômen",
+        "en": "Transversus abdominis"
+      }
+    },
+    {
+      "id": "erector-spinae",
+      "name": {
+        "pt": "Eretores da coluna",
+        "en": "Erector spinae"
+      }
+    },
+    {
+      "id": "serratus-anterior",
+      "name": {
+        "pt": "Serrátil anterior",
+        "en": "Serratus anterior"
+      }
+    }
+  ],
+  "equipment": [
+    {
+      "id": "barbell",
+      "name": {
+        "pt": "Barra",
+        "en": "Barbell"
+      }
+    },
+    {
+      "id": "dumbbells",
+      "name": {
+        "pt": "Halteres",
+        "en": "Dumbbells"
+      }
+    },
+    {
+      "id": "ez-bar",
+      "name": {
+        "pt": "Barra W",
+        "en": "EZ bar"
+      }
+    },
+    {
+      "id": "flat-bench",
+      "name": {
+        "pt": "Banco reto",
+        "en": "Flat bench"
+      }
+    },
+    {
+      "id": "adjustable-bench",
+      "name": {
+        "pt": "Banco regulável",
+        "en": "Adjustable bench"
+      }
+    },
+    {
+      "id": "rack",
+      "name": {
+        "pt": "Rack de agachamento",
+        "en": "Squat rack"
+      }
+    },
+    {
+      "id": "smith",
+      "name": {
+        "pt": "Smith",
+        "en": "Smith machine"
+      }
+    },
+    {
+      "id": "cable",
+      "name": {
+        "pt": "Polia / cabo / crossover",
+        "en": "Cable station"
+      }
+    },
+    {
+      "id": "chest-press-machine",
+      "name": {
+        "pt": "Máquina de supino",
+        "en": "Chest press machine"
+      }
+    },
+    {
+      "id": "incline-press-machine",
+      "name": {
+        "pt": "Máquina de supino inclinado",
+        "en": "Incline press machine"
+      }
+    },
+    {
+      "id": "pec-deck",
+      "name": {
+        "pt": "Peck deck",
+        "en": "Pec deck"
+      }
+    },
+    {
+      "id": "pulldown-machine",
+      "name": {
+        "pt": "Puxada alta",
+        "en": "Lat pulldown station"
+      }
+    },
+    {
+      "id": "pullup-bar",
+      "name": {
+        "pt": "Barra fixa",
+        "en": "Pull-up bar"
+      }
+    },
+    {
+      "id": "assisted-pullup-machine",
+      "name": {
+        "pt": "Graviton",
+        "en": "Assisted pull-up machine"
+      }
+    },
+    {
+      "id": "row-machine",
+      "name": {
+        "pt": "Máquina de remada",
+        "en": "Row machine"
+      }
+    },
+    {
+      "id": "low-row-cable",
+      "name": {
+        "pt": "Polia de remada baixa",
+        "en": "Seated row cable"
+      }
+    },
+    {
+      "id": "shoulder-press-machine",
+      "name": {
+        "pt": "Máquina de desenvolvimento",
+        "en": "Shoulder press machine"
+      }
+    },
+    {
+      "id": "lateral-raise-machine",
+      "name": {
+        "pt": "Máquina de elevação lateral",
+        "en": "Lateral raise machine"
+      }
+    },
+    {
+      "id": "preacher-bench",
+      "name": {
+        "pt": "Banco Scott",
+        "en": "Preacher bench"
+      }
+    },
+    {
+      "id": "curl-machine",
+      "name": {
+        "pt": "Máquina de rosca",
+        "en": "Biceps curl machine"
+      }
+    },
+    {
+      "id": "hack-squat",
+      "name": {
+        "pt": "Hack squat",
+        "en": "Hack squat machine"
+      }
+    },
+    {
+      "id": "leg-press",
+      "name": {
+        "pt": "Leg press",
+        "en": "Leg press machine"
+      }
+    },
+    {
+      "id": "leg-extension",
+      "name": {
+        "pt": "Extensora",
+        "en": "Leg extension machine"
+      }
+    },
+    {
+      "id": "seated-leg-curl",
+      "name": {
+        "pt": "Flexora sentada",
+        "en": "Seated leg curl machine"
+      }
+    },
+    {
+      "id": "lying-leg-curl",
+      "name": {
+        "pt": "Flexora deitada",
+        "en": "Lying leg curl machine"
+      }
+    },
+    {
+      "id": "standing-leg-curl",
+      "name": {
+        "pt": "Flexora em pé",
+        "en": "Standing leg curl machine"
+      }
+    },
+    {
+      "id": "hip-thrust-machine",
+      "name": {
+        "pt": "Máquina de hip thrust",
+        "en": "Hip thrust machine"
+      }
+    },
+    {
+      "id": "standing-calf-machine",
+      "name": {
+        "pt": "Máquina de panturrilha em pé",
+        "en": "Standing calf machine"
+      }
+    },
+    {
+      "id": "seated-calf-machine",
+      "name": {
+        "pt": "Máquina de panturrilha sentada",
+        "en": "Seated calf machine"
+      }
+    },
+    {
+      "id": "adductor-machine",
+      "name": {
+        "pt": "Cadeira adutora",
+        "en": "Adductor machine"
+      }
+    },
+    {
+      "id": "abductor-machine",
+      "name": {
+        "pt": "Cadeira abdutora",
+        "en": "Abductor machine"
+      }
+    },
+    {
+      "id": "resistance-band",
+      "name": {
+        "pt": "Elástico",
+        "en": "Resistance band"
+      }
+    },
+    {
+      "id": "mat",
+      "name": {
+        "pt": "Colchonete",
+        "en": "Mat"
+      }
+    },
+    {
+      "id": "sliders",
+      "name": {
+        "pt": "Discos deslizantes",
+        "en": "Sliders"
+      }
+    },
+    {
+      "id": "bodyweight",
+      "name": {
+        "pt": "Sem aparelho",
+        "en": "No equipment"
+      }
+    }
+  ],
+  "movementPatterns": [
+    {
+      "id": "horizontal-push",
+      "name": {
+        "pt": "Empurrar horizontal",
+        "en": "Horizontal push"
+      }
+    },
+    {
+      "id": "diagonal-push",
+      "name": {
+        "pt": "Empurrar inclinado",
+        "en": "Incline push"
+      }
+    },
+    {
+      "id": "horizontal-adduction",
+      "name": {
+        "pt": "Adução horizontal do ombro",
+        "en": "Shoulder horizontal adduction"
+      }
+    },
+    {
+      "id": "vertical-pull",
+      "name": {
+        "pt": "Puxar vertical",
+        "en": "Vertical pull"
+      }
+    },
+    {
+      "id": "horizontal-pull",
+      "name": {
+        "pt": "Puxar horizontal",
+        "en": "Horizontal pull"
+      }
+    },
+    {
+      "id": "shoulder-extension",
+      "name": {
+        "pt": "Extensão do ombro",
+        "en": "Shoulder extension"
+      }
+    },
+    {
+      "id": "vertical-push",
+      "name": {
+        "pt": "Empurrar vertical",
+        "en": "Vertical push"
+      }
+    },
+    {
+      "id": "shoulder-abduction",
+      "name": {
+        "pt": "Abdução do ombro",
+        "en": "Shoulder abduction"
+      }
+    },
+    {
+      "id": "horizontal-abduction",
+      "name": {
+        "pt": "Abdução horizontal do ombro",
+        "en": "Shoulder horizontal abduction"
+      }
+    },
+    {
+      "id": "elbow-flexion",
+      "name": {
+        "pt": "Flexão do cotovelo",
+        "en": "Elbow flexion"
+      }
+    },
+    {
+      "id": "elbow-extension",
+      "name": {
+        "pt": "Extensão do cotovelo",
+        "en": "Elbow extension"
+      }
+    },
+    {
+      "id": "knee-dominant",
+      "name": {
+        "pt": "Agachar / empurrar com pernas",
+        "en": "Knee dominant"
+      }
+    },
+    {
+      "id": "knee-extension",
+      "name": {
+        "pt": "Extensão do joelho",
+        "en": "Knee extension"
+      }
+    },
+    {
+      "id": "hip-hinge",
+      "name": {
+        "pt": "Dobradiça do quadril",
+        "en": "Hip hinge"
+      }
+    },
+    {
+      "id": "knee-flexion",
+      "name": {
+        "pt": "Flexão do joelho",
+        "en": "Knee flexion"
+      }
+    },
+    {
+      "id": "hip-extension",
+      "name": {
+        "pt": "Extensão do quadril",
+        "en": "Hip extension"
+      }
+    },
+    {
+      "id": "plantar-flexion",
+      "name": {
+        "pt": "Flexão plantar",
+        "en": "Plantar flexion"
+      }
+    },
+    {
+      "id": "hip-adduction",
+      "name": {
+        "pt": "Adução do quadril",
+        "en": "Hip adduction"
+      }
+    },
+    {
+      "id": "hip-abduction",
+      "name": {
+        "pt": "Abdução do quadril",
+        "en": "Hip abduction"
+      }
+    },
+    {
+      "id": "trunk-flexion",
+      "name": {
+        "pt": "Flexão do tronco",
+        "en": "Trunk flexion"
+      }
+    },
+    {
+      "id": "anti-extension",
+      "name": {
+        "pt": "Resistir à extensão do tronco",
+        "en": "Anti-extension"
+      }
+    },
+    {
+      "id": "anti-rotation",
+      "name": {
+        "pt": "Resistir à rotação do tronco",
+        "en": "Anti-rotation"
+      }
+    }
+  ],
+  "substitutionFamilies": [
+    {
+      "id": "flat-chest-press",
+      "name": {
+        "pt": "Supino horizontal",
+        "en": "Flat chest press"
+      }
+    },
+    {
+      "id": "incline-chest-press",
+      "name": {
+        "pt": "Supino inclinado",
+        "en": "Incline chest press"
+      }
+    },
+    {
+      "id": "chest-fly",
+      "name": {
+        "pt": "Crucifixo horizontal",
+        "en": "Horizontal chest fly"
+      }
+    },
+    {
+      "id": "lat-pulldown",
+      "name": {
+        "pt": "Puxada vertical",
+        "en": "Vertical pull"
+      }
+    },
+    {
+      "id": "back-row",
+      "name": {
+        "pt": "Remada",
+        "en": "Back row"
+      }
+    },
+    {
+      "id": "lat-isolation",
+      "name": {
+        "pt": "Extensão de ombro para dorsais",
+        "en": "Lat shoulder extension"
+      }
+    },
+    {
+      "id": "shoulder-press",
+      "name": {
+        "pt": "Desenvolvimento",
+        "en": "Shoulder press"
+      }
+    },
+    {
+      "id": "lateral-raise",
+      "name": {
+        "pt": "Elevação lateral",
+        "en": "Lateral raise"
+      }
+    },
+    {
+      "id": "rear-delt-fly",
+      "name": {
+        "pt": "Crucifixo inverso",
+        "en": "Rear delt fly"
+      }
+    },
+    {
+      "id": "supinated-curl",
+      "name": {
+        "pt": "Rosca supinada",
+        "en": "Supinated curl"
+      }
+    },
+    {
+      "id": "neutral-curl",
+      "name": {
+        "pt": "Rosca neutra",
+        "en": "Neutral curl"
+      }
+    },
+    {
+      "id": "triceps-pushdown",
+      "name": {
+        "pt": "Tríceps com braço ao lado",
+        "en": "Triceps pushdown"
+      }
+    },
+    {
+      "id": "overhead-triceps",
+      "name": {
+        "pt": "Tríceps acima da cabeça",
+        "en": "Overhead triceps extension"
+      }
+    },
+    {
+      "id": "quad-compound",
+      "name": {
+        "pt": "Agachamento / leg press",
+        "en": "Squat / leg press"
+      }
+    },
+    {
+      "id": "leg-extension",
+      "name": {
+        "pt": "Extensora",
+        "en": "Leg extension"
+      }
+    },
+    {
+      "id": "romanian-deadlift",
+      "name": {
+        "pt": "RDL",
+        "en": "Romanian deadlift"
+      }
+    },
+    {
+      "id": "leg-curl",
+      "name": {
+        "pt": "Flexora",
+        "en": "Leg curl"
+      }
+    },
+    {
+      "id": "hip-thrust",
+      "name": {
+        "pt": "Elevação de quadril",
+        "en": "Hip thrust"
+      }
+    },
+    {
+      "id": "standing-calf",
+      "name": {
+        "pt": "Panturrilha com joelho estendido",
+        "en": "Straight-knee calf raise"
+      }
+    },
+    {
+      "id": "seated-calf",
+      "name": {
+        "pt": "Panturrilha com joelho flexionado",
+        "en": "Bent-knee calf raise"
+      }
+    },
+    {
+      "id": "adduction",
+      "name": {
+        "pt": "Adução do quadril",
+        "en": "Hip adduction"
+      }
+    },
+    {
+      "id": "abduction",
+      "name": {
+        "pt": "Abdução do quadril",
+        "en": "Hip abduction"
+      }
+    },
+    {
+      "id": "crunch",
+      "name": {
+        "pt": "Abdominal com flexão",
+        "en": "Crunch"
+      }
+    },
+    {
+      "id": "plank",
+      "name": {
+        "pt": "Prancha",
+        "en": "Plank"
+      }
+    },
+    {
+      "id": "pallof",
+      "name": {
+        "pt": "Antirrotação",
+        "en": "Anti-rotation press"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "ace-library",
+      "title": "ACE Exercise Library",
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/"
+    },
+    {
+      "id": "nasm-library",
+      "title": "NASM Exercise Library",
+      "url": "https://www.nasm.org/resource-center/exercise-library"
+    },
+    {
+      "id": "ace-rdl",
+      "title": "ACE: Romanian Deadlift",
+      "url": "https://www.acefitness.org/continuing-education/certified/may-2025/8865/the-ace-do-it-better-series-the-romanian-deadlift/"
+    },
+    {
+      "id": "rdl-study",
+      "title": "An Electromyographic Analysis of Romanian, Step-Romanian, and Stiff-Leg Deadlift",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8835508/"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "barbell-bench-press",
+      "name": {
+        "pt": "Supino reto barra",
+        "en": "Barbell bench press"
+      },
+      "aliases": [
+        "Supino reto com barra"
+      ],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "triceps-brachii",
+        "deltoid-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-push",
+      "mechanic": "compound",
+      "substitutionFamily": "flat-chest-press",
+      "equipment": [
+        "barbell",
+        "flat-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Peitoral com banco reto. Carga e estabilidade variam entre aparelhos."
+    },
+    {
+      "id": "dumbbell-bench-press",
+      "name": {
+        "pt": "Supino reto halteres",
+        "en": "Dumbbell bench press"
+      },
+      "aliases": [],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "triceps-brachii",
+        "deltoid-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-push",
+      "mechanic": "compound",
+      "substitutionFamily": "flat-chest-press",
+      "equipment": [
+        "dumbbells",
+        "flat-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "per-dumbbell",
+      "notes": "Peitoral com banco reto. Carga e estabilidade variam entre aparelhos."
+    },
+    {
+      "id": "smith-bench-press",
+      "name": {
+        "pt": "Supino reto Smith",
+        "en": "Smith bench press"
+      },
+      "aliases": [],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "triceps-brachii",
+        "deltoid-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-push",
+      "mechanic": "compound",
+      "substitutionFamily": "flat-chest-press",
+      "equipment": [
+        "smith",
+        "flat-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Peitoral com banco reto. Carga e estabilidade variam entre aparelhos."
+    },
+    {
+      "id": "machine-chest-press",
+      "name": {
+        "pt": "Supino reto máquina",
+        "en": "Machine chest press"
+      },
+      "aliases": [
+        "Chest press / supino máquina",
+        "Chest press",
+        "Supino máquina"
+      ],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "triceps-brachii",
+        "deltoid-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-push",
+      "mechanic": "compound",
+      "substitutionFamily": "flat-chest-press",
+      "equipment": [
+        "chest-press-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Peitoral com banco reto. Carga e estabilidade variam entre aparelhos."
+    },
+    {
+      "id": "push-up",
+      "name": {
+        "pt": "Flexão de braços",
+        "en": "Push-up"
+      },
+      "aliases": [],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "triceps-brachii",
+        "deltoid-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-push",
+      "mechanic": "compound",
+      "substitutionFamily": "flat-chest-press",
+      "equipment": [
+        "bodyweight"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "bodyweight",
+      "notes": "Mesma família do supino, mas usa peso corporal; ajuste a dificuldade e registre 0 kg quando não houver carga adicional."
+    },
+    {
+      "id": "incline-barbell-bench-press",
+      "name": {
+        "pt": "Supino inclinado barra",
+        "en": "Incline barbell bench press"
+      },
+      "aliases": [],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "deltoid-anterior",
+        "triceps-brachii"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "diagonal-push",
+      "mechanic": "compound",
+      "substitutionFamily": "incline-chest-press",
+      "equipment": [
+        "barbell",
+        "adjustable-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Ênfase na região clavicular do peitoral. Mantenha uma inclinação semelhante."
+    },
+    {
+      "id": "incline-dumbbell-bench-press",
+      "name": {
+        "pt": "Supino inclinado halteres",
+        "en": "Incline dumbbell bench press"
+      },
+      "aliases": [],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "deltoid-anterior",
+        "triceps-brachii"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "diagonal-push",
+      "mechanic": "compound",
+      "substitutionFamily": "incline-chest-press",
+      "equipment": [
+        "dumbbells",
+        "adjustable-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "per-dumbbell",
+      "notes": "Ênfase na região clavicular do peitoral. Mantenha uma inclinação semelhante."
+    },
+    {
+      "id": "incline-smith-bench-press",
+      "name": {
+        "pt": "Supino inclinado Smith",
+        "en": "Incline Smith bench press"
+      },
+      "aliases": [
+        "Supino inclinado Smith / máquina"
+      ],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "deltoid-anterior",
+        "triceps-brachii"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "diagonal-push",
+      "mechanic": "compound",
+      "substitutionFamily": "incline-chest-press",
+      "equipment": [
+        "smith",
+        "adjustable-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Ênfase na região clavicular do peitoral. Mantenha uma inclinação semelhante."
+    },
+    {
+      "id": "incline-machine-chest-press",
+      "name": {
+        "pt": "Supino inclinado máquina",
+        "en": "Incline machine chest press"
+      },
+      "aliases": [],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "deltoid-anterior",
+        "triceps-brachii"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "diagonal-push",
+      "mechanic": "compound",
+      "substitutionFamily": "incline-chest-press",
+      "equipment": [
+        "incline-press-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Ênfase na região clavicular do peitoral. Mantenha uma inclinação semelhante."
+    },
+    {
+      "id": "cable-chest-fly",
+      "name": {
+        "pt": "Crucifixo no cabo",
+        "en": "Cable chest fly"
+      },
+      "aliases": [
+        "Crossover no cabo",
+        "Crossover"
+      ],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "deltoid-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-adduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "chest-fly",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "per-side",
+      "notes": "Adução horizontal sem extensão ativa do cotovelo. Não substitui automaticamente um supino."
+    },
+    {
+      "id": "dumbbell-chest-fly",
+      "name": {
+        "pt": "Crucifixo reto halteres",
+        "en": "Dumbbell chest fly"
+      },
+      "aliases": [],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "deltoid-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-adduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "chest-fly",
+      "equipment": [
+        "dumbbells",
+        "flat-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "per-dumbbell",
+      "notes": "Adução horizontal sem extensão ativa do cotovelo. Não substitui automaticamente um supino."
+    },
+    {
+      "id": "pec-deck-fly",
+      "name": {
+        "pt": "Crucifixo máquina",
+        "en": "Pec deck fly"
+      },
+      "aliases": [
+        "Peck deck"
+      ],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "deltoid-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-adduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "chest-fly",
+      "equipment": [
+        "pec-deck"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Adução horizontal sem extensão ativa do cotovelo. Não substitui automaticamente um supino."
+    },
+    {
+      "id": "band-chest-fly",
+      "name": {
+        "pt": "Crucifixo com elástico",
+        "en": "Band chest fly"
+      },
+      "aliases": [],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "deltoid-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-adduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "chest-fly",
+      "equipment": [
+        "resistance-band"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "band",
+      "notes": "Adução horizontal sem extensão ativa do cotovelo. Não substitui automaticamente um supino."
+    },
+    {
+      "id": "neutral-grip-lat-pulldown",
+      "name": {
+        "pt": "Puxada alta neutra",
+        "en": "Neutral-grip lat pulldown"
+      },
+      "aliases": [
+        "Puxada alta pegada neutra"
+      ],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi"
+      ],
+      "secondaryMuscles": [
+        "teres-major",
+        "biceps-brachii",
+        "brachialis",
+        "trapezius-lower"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "vertical-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "lat-pulldown",
+      "equipment": [
+        "pulldown-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Puxada vertical. Ajuste carga, assistência e pegada à execução escolhida."
+    },
+    {
+      "id": "pronated-lat-pulldown",
+      "name": {
+        "pt": "Puxada alta pronada",
+        "en": "Pronated lat pulldown"
+      },
+      "aliases": [
+        "Puxada alta"
+      ],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi"
+      ],
+      "secondaryMuscles": [
+        "teres-major",
+        "biceps-brachii",
+        "brachialis",
+        "trapezius-lower"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "vertical-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "lat-pulldown",
+      "equipment": [
+        "pulldown-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Puxada vertical. Ajuste carga, assistência e pegada à execução escolhida."
+    },
+    {
+      "id": "supinated-lat-pulldown",
+      "name": {
+        "pt": "Puxada alta supinada",
+        "en": "Supinated lat pulldown"
+      },
+      "aliases": [],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi"
+      ],
+      "secondaryMuscles": [
+        "teres-major",
+        "biceps-brachii",
+        "brachialis",
+        "trapezius-lower"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "vertical-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "lat-pulldown",
+      "equipment": [
+        "pulldown-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Puxada vertical. Ajuste carga, assistência e pegada à execução escolhida."
+    },
+    {
+      "id": "pull-up",
+      "name": {
+        "pt": "Barra fixa pronada",
+        "en": "Pull-up"
+      },
+      "aliases": [
+        "Barra fixa / puxada alta",
+        "Barra fixa"
+      ],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi"
+      ],
+      "secondaryMuscles": [
+        "teres-major",
+        "biceps-brachii",
+        "brachialis",
+        "trapezius-lower"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "vertical-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "lat-pulldown",
+      "equipment": [
+        "pullup-bar"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "bodyweight",
+      "notes": "Puxada vertical. Ajuste carga, assistência e pegada à execução escolhida."
+    },
+    {
+      "id": "chin-up",
+      "name": {
+        "pt": "Barra fixa supinada",
+        "en": "Chin-up"
+      },
+      "aliases": [],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi"
+      ],
+      "secondaryMuscles": [
+        "teres-major",
+        "biceps-brachii",
+        "brachialis",
+        "trapezius-lower"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "vertical-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "lat-pulldown",
+      "equipment": [
+        "pullup-bar"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "bodyweight",
+      "notes": "Puxada vertical. Ajuste carga, assistência e pegada à execução escolhida."
+    },
+    {
+      "id": "assisted-pull-up",
+      "name": {
+        "pt": "Barra fixa assistida",
+        "en": "Assisted pull-up"
+      },
+      "aliases": [
+        "Graviton"
+      ],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi"
+      ],
+      "secondaryMuscles": [
+        "teres-major",
+        "biceps-brachii",
+        "brachialis",
+        "trapezius-lower"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "vertical-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "lat-pulldown",
+      "equipment": [
+        "assisted-pullup-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "assistance",
+      "notes": "Puxada vertical. Ajuste carga, assistência e pegada à execução escolhida."
+    },
+    {
+      "id": "band-lat-pulldown",
+      "name": {
+        "pt": "Puxada alta com elástico",
+        "en": "Band lat pulldown"
+      },
+      "aliases": [],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi"
+      ],
+      "secondaryMuscles": [
+        "teres-major",
+        "biceps-brachii",
+        "brachialis",
+        "trapezius-lower"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "vertical-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "lat-pulldown",
+      "equipment": [
+        "resistance-band"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "band",
+      "notes": "Puxada vertical. Ajuste carga, assistência e pegada à execução escolhida."
+    },
+    {
+      "id": "chest-supported-machine-row",
+      "name": {
+        "pt": "Remada apoiada máquina",
+        "en": "Chest-supported machine row"
+      },
+      "aliases": [
+        "Remada apoiada",
+        "Remada apoiada/máquina"
+      ],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi",
+        "rhomboids",
+        "trapezius-middle"
+      ],
+      "secondaryMuscles": [
+        "deltoid-posterior",
+        "biceps-brachii",
+        "brachialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "back-row",
+      "equipment": [
+        "row-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Remada. A trajetória dos cotovelos altera a ênfase; apoio do tronco altera a demanda de estabilização."
+    },
+    {
+      "id": "chest-supported-dumbbell-row",
+      "name": {
+        "pt": "Remada apoiada halteres",
+        "en": "Chest-supported dumbbell row"
+      },
+      "aliases": [],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi",
+        "rhomboids",
+        "trapezius-middle"
+      ],
+      "secondaryMuscles": [
+        "deltoid-posterior",
+        "biceps-brachii",
+        "brachialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "back-row",
+      "equipment": [
+        "dumbbells",
+        "adjustable-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "per-dumbbell",
+      "notes": "Remada. A trajetória dos cotovelos altera a ênfase; apoio do tronco altera a demanda de estabilização."
+    },
+    {
+      "id": "seated-cable-row",
+      "name": {
+        "pt": "Remada baixa no cabo",
+        "en": "Seated cable row"
+      },
+      "aliases": [
+        "Remada baixa"
+      ],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi",
+        "rhomboids",
+        "trapezius-middle"
+      ],
+      "secondaryMuscles": [
+        "deltoid-posterior",
+        "biceps-brachii",
+        "brachialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "back-row",
+      "equipment": [
+        "low-row-cable"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Remada. A trajetória dos cotovelos altera a ênfase; apoio do tronco altera a demanda de estabilização."
+    },
+    {
+      "id": "one-arm-dumbbell-row",
+      "name": {
+        "pt": "Remada unilateral halter",
+        "en": "One-arm dumbbell row"
+      },
+      "aliases": [
+        "Remada unilateral"
+      ],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi",
+        "rhomboids",
+        "trapezius-middle"
+      ],
+      "secondaryMuscles": [
+        "deltoid-posterior",
+        "biceps-brachii",
+        "brachialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "back-row",
+      "equipment": [
+        "dumbbells",
+        "flat-bench"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "per-dumbbell",
+      "notes": "Remada. A trajetória dos cotovelos altera a ênfase; apoio do tronco altera a demanda de estabilização."
+    },
+    {
+      "id": "barbell-bent-over-row",
+      "name": {
+        "pt": "Remada curvada barra",
+        "en": "Barbell bent-over row"
+      },
+      "aliases": [],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi",
+        "rhomboids",
+        "trapezius-middle"
+      ],
+      "secondaryMuscles": [
+        "deltoid-posterior",
+        "biceps-brachii",
+        "brachialis"
+      ],
+      "stabilizerMuscles": [
+        "erector-spinae",
+        "transversus-abdominis"
+      ],
+      "movementPattern": "horizontal-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "back-row",
+      "equipment": [
+        "barbell"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Remada sem apoio. Exige estabilização dos eretores da coluna e controle do quadril; evite transferir a carga da máquina."
+    },
+    {
+      "id": "one-arm-cable-row",
+      "name": {
+        "pt": "Remada unilateral no cabo",
+        "en": "One-arm cable row"
+      },
+      "aliases": [],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi",
+        "rhomboids",
+        "trapezius-middle"
+      ],
+      "secondaryMuscles": [
+        "deltoid-posterior",
+        "biceps-brachii",
+        "brachialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "back-row",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "unilateral",
+      "support": "free",
+      "loadUnit": "per-side",
+      "notes": "Remada. A trajetória dos cotovelos altera a ênfase; apoio do tronco altera a demanda de estabilização."
+    },
+    {
+      "id": "band-row",
+      "name": {
+        "pt": "Remada com elástico",
+        "en": "Band row"
+      },
+      "aliases": [],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi",
+        "rhomboids",
+        "trapezius-middle"
+      ],
+      "secondaryMuscles": [
+        "deltoid-posterior",
+        "biceps-brachii",
+        "brachialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "back-row",
+      "equipment": [
+        "resistance-band"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "band",
+      "notes": "Remada. A trajetória dos cotovelos altera a ênfase; apoio do tronco altera a demanda de estabilização."
+    },
+    {
+      "id": "straight-arm-cable-pulldown",
+      "name": {
+        "pt": "Pulldown braço estendido",
+        "en": "Straight-arm cable pulldown"
+      },
+      "aliases": [],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi"
+      ],
+      "secondaryMuscles": [
+        "teres-major",
+        "pectoralis-major"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "shoulder-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "lat-isolation",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Extensão do ombro com pouca mudança no cotovelo. Não equivale a uma puxada composta."
+    },
+    {
+      "id": "band-straight-arm-pulldown",
+      "name": {
+        "pt": "Pulldown braço estendido com elástico",
+        "en": "Band straight-arm pulldown"
+      },
+      "aliases": [],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi"
+      ],
+      "secondaryMuscles": [
+        "teres-major",
+        "pectoralis-major"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "shoulder-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "lat-isolation",
+      "equipment": [
+        "resistance-band"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "band",
+      "notes": "Extensão do ombro com pouca mudança no cotovelo. Não equivale a uma puxada composta."
+    },
+    {
+      "id": "machine-shoulder-press",
+      "name": {
+        "pt": "Desenvolvimento máquina",
+        "en": "Machine shoulder press"
+      },
+      "aliases": [
+        "Desenvolvimento máquina / halteres",
+        "Desenvolvimento máquina ou halteres"
+      ],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-anterior"
+      ],
+      "secondaryMuscles": [
+        "deltoid-lateral",
+        "triceps-brachii",
+        "serratus-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "vertical-push",
+      "mechanic": "compound",
+      "substitutionFamily": "shoulder-press",
+      "equipment": [
+        "shoulder-press-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Desenvolvimento acima da cabeça. Halteres e barra exigem mais estabilização que a máquina."
+    },
+    {
+      "id": "seated-dumbbell-shoulder-press",
+      "name": {
+        "pt": "Desenvolvimento halteres sentado",
+        "en": "Seated dumbbell shoulder press"
+      },
+      "aliases": [
+        "Desenvolvimento halteres"
+      ],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-anterior"
+      ],
+      "secondaryMuscles": [
+        "deltoid-lateral",
+        "triceps-brachii",
+        "serratus-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "vertical-push",
+      "mechanic": "compound",
+      "substitutionFamily": "shoulder-press",
+      "equipment": [
+        "dumbbells",
+        "adjustable-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "per-dumbbell",
+      "notes": "Desenvolvimento acima da cabeça. Halteres e barra exigem mais estabilização que a máquina."
+    },
+    {
+      "id": "seated-barbell-shoulder-press",
+      "name": {
+        "pt": "Desenvolvimento barra sentado",
+        "en": "Seated barbell shoulder press"
+      },
+      "aliases": [],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-anterior"
+      ],
+      "secondaryMuscles": [
+        "deltoid-lateral",
+        "triceps-brachii",
+        "serratus-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "vertical-push",
+      "mechanic": "compound",
+      "substitutionFamily": "shoulder-press",
+      "equipment": [
+        "barbell",
+        "adjustable-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Desenvolvimento acima da cabeça. Halteres e barra exigem mais estabilização que a máquina."
+    },
+    {
+      "id": "smith-shoulder-press",
+      "name": {
+        "pt": "Desenvolvimento Smith",
+        "en": "Smith shoulder press"
+      },
+      "aliases": [],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-anterior"
+      ],
+      "secondaryMuscles": [
+        "deltoid-lateral",
+        "triceps-brachii",
+        "serratus-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "vertical-push",
+      "mechanic": "compound",
+      "substitutionFamily": "shoulder-press",
+      "equipment": [
+        "smith",
+        "adjustable-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Desenvolvimento acima da cabeça. Halteres e barra exigem mais estabilização que a máquina."
+    },
+    {
+      "id": "dumbbell-lateral-raise",
+      "name": {
+        "pt": "Elevação lateral halteres",
+        "en": "Dumbbell lateral raise"
+      },
+      "aliases": [
+        "Elevação lateral"
+      ],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-lateral"
+      ],
+      "secondaryMuscles": [
+        "trapezius-upper"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "shoulder-abduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "lateral-raise",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Abdução do ombro. Polia e halteres têm curvas de resistência diferentes."
+    },
+    {
+      "id": "cable-lateral-raise",
+      "name": {
+        "pt": "Elevação lateral no cabo",
+        "en": "Cable lateral raise"
+      },
+      "aliases": [],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-lateral"
+      ],
+      "secondaryMuscles": [
+        "trapezius-upper"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "shoulder-abduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "lateral-raise",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "unilateral",
+      "support": "free",
+      "loadUnit": "per-side",
+      "notes": "Abdução do ombro. Polia e halteres têm curvas de resistência diferentes."
+    },
+    {
+      "id": "machine-lateral-raise",
+      "name": {
+        "pt": "Elevação lateral máquina",
+        "en": "Machine lateral raise"
+      },
+      "aliases": [],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-lateral"
+      ],
+      "secondaryMuscles": [
+        "trapezius-upper"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "shoulder-abduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "lateral-raise",
+      "equipment": [
+        "lateral-raise-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Abdução do ombro. Polia e halteres têm curvas de resistência diferentes."
+    },
+    {
+      "id": "band-lateral-raise",
+      "name": {
+        "pt": "Elevação lateral com elástico",
+        "en": "Band lateral raise"
+      },
+      "aliases": [],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-lateral"
+      ],
+      "secondaryMuscles": [
+        "trapezius-upper"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "shoulder-abduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "lateral-raise",
+      "equipment": [
+        "resistance-band"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "band",
+      "notes": "Abdução do ombro. Polia e halteres têm curvas de resistência diferentes."
+    },
+    {
+      "id": "reverse-pec-deck",
+      "name": {
+        "pt": "Crucifixo inverso máquina",
+        "en": "Reverse pec deck"
+      },
+      "aliases": [
+        "Crucifixo inverso",
+        "Crucifixo inverso / peck deck"
+      ],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-posterior"
+      ],
+      "secondaryMuscles": [
+        "rhomboids",
+        "trapezius-middle"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-abduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "rear-delt-fly",
+      "equipment": [
+        "pec-deck"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Crucifixo inverso; o movimento da escápula altera a participação da região média das costas."
+    },
+    {
+      "id": "dumbbell-rear-delt-fly",
+      "name": {
+        "pt": "Crucifixo inverso halteres apoiado",
+        "en": "Chest-supported dumbbell rear delt fly"
+      },
+      "aliases": [],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-posterior"
+      ],
+      "secondaryMuscles": [
+        "rhomboids",
+        "trapezius-middle"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-abduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "rear-delt-fly",
+      "equipment": [
+        "dumbbells",
+        "adjustable-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "per-dumbbell",
+      "notes": "Crucifixo inverso; o movimento da escápula altera a participação da região média das costas."
+    },
+    {
+      "id": "cable-rear-delt-fly",
+      "name": {
+        "pt": "Crucifixo inverso no cabo",
+        "en": "Cable rear delt fly"
+      },
+      "aliases": [],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-posterior"
+      ],
+      "secondaryMuscles": [
+        "rhomboids",
+        "trapezius-middle"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-abduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "rear-delt-fly",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "per-side",
+      "notes": "Crucifixo inverso; o movimento da escápula altera a participação da região média das costas."
+    },
+    {
+      "id": "barbell-curl",
+      "name": {
+        "pt": "Rosca direta barra",
+        "en": "Barbell curl"
+      },
+      "aliases": [
+        "Rosca direta"
+      ],
+      "group": "biceps",
+      "primaryMuscles": [
+        "biceps-brachii"
+      ],
+      "secondaryMuscles": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "supinated-curl",
+      "equipment": [
+        "barbell"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Rosca com palma voltada para cima. A posição do ombro muda o estímulo entre Scott, inclinada e direta."
+    },
+    {
+      "id": "ez-bar-curl",
+      "name": {
+        "pt": "Rosca direta barra W",
+        "en": "EZ-bar curl"
+      },
+      "aliases": [],
+      "group": "biceps",
+      "primaryMuscles": [
+        "biceps-brachii"
+      ],
+      "secondaryMuscles": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "supinated-curl",
+      "equipment": [
+        "ez-bar"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Rosca com palma voltada para cima. A posição do ombro muda o estímulo entre Scott, inclinada e direta."
+    },
+    {
+      "id": "dumbbell-curl",
+      "name": {
+        "pt": "Rosca direta halteres",
+        "en": "Dumbbell curl"
+      },
+      "aliases": [],
+      "group": "biceps",
+      "primaryMuscles": [
+        "biceps-brachii"
+      ],
+      "secondaryMuscles": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "supinated-curl",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Rosca com palma voltada para cima. A posição do ombro muda o estímulo entre Scott, inclinada e direta."
+    },
+    {
+      "id": "incline-dumbbell-curl",
+      "name": {
+        "pt": "Rosca inclinada halteres",
+        "en": "Incline dumbbell curl"
+      },
+      "aliases": [],
+      "group": "biceps",
+      "primaryMuscles": [
+        "biceps-brachii"
+      ],
+      "secondaryMuscles": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "supinated-curl",
+      "equipment": [
+        "dumbbells",
+        "adjustable-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "per-dumbbell",
+      "notes": "Rosca com palma voltada para cima. A posição do ombro muda o estímulo entre Scott, inclinada e direta."
+    },
+    {
+      "id": "ez-bar-preacher-curl",
+      "name": {
+        "pt": "Rosca Scott barra W",
+        "en": "EZ-bar preacher curl"
+      },
+      "aliases": [
+        "Rosca Scott"
+      ],
+      "group": "biceps",
+      "primaryMuscles": [
+        "biceps-brachii"
+      ],
+      "secondaryMuscles": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "supinated-curl",
+      "equipment": [
+        "ez-bar",
+        "preacher-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Rosca com palma voltada para cima. A posição do ombro muda o estímulo entre Scott, inclinada e direta."
+    },
+    {
+      "id": "machine-preacher-curl",
+      "name": {
+        "pt": "Rosca Scott máquina",
+        "en": "Machine preacher curl"
+      },
+      "aliases": [],
+      "group": "biceps",
+      "primaryMuscles": [
+        "biceps-brachii"
+      ],
+      "secondaryMuscles": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "supinated-curl",
+      "equipment": [
+        "curl-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Rosca com palma voltada para cima. A posição do ombro muda o estímulo entre Scott, inclinada e direta."
+    },
+    {
+      "id": "cable-curl",
+      "name": {
+        "pt": "Rosca direta no cabo",
+        "en": "Cable curl"
+      },
+      "aliases": [],
+      "group": "biceps",
+      "primaryMuscles": [
+        "biceps-brachii"
+      ],
+      "secondaryMuscles": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "supinated-curl",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Rosca com palma voltada para cima. A posição do ombro muda o estímulo entre Scott, inclinada e direta."
+    },
+    {
+      "id": "dumbbell-hammer-curl",
+      "name": {
+        "pt": "Rosca martelo halteres",
+        "en": "Dumbbell hammer curl"
+      },
+      "aliases": [
+        "Rosca martelo"
+      ],
+      "group": "biceps",
+      "primaryMuscles": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "secondaryMuscles": [
+        "biceps-brachii"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "neutral-curl",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Rosca de pegada neutra; não é uma alternativa direta da rosca supinada."
+    },
+    {
+      "id": "rope-hammer-curl",
+      "name": {
+        "pt": "Rosca martelo corda",
+        "en": "Rope hammer curl"
+      },
+      "aliases": [],
+      "group": "biceps",
+      "primaryMuscles": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "secondaryMuscles": [
+        "biceps-brachii"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "neutral-curl",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Rosca de pegada neutra; não é uma alternativa direta da rosca supinada."
+    },
+    {
+      "id": "rope-triceps-pushdown",
+      "name": {
+        "pt": "Tríceps corda",
+        "en": "Rope triceps pushdown"
+      },
+      "aliases": [],
+      "group": "triceps",
+      "primaryMuscles": [
+        "triceps-brachii"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "triceps-pushdown",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Extensão do cotovelo com braço junto ao tronco. Mantenha o ombro estável."
+    },
+    {
+      "id": "bar-triceps-pushdown",
+      "name": {
+        "pt": "Tríceps pulley barra",
+        "en": "Bar triceps pushdown"
+      },
+      "aliases": [
+        "Tríceps pulley"
+      ],
+      "group": "triceps",
+      "primaryMuscles": [
+        "triceps-brachii"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "triceps-pushdown",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Extensão do cotovelo com braço junto ao tronco. Mantenha o ombro estável."
+    },
+    {
+      "id": "band-triceps-pushdown",
+      "name": {
+        "pt": "Tríceps pulley com elástico",
+        "en": "Band triceps pushdown"
+      },
+      "aliases": [],
+      "group": "triceps",
+      "primaryMuscles": [
+        "triceps-brachii"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "triceps-pushdown",
+      "equipment": [
+        "resistance-band"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "band",
+      "notes": "Extensão do cotovelo com braço junto ao tronco. Mantenha o ombro estável."
+    },
+    {
+      "id": "cable-overhead-triceps-extension",
+      "name": {
+        "pt": "Tríceps acima da cabeça no cabo",
+        "en": "Cable overhead triceps extension"
+      },
+      "aliases": [
+        "Tríceps francês no cabo"
+      ],
+      "group": "triceps",
+      "primaryMuscles": [
+        "triceps-brachii"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "overhead-triceps",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Extensão acima da cabeça, com maior comprimento da cabeça longa do tríceps. Não equivale ao pulley com braço ao lado."
+    },
+    {
+      "id": "dumbbell-overhead-triceps-extension",
+      "name": {
+        "pt": "Tríceps francês halter",
+        "en": "Dumbbell overhead triceps extension"
+      },
+      "aliases": [],
+      "group": "triceps",
+      "primaryMuscles": [
+        "triceps-brachii"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "overhead-triceps",
+      "equipment": [
+        "dumbbells",
+        "flat-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Extensão acima da cabeça, com maior comprimento da cabeça longa do tríceps. Não equivale ao pulley com braço ao lado."
+    },
+    {
+      "id": "ez-bar-overhead-triceps-extension",
+      "name": {
+        "pt": "Tríceps francês barra W",
+        "en": "EZ-bar overhead triceps extension"
+      },
+      "aliases": [],
+      "group": "triceps",
+      "primaryMuscles": [
+        "triceps-brachii"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "elbow-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "overhead-triceps",
+      "equipment": [
+        "ez-bar",
+        "flat-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Extensão acima da cabeça, com maior comprimento da cabeça longa do tríceps. Não equivale ao pulley com braço ao lado."
+    },
+    {
+      "id": "hack-squat",
+      "name": {
+        "pt": "Hack squat",
+        "en": "Hack squat"
+      },
+      "aliases": [],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "hack-squat"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Agachamento / leg press. Amplitude, posição dos pés e apoio alteram a distribuição do esforço."
+    },
+    {
+      "id": "leg-press",
+      "name": {
+        "pt": "Leg press",
+        "en": "Leg press"
+      },
+      "aliases": [],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "leg-press"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Agachamento / leg press. Amplitude, posição dos pés e apoio alteram a distribuição do esforço."
+    },
+    {
+      "id": "barbell-back-squat",
+      "name": {
+        "pt": "Agachamento livre barra",
+        "en": "Barbell back squat"
+      },
+      "aliases": [
+        "Agachamento livre",
+        "Agachamento"
+      ],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "erector-spinae",
+        "transversus-abdominis"
+      ],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "barbell",
+        "rack"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Agachamento / leg press. Amplitude, posição dos pés e apoio alteram a distribuição do esforço."
+    },
+    {
+      "id": "smith-squat",
+      "name": {
+        "pt": "Agachamento Smith",
+        "en": "Smith squat"
+      },
+      "aliases": [],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "smith"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Agachamento / leg press. Amplitude, posição dos pés e apoio alteram a distribuição do esforço."
+    },
+    {
+      "id": "goblet-squat",
+      "name": {
+        "pt": "Agachamento goblet",
+        "en": "Goblet squat"
+      },
+      "aliases": [],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Agachamento / leg press. Amplitude, posição dos pés e apoio alteram a distribuição do esforço."
+    },
+    {
+      "id": "dumbbell-split-squat",
+      "name": {
+        "pt": "Agachamento dividido halteres",
+        "en": "Dumbbell split squat"
+      },
+      "aliases": [],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "unilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Exercício unilateral; faça as repetições em cada lado e ajuste a carga. Demanda de equilíbrio diferente do leg press."
+    },
+    {
+      "id": "machine-leg-extension",
+      "name": {
+        "pt": "Extensora",
+        "en": "Leg extension"
+      },
+      "aliases": [
+        "Cadeira extensora"
+      ],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "leg-extension",
+      "equipment": [
+        "leg-extension"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Extensão isolada do joelho. Agachamento não é substituição automática."
+    },
+    {
+      "id": "band-leg-extension",
+      "name": {
+        "pt": "Extensora com elástico",
+        "en": "Band leg extension"
+      },
+      "aliases": [],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "leg-extension",
+      "equipment": [
+        "resistance-band",
+        "flat-bench"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "band",
+      "notes": "Extensão isolada do joelho. Agachamento não é substituição automática."
+    },
+    {
+      "id": "barbell-romanian-deadlift",
+      "name": {
+        "pt": "RDL barra",
+        "en": "Barbell Romanian deadlift"
+      },
+      "aliases": [
+        "RDL / stiff",
+        "Stiff/RDL",
+        "RDL",
+        "Stiff"
+      ],
+      "group": "hamstrings",
+      "primaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus",
+        "gluteus-maximus"
+      ],
+      "secondaryMuscles": [
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "erector-spinae",
+        "transversus-abdominis"
+      ],
+      "movementPattern": "hip-hinge",
+      "mechanic": "compound",
+      "substitutionFamily": "romanian-deadlift",
+      "equipment": [
+        "barbell"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "RDL com joelhos levemente flexionados e movimento no quadril. Flexora tem outra função e não aparece como troca direta."
+    },
+    {
+      "id": "dumbbell-romanian-deadlift",
+      "name": {
+        "pt": "RDL halteres",
+        "en": "Dumbbell Romanian deadlift"
+      },
+      "aliases": [],
+      "group": "hamstrings",
+      "primaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus",
+        "gluteus-maximus"
+      ],
+      "secondaryMuscles": [
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "erector-spinae",
+        "transversus-abdominis"
+      ],
+      "movementPattern": "hip-hinge",
+      "mechanic": "compound",
+      "substitutionFamily": "romanian-deadlift",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "RDL com joelhos levemente flexionados e movimento no quadril. Flexora tem outra função e não aparece como troca direta."
+    },
+    {
+      "id": "smith-romanian-deadlift",
+      "name": {
+        "pt": "RDL Smith",
+        "en": "Smith Romanian deadlift"
+      },
+      "aliases": [],
+      "group": "hamstrings",
+      "primaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus",
+        "gluteus-maximus"
+      ],
+      "secondaryMuscles": [
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "erector-spinae",
+        "transversus-abdominis"
+      ],
+      "movementPattern": "hip-hinge",
+      "mechanic": "compound",
+      "substitutionFamily": "romanian-deadlift",
+      "equipment": [
+        "smith"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "RDL com joelhos levemente flexionados e movimento no quadril. Flexora tem outra função e não aparece como troca direta."
+    },
+    {
+      "id": "seated-leg-curl",
+      "name": {
+        "pt": "Flexora sentada",
+        "en": "Seated leg curl"
+      },
+      "aliases": [
+        "Flexora",
+        "Flexora sentada/deitada"
+      ],
+      "group": "hamstrings",
+      "primaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus"
+      ],
+      "secondaryMuscles": [
+        "gastrocnemius"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "leg-curl",
+      "equipment": [
+        "seated-leg-curl"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Flexão do joelho. Sentada e deitada mudam o comprimento muscular; ajuste a carga."
+    },
+    {
+      "id": "lying-leg-curl",
+      "name": {
+        "pt": "Flexora deitada",
+        "en": "Lying leg curl"
+      },
+      "aliases": [
+        "Mesa flexora"
+      ],
+      "group": "hamstrings",
+      "primaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus"
+      ],
+      "secondaryMuscles": [
+        "gastrocnemius"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "leg-curl",
+      "equipment": [
+        "lying-leg-curl"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Flexão do joelho. Sentada e deitada mudam o comprimento muscular; ajuste a carga."
+    },
+    {
+      "id": "standing-leg-curl",
+      "name": {
+        "pt": "Flexora em pé",
+        "en": "Standing leg curl"
+      },
+      "aliases": [],
+      "group": "hamstrings",
+      "primaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus"
+      ],
+      "secondaryMuscles": [
+        "gastrocnemius"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "leg-curl",
+      "equipment": [
+        "standing-leg-curl"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Flexão do joelho. Sentada e deitada mudam o comprimento muscular; ajuste a carga."
+    },
+    {
+      "id": "band-leg-curl",
+      "name": {
+        "pt": "Flexora com elástico",
+        "en": "Band leg curl"
+      },
+      "aliases": [],
+      "group": "hamstrings",
+      "primaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus"
+      ],
+      "secondaryMuscles": [
+        "gastrocnemius"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "leg-curl",
+      "equipment": [
+        "resistance-band",
+        "mat"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "band",
+      "notes": "Flexão do joelho. Sentada e deitada mudam o comprimento muscular; ajuste a carga."
+    },
+    {
+      "id": "slider-leg-curl",
+      "name": {
+        "pt": "Flexora deslizante",
+        "en": "Slider leg curl"
+      },
+      "aliases": [],
+      "group": "hamstrings",
+      "primaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus"
+      ],
+      "secondaryMuscles": [
+        "gastrocnemius",
+        "gluteus-maximus"
+      ],
+      "stabilizerMuscles": [
+        "transversus-abdominis"
+      ],
+      "movementPattern": "knee-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "leg-curl",
+      "equipment": [
+        "sliders",
+        "mat"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "bodyweight",
+      "notes": "Flexão de joelho mantendo o quadril elevado. Requer controle de peso corporal; dificuldade e amplitude diferem da máquina."
+    },
+    {
+      "id": "barbell-hip-thrust",
+      "name": {
+        "pt": "Hip thrust barra",
+        "en": "Barbell hip thrust"
+      },
+      "aliases": [
+        "Hip thrust"
+      ],
+      "group": "glutes",
+      "primaryMuscles": [
+        "gluteus-maximus"
+      ],
+      "secondaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "transversus-abdominis"
+      ],
+      "movementPattern": "hip-extension",
+      "mechanic": "compound",
+      "substitutionFamily": "hip-thrust",
+      "equipment": [
+        "barbell",
+        "flat-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Extensão do quadril com apoio; apoio e amplitude diferem na ponte e no hip thrust."
+    },
+    {
+      "id": "machine-hip-thrust",
+      "name": {
+        "pt": "Hip thrust máquina",
+        "en": "Machine hip thrust"
+      },
+      "aliases": [],
+      "group": "glutes",
+      "primaryMuscles": [
+        "gluteus-maximus"
+      ],
+      "secondaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "transversus-abdominis"
+      ],
+      "movementPattern": "hip-extension",
+      "mechanic": "compound",
+      "substitutionFamily": "hip-thrust",
+      "equipment": [
+        "hip-thrust-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Extensão do quadril com apoio; apoio e amplitude diferem na ponte e no hip thrust."
+    },
+    {
+      "id": "dumbbell-glute-bridge",
+      "name": {
+        "pt": "Ponte de glúteos halter",
+        "en": "Dumbbell glute bridge"
+      },
+      "aliases": [],
+      "group": "glutes",
+      "primaryMuscles": [
+        "gluteus-maximus"
+      ],
+      "secondaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "transversus-abdominis"
+      ],
+      "movementPattern": "hip-extension",
+      "mechanic": "compound",
+      "substitutionFamily": "hip-thrust",
+      "equipment": [
+        "dumbbells",
+        "mat"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Extensão do quadril com apoio; apoio e amplitude diferem na ponte e no hip thrust."
+    },
+    {
+      "id": "standing-machine-calf-raise",
+      "name": {
+        "pt": "Panturrilha em pé máquina",
+        "en": "Standing machine calf raise"
+      },
+      "aliases": [
+        "Panturrilha",
+        "Panturrilha em pé ou sentado"
+      ],
+      "group": "calves",
+      "primaryMuscles": [
+        "gastrocnemius",
+        "soleus"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "plantar-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "standing-calf",
+      "equipment": [
+        "standing-calf-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Panturrilha com joelho estendido. A versão sentada recebe outra família por mudar a ênfase."
+    },
+    {
+      "id": "smith-standing-calf-raise",
+      "name": {
+        "pt": "Panturrilha em pé Smith",
+        "en": "Smith standing calf raise"
+      },
+      "aliases": [],
+      "group": "calves",
+      "primaryMuscles": [
+        "gastrocnemius",
+        "soleus"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "plantar-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "standing-calf",
+      "equipment": [
+        "smith"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Panturrilha com joelho estendido. A versão sentada recebe outra família por mudar a ênfase."
+    },
+    {
+      "id": "dumbbell-standing-calf-raise",
+      "name": {
+        "pt": "Panturrilha em pé halteres",
+        "en": "Dumbbell standing calf raise"
+      },
+      "aliases": [],
+      "group": "calves",
+      "primaryMuscles": [
+        "gastrocnemius",
+        "soleus"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "plantar-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "standing-calf",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Panturrilha com joelho estendido. A versão sentada recebe outra família por mudar a ênfase."
+    },
+    {
+      "id": "leg-press-calf-raise",
+      "name": {
+        "pt": "Panturrilha no leg press",
+        "en": "Leg press calf raise"
+      },
+      "aliases": [],
+      "group": "calves",
+      "primaryMuscles": [
+        "gastrocnemius",
+        "soleus"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "plantar-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "standing-calf",
+      "equipment": [
+        "leg-press"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Panturrilha com joelho estendido. A versão sentada recebe outra família por mudar a ênfase."
+    },
+    {
+      "id": "seated-machine-calf-raise",
+      "name": {
+        "pt": "Panturrilha sentada máquina",
+        "en": "Seated machine calf raise"
+      },
+      "aliases": [],
+      "group": "calves",
+      "primaryMuscles": [
+        "soleus"
+      ],
+      "secondaryMuscles": [
+        "gastrocnemius"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "plantar-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "seated-calf",
+      "equipment": [
+        "seated-calf-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Panturrilha com joelho flexionado, com ênfase relativa no sóleo."
+    },
+    {
+      "id": "seated-dumbbell-calf-raise",
+      "name": {
+        "pt": "Panturrilha sentada halter",
+        "en": "Seated dumbbell calf raise"
+      },
+      "aliases": [],
+      "group": "calves",
+      "primaryMuscles": [
+        "soleus"
+      ],
+      "secondaryMuscles": [
+        "gastrocnemius"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "plantar-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "seated-calf",
+      "equipment": [
+        "dumbbells",
+        "flat-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Panturrilha com joelho flexionado, com ênfase relativa no sóleo."
+    },
+    {
+      "id": "machine-hip-adduction",
+      "name": {
+        "pt": "Cadeira adutora",
+        "en": "Machine hip adduction"
+      },
+      "aliases": [],
+      "group": "adductors",
+      "primaryMuscles": [
+        "adductor-longus",
+        "adductor-brevis",
+        "adductor-magnus",
+        "gracilis"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "hip-adduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "adduction",
+      "equipment": [
+        "adductor-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Adução do quadril. Amplitude e posição do quadril mudam a participação muscular."
+    },
+    {
+      "id": "cable-hip-adduction",
+      "name": {
+        "pt": "Adução do quadril no cabo",
+        "en": "Cable hip adduction"
+      },
+      "aliases": [],
+      "group": "adductors",
+      "primaryMuscles": [
+        "adductor-longus",
+        "adductor-brevis",
+        "adductor-magnus",
+        "gracilis"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "hip-adduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "adduction",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "unilateral",
+      "support": "free",
+      "loadUnit": "per-side",
+      "notes": "Adução do quadril. Amplitude e posição do quadril mudam a participação muscular."
+    },
+    {
+      "id": "machine-hip-abduction",
+      "name": {
+        "pt": "Cadeira abdutora",
+        "en": "Machine hip abduction"
+      },
+      "aliases": [],
+      "group": "abductors",
+      "primaryMuscles": [
+        "gluteus-medius",
+        "gluteus-minimus"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "hip-abduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "abduction",
+      "equipment": [
+        "abductor-machine"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Abdução do quadril. A posição do quadril altera a participação muscular."
+    },
+    {
+      "id": "band-hip-abduction",
+      "name": {
+        "pt": "Abdução com elástico",
+        "en": "Band hip abduction"
+      },
+      "aliases": [],
+      "group": "abductors",
+      "primaryMuscles": [
+        "gluteus-medius",
+        "gluteus-minimus"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "hip-abduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "abduction",
+      "equipment": [
+        "resistance-band"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "band",
+      "notes": "Abdução do quadril. A posição do quadril altera a participação muscular."
+    },
+    {
+      "id": "floor-crunch",
+      "name": {
+        "pt": "Abdominal no solo",
+        "en": "Floor crunch"
+      },
+      "aliases": [
+        "Abdominal",
+        "Abdômen"
+      ],
+      "group": "core",
+      "primaryMuscles": [
+        "rectus-abdominis"
+      ],
+      "secondaryMuscles": [
+        "obliques"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "trunk-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "crunch",
+      "equipment": [
+        "mat"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "bodyweight",
+      "notes": "Flexão controlada do tronco. Não equivale a uma prancha isométrica."
+    },
+    {
+      "id": "cable-crunch",
+      "name": {
+        "pt": "Abdominal no cabo",
+        "en": "Cable crunch"
+      },
+      "aliases": [],
+      "group": "core",
+      "primaryMuscles": [
+        "rectus-abdominis"
+      ],
+      "secondaryMuscles": [
+        "obliques"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "trunk-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "crunch",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Flexão controlada do tronco. Não equivale a uma prancha isométrica."
+    },
+    {
+      "id": "forearm-plank",
+      "name": {
+        "pt": "Prancha antebraços",
+        "en": "Forearm plank"
+      },
+      "aliases": [],
+      "group": "core",
+      "primaryMuscles": [
+        "rectus-abdominis",
+        "transversus-abdominis"
+      ],
+      "secondaryMuscles": [
+        "obliques"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "anti-extension",
+      "mechanic": "isometric",
+      "substitutionFamily": "plank",
+      "equipment": [
+        "mat"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "bodyweight",
+      "notes": "Resistir à extensão do tronco. Registre tempo como tempo; não confunda com repetições de abdominal."
+    },
+    {
+      "id": "high-plank",
+      "name": {
+        "pt": "Prancha braços estendidos",
+        "en": "High plank"
+      },
+      "aliases": [],
+      "group": "core",
+      "primaryMuscles": [
+        "rectus-abdominis",
+        "transversus-abdominis"
+      ],
+      "secondaryMuscles": [
+        "obliques"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "anti-extension",
+      "mechanic": "isometric",
+      "substitutionFamily": "plank",
+      "equipment": [
+        "mat"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "bodyweight",
+      "notes": "Resistir à extensão do tronco. Registre tempo como tempo; não confunda com repetições de abdominal."
+    },
+    {
+      "id": "cable-pallof-press",
+      "name": {
+        "pt": "Pallof press no cabo",
+        "en": "Cable Pallof press"
+      },
+      "aliases": [],
+      "group": "core",
+      "primaryMuscles": [
+        "obliques",
+        "transversus-abdominis"
+      ],
+      "secondaryMuscles": [
+        "rectus-abdominis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "anti-rotation",
+      "mechanic": "isometric",
+      "substitutionFamily": "pallof",
+      "equipment": [
+        "cable"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Resistir à rotação do tronco, com resistência lateral."
+    },
+    {
+      "id": "band-pallof-press",
+      "name": {
+        "pt": "Pallof press com elástico",
+        "en": "Band Pallof press"
+      },
+      "aliases": [],
+      "group": "core",
+      "primaryMuscles": [
+        "obliques",
+        "transversus-abdominis"
+      ],
+      "secondaryMuscles": [
+        "rectus-abdominis"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "anti-rotation",
+      "mechanic": "isometric",
+      "substitutionFamily": "pallof",
+      "equipment": [
+        "resistance-band"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "band",
+      "notes": "Resistir à rotação do tronco, com resistência lateral."
+    }
+  ]
+}

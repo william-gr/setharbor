@@ -9,3 +9,10 @@
 - [ ] Confirmar aprovação da matriz de CI API 29/35 (compatibilidade de campo de busca e preparação ADB corrigidas; aguardando nova execução).
 
 Não marcar execução/CI como concluídos sem consultar os resultados reais.
+
+- [x] Recuperar requisitos e catálogo da conversa em cloud.
+- [x] Implementar catálogo offline e troca aleatória por similar só na sessão.
+- [x] Preservar identidade, histórico, backups v1/v2 e bloquear troca com dados.
+- [x] Testar regras de catálogo/sessão em JVM e compilar APK 1.5.
+- [x] Passar quatro E2E focados em trocas, proteção de dados, backup e histórico.
+- [ ] Concluir regressão completa de 34 cenários e CI da versão 1.5.

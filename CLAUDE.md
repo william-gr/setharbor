@@ -8,11 +8,15 @@ Aplicativo Android gratuito e open source (MIT) para registrar treinos de muscul
 
 - `app/src/main/java/com/william/treino/MainActivity.java`: interface com widgets Android, persistência, histórico, seletor de documentos, backup e atualização HTTPS.
 - `app/src/main/java/com/william/treino/WorkoutPlan.java`: validação de fichas JSON.
+- `app/src/main/java/com/william/treino/ExerciseCatalog.java`: catálogo offline e famílias de substituição.
+- `app/src/main/java/com/william/treino/ExerciseSession.java`: trocas por sessão, validação e snapshots.
+- `app/src/main/assets/exercise-catalog.json`: 90 exercícios com IDs estáveis, grupos, músculos e equipamentos.
+- `docs/EXERCISE_CATALOG.md`: contrato e regras de identidade/troca.
 - `app/src/main/assets/default-plan.json`: ficha original, usada na primeira abertura e na migração de histórico antigo.
 - `app/src/main/res`: tema e ícone vetorial.
 - `app/src/e2e`: sobreposição exclusiva do APK E2E para confiar no certificado HTTPS das fixtures locais.
 - `e2e/android_ui.py`: interação com o dispositivo via ADB e XML do UI Automator.
-- `e2e/test_workout_app.py`: 30 cenários E2E.
+- `e2e/test_workout_app.py`: 34 cenários E2E.
 - `e2e/run.py`: execução e relatório JSON.
 - `.github/workflows/android-e2e.yml`: build/lint e E2E em PRs e pushes na main.
 
@@ -23,7 +27,7 @@ Não há framework de UI externo, conta de usuário, banco remoto ou integraçã
 JDK 17, Gradle 8.9, Android Gradle Plugin 8.7.3, compile/target SDK 35, min SDK 26.
 
 ```bash
-./gradlew assembleDebug lintDebug
+./gradlew testDebugUnitTest assembleDebug lintDebug
 ./gradlew assembleE2e
 ```
 
@@ -38,10 +42,11 @@ SharedPreferences `training` guarda:
 - `plan`: ficha ativa em JSON; a ausência usa a ficha original.
 - `history`: array de sessões. Cada sessão nova tem `date`, `day`, `phase`, `sets` e uma cópia da `plan` usada.
 - `draft<N>`: rascunho por índice do dia. As chaves de série são `<índice-exercício>_<índice-série>kg`, `reps` e `done`.
+- `draft<N>.exerciseOverrides`: mapa de ID da posição para catalogId, exclusivo da sessão. Impede atualização da ficha enquanto existir.
 - `day` e `phase`: seleção atual.
 - `planUrl`: URL opcional de atualização, excluída dos backups.
 
-Não interprete sessões antigas usando a ficha atual. A cópia da ficha no histórico preserva nomes, ordem e quantidades antigas. Na migração, registros sem `plan` recebem a ficha original. A consulta de último desempenho usa IDs de exercício, não posições atuais.
+Não interprete sessões antigas usando a ficha atual. A cópia da ficha no histórico preserva nomes, ordem e quantidades antigas. Na migração, registros sem `plan` recebem a ficha original. A consulta de último desempenho usa catalogId quando conhecido, com compatibilidade de IDs legados/personalizados. O campo id continua sendo o ID da posição na ficha.
 
 Trocar a ficha é bloqueado enquanto houver rascunhos, para não misturar posições entre programas. Não descarte dados ao resolver esse bloqueio. Ocultar uma série marcada altera apenas a apresentação; os valores continuam no rascunho e só séries marcadas entram no histórico.
 
@@ -61,6 +66,7 @@ Semana 1: no máximo duas séries por exercício, respeitando exercícios de uma
     "focus": "Peito e quadríceps",
     "exercises": [{
       "id": "legacy-0-0",
+      "catalogId": "barbell-bench-press",
       "name": "Supino reto barra",
       "sets": 3,
       "reps": "6–8"
@@ -75,7 +81,7 @@ Importação lê até 1 MB, valida antes de salvar e pede confirmação. Atualiz
 
 ## Backups
 
-Backup v2 inclui `version`, `plan`, `history`, `phase` e rascunhos dos dias. Restaurar substitui o estado mediante confirmação. Backup v1 é aceito e restaura a ficha original. Mantenha essa compatibilidade ao mudar o formato; não remova campos ou histórico silenciosamente.
+Backup v3 inclui `version`, `plan`, `history`, `phase` e rascunhos dos dias. Restaurar substitui o estado mediante confirmação. Backup v1 é aceito e restaura a ficha original; v2 também continua aceito. V3 impede que versões antigas ignorem trocas em rascunhos e atribuam cargas ao exercício errado. Mantenha essa compatibilidade ao mudar o formato; não remova campos ou histórico silenciosamente.
 
 ## Testes E2E
 
@@ -111,3 +117,7 @@ Eventos: todos os PRs, push na `main` e workflow_dispatch. Matriz API 29/35, Ubu
 3. Execute build/lint e E2E apropriados; relate explicitamente testes que não puder executar.
 4. Não diga que a suíte passou apenas porque scripts ou APKs compilaram.
 5. Atualize esta documentação, README e fixtures quando mudar contratos ou comportamento.
+
+## Catálogo e trocas
+
+Trocar por similar escolhe imediatamente outra opção aleatória da mesma família, grupo, movimento e mecânica, excluindo o exercício atual. Sem busca, seletor ou confirmação. Não trocar se qualquer série da posição tiver carga/reps ou check (incluindo séries ocultas). A ficha ativa não muda; rascunhos e backups guardam a troca; o snapshot do histórico guarda o exercício real. Ao salvar o treino, a próxima sessão volta à ficha ativa. Não misture cargas por posição; compare a identidade do movimento. CatalogId desconhecido é válido em uma ficha, mas não habilita substituições.

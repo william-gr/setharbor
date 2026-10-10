@@ -58,3 +58,7 @@ A automação aceita os pacotes AOSP e Google do DocumentsUI, os rótulos comuns
 O workflow não depende de segredo para rodar testes em PRs de forks. A chave pessoal de atualização do aplicativo não é versionada; no CI o Gradle gera sua assinatura debug padrão. Portanto, o APK gerado no CI não substitui a instalação pessoal assinada pela chave original sem configurar essa chave separadamente. Não desinstale o aplicativo pessoal para instalar o APK E2E: são pacotes distintos.
 
 A preparação força a parada do pacote E2E e exige confirmação de limpeza dos dados. Apenas uma falha reconhecida de transporte ADB durante essa limpeza idempotente permite uma segunda tentativa; falhas de permissão e de assertions continuam falhando. stdout/stderr de comandos ADB com erro ficam em `adb-error.json` nos artefatos.
+
+## Exercise catalog coverage
+
+Scenarios 31–34 cover immediate random changes excluding the current exercise, session reset after saving, restart persistence, entered/hidden set protection, valid and invalid real-document backup restoration, and load history across catalog IDs and plan positions. Local JVM tests validate catalog references and session rules before the CI emulator suite.
