@@ -89,4 +89,74 @@ public class ExerciseCatalogTest {
   assertTrue(ExerciseSession.sameExercise(imported,first(),catalog));
   assertEquals("barbell-bench-press",ExerciseSession.effective(imported,new JSONObject(),catalog).getString("catalogId"));
  }
+ @Test public void incompatibleCatalogVersionsAndDuplicateIdsAreRejected() throws Exception {
+  JSONObject data=read("exercise-catalog.json");
+  assertThrows(Exception.class,()->new ExerciseCatalog(new JSONObject(data.toString()).put("format","other")));
+  assertThrows(Exception.class,()->new ExerciseCatalog(new JSONObject(data.toString()).put("schemaVersion",2)));
+  for(String table:new String[]{"groups","exercises"}) {
+   JSONObject duplicate=new JSONObject(data.toString());JSONArray rows=duplicate.getJSONArray(table);rows.put(new JSONObject(rows.getJSONObject(0).toString()));
+   assertThrows(Exception.class,()->new ExerciseCatalog(duplicate));
+  }
+ }
+ @Test public void missingReferencesAndAmbiguousAliasesAreRejected() throws Exception {
+  for(String field:new String[]{"group","movementPattern","substitutionFamily","primaryMuscles","secondaryMuscles","stabilizerMuscles","equipment"}) {
+   JSONObject data=read("exercise-catalog.json");JSONObject ex=data.getJSONArray("exercises").getJSONObject(0);
+   ex.put(field,ex.get(field) instanceof JSONArray?new JSONArray().put("missing"):"missing");
+   assertThrows(Exception.class,()->new ExerciseCatalog(data));
+  }
+  for(String field:new String[]{"primaryMuscles","equipment"}) {
+   JSONObject data=read("exercise-catalog.json");data.getJSONArray("exercises").getJSONObject(0).put(field,new JSONArray());
+   assertThrows(Exception.class,()->new ExerciseCatalog(data));
+  }
+  JSONObject data=read("exercise-catalog.json");JSONArray rows=data.getJSONArray("exercises");
+  rows.getJSONObject(1).getJSONArray("aliases").put(rows.getJSONObject(0).getJSONObject("name").getString("pt"));
+  assertThrows(Exception.class,()->new ExerciseCatalog(data));
+ }
+ @Test public void labelsAliasesAndLoadUnitsGiveUsableDetails() throws Exception {
+  JSONObject ex=catalog.get("barbell-bench-press");
+  assertEquals(ex,catalog.resolve(new JSONObject().put("name","  BARBELL BENCH PRESS  ")));
+  assertEquals(catalog.label("muscles",ex.getJSONArray("primaryMuscles").getString(0)),catalog.labels("muscles",new JSONArray().put(ex.getJSONArray("primaryMuscles").getString(0))));
+  assertEquals("",catalog.labels("muscles",new JSONArray()));
+  assertThrows(IllegalStateException.class,()->catalog.labels("muscles",new JSONArray().put("missing")));
+  String[] units={"per-dumbbell","per-side","bodyweight","assistance","band","total"};
+  String[] hints={"Carga por halter","Carga por lado","0 kg sem carga adicional","Assistência em kg · reduza para progredir","Resistência de elástico","Carga total em kg"};
+  for(int i=0;i<units.length;i++)assertEquals(hints[i],catalog.loadHint(new JSONObject().put("loadUnit",units[i])));
+ }
+ @Test public void similarityRequiresEveryMovementConstraintAndCompatibleRecording() throws Exception {
+  JSONObject ex=catalog.get("barbell-bench-press");
+  for(String field:new String[]{"group","substitutionFamily","movementPattern","mechanic"})assertFalse(catalog.similar(ex,new JSONObject(ex.toString()).put(field,"different")));
+  assertTrue(catalog.alternatives(null).isEmpty());
+  for(JSONObject current:catalog.all())for(JSONObject option:catalog.alternatives(current)) {
+   assertNotEquals("band",option.getString("loadUnit"));assertNotEquals("isometric",option.getString("mechanic"));
+  }
+ }
+ @Test public void customAndFutureExercisesKeepIdentityAndCannotBeSwapped() throws Exception {
+  JSONObject custom=new JSONObject(first().toString()).put("id","custom").put("name","Custom");custom.remove("catalogId");
+  assertEquals(custom.toString(),ExerciseSession.effective(custom,new JSONObject(),catalog).toString());
+  JSONObject unknown=new JSONObject(custom.toString()).put("catalogId","future-a");
+  assertTrue(ExerciseSession.sameExercise(unknown,new JSONObject(unknown.toString()).put("id","another-slot"),catalog));
+  assertFalse(ExerciseSession.sameExercise(unknown,new JSONObject(unknown.toString()).put("catalogId","future-b"),catalog));
+  assertFalse(ExerciseSession.sameExercise(custom,new JSONObject(custom.toString()).put("id","different"),catalog));
+  JSONObject customPlan=new JSONObject(plan.toString());customPlan.getJSONArray("days").getJSONObject(0).getJSONArray("exercises").put(0,custom);
+  JSONObject draft=new JSONObject();assertThrows(Exception.class,()->ExerciseSession.switchTo(customPlan,0,0,draft,catalog,"dumbbell-bench-press"));assertEquals(0,draft.length());
+ }
+ @Test public void malformedOverrideTypesAndUnknownExercisesFailWithoutMutation() throws Exception {
+  JSONObject unknown=new JSONObject().put(ExerciseSession.OVERRIDES,new JSONObject().put("legacy-0-0","missing"));
+  assertThrows(JSONException.class,()->ExerciseSession.effective(first(),unknown,catalog));
+  for(Object value:new Object[]{"wrong type",JSONObject.NULL,new JSONObject().put("legacy-0-0",17)}) {
+   JSONObject draft=new JSONObject().put(ExerciseSession.OVERRIDES,value);String before=draft.toString();
+   assertThrows(Exception.class,()->ExerciseSession.validateOverrides(plan,0,draft,catalog));assertEquals(before,draft.toString());
+  }
+  ExerciseSession.validateOverrides(plan,0,new JSONObject(),catalog);
+  ExerciseSession.validateOverrides(plan,0,new JSONObject().put(ExerciseSession.OVERRIDES,new JSONObject()),catalog);
+ }
+ @Test public void returningOneSwapPreservesOtherOverridesAndSnapshotDays() throws Exception {
+  JSONObject draft=new JSONObject().put(ExerciseSession.OVERRIDES,new JSONObject().put("legacy-0-1","incline-dumbbell-bench-press"));
+  ExerciseSession.switchTo(plan,0,0,draft,catalog,"dumbbell-bench-press");
+  ExerciseSession.switchTo(plan,0,0,draft,catalog,"barbell-bench-press");
+  assertEquals("incline-dumbbell-bench-press",draft.getJSONObject(ExerciseSession.OVERRIDES).getString("legacy-0-1"));
+  assertFalse(draft.getJSONObject(ExerciseSession.OVERRIDES).has("legacy-0-0"));
+  JSONObject saved=ExerciseSession.snapshot(plan,0,draft,catalog);
+  assertEquals(plan.getJSONArray("days").getJSONObject(1).toString(),saved.getJSONArray("days").getJSONObject(1).toString());
+ }
 }

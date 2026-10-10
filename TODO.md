@@ -16,3 +16,5 @@ Não marcar execução/CI como concluídos sem consultar os resultados reais.
 - [x] Testar regras de catálogo/sessão em JVM e compilar APK 1.5.
 - [x] Passar quatro E2E focados em trocas, proteção de dados, backup e histórico.
 - [x] Concluir regressão completa de 35 cenários e CI da versão 1.5 (35/35 em API 29 e 35; execução 38054423441).
+- [x] Acrescentar 13 regressões JVM para catálogo, sessão e validação de ficha (26 testes totais).
+- [x] Exigir cobertura por classe de lógica: 90% linhas / 80% branches, com relatório HTML/XML, gate em check/CI e falha com dados ausentes.

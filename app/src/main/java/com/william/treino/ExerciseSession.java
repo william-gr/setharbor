@@ -5,6 +5,7 @@ import java.util.*;
 
 /** Session overrides live inside the existing per-day draft and backup. */
 public final class ExerciseSession {
+ private ExerciseSession() {}
  public static final String OVERRIDES="exerciseOverrides";
  public static JSONObject planned(JSONObject plan,int day,int exercise) throws JSONException {return plan.getJSONArray("days").getJSONObject(day).getJSONArray("exercises").getJSONObject(exercise);}
  public static JSONObject effective(JSONObject planned,JSONObject draft,ExerciseCatalog catalog) throws JSONException {

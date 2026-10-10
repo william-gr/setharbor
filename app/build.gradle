@@ -1,4 +1,4 @@
-plugins { id 'com.android.application' }
+plugins { id 'com.android.application'; id 'jacoco' }
 android {
     namespace 'com.william.treino'
     compileSdk 35
@@ -35,3 +35,49 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.json:json:20240303'
 }
+
+jacoco { toolVersion = '0.8.14' }
+tasks.withType(Test).configureEach {
+    jacoco { includes = ['com.william.treino.*'] }
+}
+
+// JVM coverage for all application logic except the Android Activity, whose
+// widgets, persistence and document picker are exercised by real-device E2E.
+def coreClasses = fileTree(layout.buildDirectory.dir('intermediates/javac/debug/compileDebugJavaWithJavac/classes')) {
+    include 'com/william/treino/**'
+    exclude '**/MainActivity.class', '**/MainActivity$*', '**/R.class', '**/R$*', '**/BuildConfig.class'
+}
+def coreExecutionData = layout.buildDirectory.file('jacoco/testDebugUnitTest.exec')
+// A separate prerequisite fails even when JaCoCo would otherwise skip a report
+// with missing execution data. Cached/up-to-date test results remain valid.
+tasks.register('coreCoverageInputs') {
+    dependsOn 'testDebugUnitTest'
+    doLast {
+        if (tasks.named('testDebugUnitTest').get().state.noSource || coreClasses.isEmpty() ||
+                !coreExecutionData.get().asFile.exists() || coreExecutionData.get().asFile.length() == 0) {
+            throw new GradleException('Core coverage requires compiled classes, JVM tests and execution data')
+        }
+    }
+}
+def coverageInputs = { task ->
+    task.dependsOn 'coreCoverageInputs'
+    task.classDirectories.setFrom(coreClasses)
+    task.sourceDirectories.setFrom(android.sourceSets.main.java.srcDirs)
+    task.executionData.setFrom(coreExecutionData)
+}
+tasks.register('coreCoverageReport', JacocoReport) {
+    coverageInputs(delegate)
+    reports { xml.required = true; html.required = true }
+}
+tasks.register('coreCoverageVerification', JacocoCoverageVerification) {
+    coverageInputs(delegate)
+    dependsOn 'coreCoverageReport'
+    violationRules {
+        rule {
+            element = 'CLASS'
+            limit { counter = 'LINE'; value = 'COVEREDRATIO'; minimum = 0.90 }
+            limit { counter = 'BRANCH'; value = 'COVEREDRATIO'; minimum = 0.80 }
+        }
+    }
+}
+tasks.named('check') { dependsOn 'coreCoverageVerification' }

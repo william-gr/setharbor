@@ -31,6 +31,8 @@ JDK 17, Gradle 8.9, Android Gradle Plugin 8.7.3, compile/target SDK 35, min SDK 
 ./gradlew assembleE2e
 ```
 
+`./gradlew coreCoverageVerification` executa os testes JVM, gera relatório JaCoCo HTML/XML e exige 90% de linhas e 80% de branches **por classe** de lógica. Inclui automaticamente novas classes; exclui somente MainActivity/suas classes internas e classes Android geradas. A Activity é coberta pelos E2E reais, não pelo percentual JVM. `check` e CI executam a verificação; ausência de classes, testes ou dados de execução falha. Relatórios em `app/build/reports/jacoco/coreCoverageReport/`. Não reduza os limites ou exclua lógica para fazer o gate passar.
+
 Application ID preservado por compatibilidade: `com.william.treino`. Pacote de testes: `com.william.treino.e2e`.
 
 A assinatura debug padrão é usada quando a chave pessoal não existe. `signing/personal-debug.jks` é opcional, local e ignorada pelo Git; não a versione. Para atualizar a instalação pessoal preservando dados, mantenha a assinatura original e aumente `versionCode`. APKs de CI usam outra chave debug e não substituem automaticamente a instalação pessoal.

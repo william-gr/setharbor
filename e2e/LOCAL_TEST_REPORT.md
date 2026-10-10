@@ -38,3 +38,18 @@ Informações ficam ocultas por padrão; o ícone de detalhes expande o conteúd
 - Depois da regressão, apenas dois textos de orientação foram ajustados: a unidade de carga fica nos detalhes e a progressão de exercícios assistidos reduz a assistência. Build/lint e os 13 testes JVM passaram novamente; os cenários 01 e 35 passaram novamente em 115,010 segundos.
 
 O usuário autorizou merge direto na `main` após aprovação dos testes. As alterações posteriores ao commit testado são apenas documentação; a documentação final usa `[skip ci]` para evitar uma matriz duplicada. Artefatos locais em `e2e/artifacts/catalog-targeted`, `catalog-icons-targeted` e `catalog-icons-full`, ignorados pelo Git. Fixtures/CA só entram no APK E2E. O app permanece gratuito, offline e MIT.
+
+
+## Gate de cobertura — 2026-10-10
+
+13 regressões JVM adicionais, 26 no total: catálogo com versão/IDs/referências/aliases inválidos, tradução de unidades de carga, restrições de similaridade, identidade de exercícios futuros/personalizados, tipos inválidos em overrides, preservação de outras trocas/dias no snapshot e limites/duplicações/campos obrigatórios da ficha. Os 35 E2E já aprovados cobrem os fluxos de UI, incluindo ícones e informações ocultas; não foram adicionados cenários redundantes.
+
+JaCoCo 0.8.14: `coreCoverageVerification` exige 90% de linhas e 80% de branches **por classe**, executando testes e relatório. `check` e o build de CI dependem do gate antes de abrir o emulador. Escopo inclui automaticamente todas as classes Java da aplicação, exceto Activity/classes internas e código Android gerado; não representa cobertura de toda a interface. HTML/XML em `app/build/reports/jacoco/coreCoverageReport/`. Prerequisito separado impede que dados ausentes sejam tratados como um relatório ignorado com sucesso. Helpers estáticos têm construtores privados vazios, impedindo instanciação sem finalidade; JaCoCo filtra esses construtores.
+
+| Classe | Linhas | Branches |
+| --- | --- | --- |
+| ExerciseCatalog | 100% | 100% |
+| ExerciseSession | 100% | 91,38% |
+| WorkoutPlan | 100% | 100% |
+
+26/26 JVM, 3/3 checks do driver, gate, builds debug/E2E e lint passaram localmente. O teste negativo executou somente WorkoutPlanTest: o gate falhou por cobertura 0% nas outras duas classes. Outro teste removeu temporariamente os dados de cobertura e excluiu a execução JVM: o prerequisito falhou explicitamente; o arquivo foi restaurado e a suíte completa passou novamente. [Documentação do plugin Gradle](https://docs.gradle.org/8.9/userguide/jacoco_plugin.html).

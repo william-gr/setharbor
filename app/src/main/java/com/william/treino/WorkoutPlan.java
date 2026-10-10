@@ -2,6 +2,7 @@ package com.william.treino;
 import org.json.*;
 import java.util.*;
 public final class WorkoutPlan {
+ private WorkoutPlan() {}
  public static void validate(JSONObject plan) throws Exception {
   if(!"meu-treino-plan".equals(plan.getString("format"))||plan.getInt("schemaVersion")!=1)throw new Exception("Formato incompatível");
   if(plan.getLong("revision")<1)throw new Exception("Revisão inválida");

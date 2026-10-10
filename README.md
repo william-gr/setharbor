@@ -27,6 +27,8 @@ Use JDK 17 and Android SDK 35. The Gradle wrapper pins Gradle 8.9 and the projec
 ./gradlew testDebugUnitTest assembleDebug lintDebug
 ```
 
+Run `./gradlew coreCoverageVerification` to execute the JVM tests, generate HTML/XML reports and enforce **90% line / 80% branch coverage for each core class**. The gate also runs through `check` and before CI emulator tests. It covers all application Java classes except `MainActivity`, its nested classes, and generated Android classes. Real-UI E2E tests cover the Activity. New core classes are included automatically. Missing classes, tests or execution data fail the gate. Reports: `app/build/reports/jacoco/coreCoverageReport/`.
+
 The APK is written to `app/build/outputs/apk/debug/app-debug.apk`. Windows users can use `gradlew.bat`. CI produces development APKs; no Play Store release is published yet. Keep the same signing key when updating an existing installation.
 
 ## Tests
