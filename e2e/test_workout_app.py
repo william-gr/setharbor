@@ -335,4 +335,15 @@ class WorkoutAppE2E(unittest.TestCase):
         self.ui.wait(lambda:self.ui.has(text='SetHarbor'));self.assertFalse(self.ui.has(text='Restaurar backup?'))
         self.ui.history();self.assertTrue(self.ui.has(text='Supino reto barra\n40 kg × 8'))
 
+    def test_35_exercise_details_hidden_and_icon_toggles_without_changing_sets(self):
+        self.assertFalse(self.ui.has(text='Principais: Peitoral maior'))
+        self.assertFalse(self.ui.has(text='Grupo: Peito'))
+        self.ui.fill('42',desc='Carga · legacy-0-0 · 1');self.ui.top()
+        self.ui.tap(scroll=True,desc='Mostrar detalhes · legacy-0-0')
+        self.ui.scroll_to(text='Principais: Peitoral maior');self.assertTrue(self.ui.has(text='Grupo: Peito'))
+        self.ui.top();self.ui.tap(scroll=True,desc='Ocultar detalhes · legacy-0-0')
+        self.assertFalse(self.ui.has(text='Principais: Peitoral maior'))
+        self.ui.scroll_to(desc='Carga · legacy-0-0 · 1');self.assertEqual('42',self.ui.nodes(desc='Carga · legacy-0-0 · 1')[-1].get('text'))
+        self.ui.restart();self.assertFalse(self.ui.has(text='Grupo: Peito'))
+
 if __name__=='__main__': unittest.main(verbosity=2)

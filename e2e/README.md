@@ -61,4 +61,4 @@ A preparação força a parada do pacote E2E e exige confirmação de limpeza do
 
 ## Exercise catalog coverage
 
-Scenarios 31–34 cover immediate random changes excluding the current exercise, session reset after saving, restart persistence, entered/hidden set protection, valid and invalid real-document backup restoration, and load history across catalog IDs and plan positions. Local JVM tests validate catalog references and session rules before the CI emulator suite.
+Scenarios 31–35 cover immediate random changes excluding the current exercise, session reset after saving, restart persistence, entered/hidden set protection, valid and invalid real-document backup restoration, and load history across catalog IDs and plan positions. Local JVM tests validate catalog references and session rules before the CI emulator suite.

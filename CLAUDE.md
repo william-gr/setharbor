@@ -16,7 +16,7 @@ Aplicativo Android gratuito e open source (MIT) para registrar treinos de muscul
 - `app/src/main/res`: tema e ícone vetorial.
 - `app/src/e2e`: sobreposição exclusiva do APK E2E para confiar no certificado HTTPS das fixtures locais.
 - `e2e/android_ui.py`: interação com o dispositivo via ADB e XML do UI Automator.
-- `e2e/test_workout_app.py`: 34 cenários E2E.
+- `e2e/test_workout_app.py`: 35 cenários E2E.
 - `e2e/run.py`: execução e relatório JSON.
 - `.github/workflows/android-e2e.yml`: build/lint e E2E em PRs e pushes na main.
 

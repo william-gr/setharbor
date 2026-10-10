@@ -15,4 +15,4 @@ Não marcar execução/CI como concluídos sem consultar os resultados reais.
 - [x] Preservar identidade, histórico, backups v1/v2 e bloquear troca com dados.
 - [x] Testar regras de catálogo/sessão em JVM e compilar APK 1.5.
 - [x] Passar quatro E2E focados em trocas, proteção de dados, backup e histórico.
-- [ ] Concluir regressão completa de 34 cenários e CI da versão 1.5.
+- [ ] Concluir regressão completa de 35 cenários e CI da versão 1.5.

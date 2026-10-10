@@ -46,3 +46,7 @@ Na execução https://github.com/william-gr/setharbor/actions/runs/37974858007, 
 Requisitos e dados recuperados da continuação em cloud. Catálogo com 90 exercícios, 12 grupos e 35 músculos; troca aleatória por família só na sessão, bloqueio com dados, identidade de movimento separada da posição, snapshots reais e backups v3 (aceitando v1/v2).
 
 13 testes JVM passaram, build/lint de debug e E2E passou sem erros. Os quatro cenários novos 31–34 passaram em API 35 em 621,166 segundos, antes do ajuste final de exportação v3 e nomes explícitos na ficha. A regressão final com 34 cenários e o backup v3 está em andamento; ainda não está aprovada. Os artefatos locais ficam em e2e/artifacts/catalog-targeted e catalog-full (ignorados pelo Git).
+
+### Cartões compactos
+
+Informações ocultas por padrão, ícone de detalhes e ícone pequeno de troca no canto, com alvos de toque de 48 dp. Cenários 31 e 35 passaram em API 35 em 144,587 segundos no APK final (incluindo exportação v3). Build/lint e 13 testes JVM passaram. A execução anterior de 34 cenários foi interrompida deliberadamente após oito passagens, sem falhas, para incorporar este ajuste de interface. Nova regressão de 35 cenários em andamento em e2e/artifacts/catalog-icons-full.

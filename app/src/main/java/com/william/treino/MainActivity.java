@@ -34,16 +34,27 @@ public class MainActivity extends Activity {
  for(int e=0;e<names[selected].length;e++)addExercise(e);
 
  body.addView(text("Aumente a carga quando atingir o topo da faixa em todas as séries. Confira a unidade de carga junto ao equipamento. Exercícios assistidos registram assistência; peso corporal usa 0 kg sem carga adicional. Aquecimentos não entram nas séries.",13,muted));body.addView(button("Concluir e salvar treino",()->finishWorkout()));body.addView(button("Histórico de treinos",()->history()));body.addView(button("Importar ficha de treino",()->{Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT);i.setType("application/json");i.addCategory(Intent.CATEGORY_OPENABLE);startActivityForResult(i,44);}));body.addView(button("Atualização online",()->configureSync()));body.addView(button("Exportar backup",()->{Intent i=new Intent(Intent.ACTION_CREATE_DOCUMENT);i.setType("application/json");i.putExtra(Intent.EXTRA_TITLE,"meu-treino-backup.json");startActivityForResult(i,42);}));body.addView(button("Restaurar backup",()->{Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT);i.setType("application/json");i.addCategory(Intent.CATEGORY_OPENABLE);startActivityForResult(i,43);}));}
+ ImageButton exerciseIcon(int drawable,String description,Runnable action){
+  ImageButton icon=new ImageButton(this);icon.setImageResource(drawable);icon.setScaleType(ImageView.ScaleType.CENTER);icon.setContentDescription(description);icon.setTooltipText(description.split(" · ")[0]);
+  android.util.TypedValue ripple=new android.util.TypedValue();getTheme().resolveAttribute(android.R.attr.selectableItemBackgroundBorderless,ripple,true);icon.setBackgroundResource(ripple.resourceId);icon.setOnClickListener(v->action.run());return icon;
+ }
  void addExercise(int exercise){
-  LinearLayout c=card();JSONObject actual=effectiveExercise(exercise);String displayed=actual.optString("name");c.addView(text(displayed,19,Color.WHITE));
+  LinearLayout c=card();JSONObject actual=effectiveExercise(exercise);String displayed=actual.optString("name");
+  LinearLayout header=new LinearLayout(this);header.setGravity(Gravity.CENTER_VERTICAL);header.addView(text(displayed,19,Color.WHITE),new LinearLayout.LayoutParams(0,-2,1));c.addView(header);
   JSONObject known=catalog.resolve(actual);
   if(known!=null){
-   c.addView(text("Grupo: "+catalog.labels("groups",new JSONArray().put(known.optString("group"))),13,muted));
-   c.addView(text("Principais: "+catalog.labels("muscles",known.optJSONArray("primaryMuscles")),13,muted));
-   String secondary=catalog.labels("muscles",known.optJSONArray("secondaryMuscles"));if(!secondary.isEmpty())c.addView(text("Secundários: "+secondary,13,muted));
-   c.addView(text("Equipamento: "+catalog.labels("equipment",known.optJSONArray("equipment"))+" · "+catalog.loadHint(known),13,muted));
-   Button swap=button("Trocar por similar",()->switchExercise(exercise));swap.setContentDescription("Trocar por similar · "+exerciseIds[selected][exercise]);c.addView(swap);
-   if(draft.optJSONObject(ExerciseSession.OVERRIDES)!=null&&draft.optJSONObject(ExerciseSession.OVERRIDES).has(exerciseIds[selected][exercise]))c.addView(text("Só neste treino · planejado: "+names[selected][exercise],13,green));
+   LinearLayout details=new LinearLayout(this);details.setOrientation(LinearLayout.VERTICAL);details.setVisibility(View.GONE);
+   details.addView(text("Grupo: "+catalog.labels("groups",new JSONArray().put(known.optString("group"))),13,muted));
+   details.addView(text("Principais: "+catalog.labels("muscles",known.optJSONArray("primaryMuscles")),13,muted));
+   String secondary=catalog.labels("muscles",known.optJSONArray("secondaryMuscles"));if(!secondary.isEmpty())details.addView(text("Secundários: "+secondary,13,muted));
+   String stabilizers=catalog.labels("muscles",known.optJSONArray("stabilizerMuscles"));if(!stabilizers.isEmpty())details.addView(text("Estabilizadores: "+stabilizers,13,muted));
+   details.addView(text("Equipamento: "+catalog.labels("equipment",known.optJSONArray("equipment"))+" · "+catalog.loadHint(known),13,muted));
+   details.addView(text(known.optString("notes"),13,muted));
+   String slot=exerciseIds[selected][exercise];ImageButton info=exerciseIcon(R.drawable.ic_exercise_info,"Mostrar detalhes · "+slot,()->{});
+   info.setOnClickListener(v->{boolean expanded=details.getVisibility()!=View.VISIBLE;details.setVisibility(expanded?View.VISIBLE:View.GONE);info.setContentDescription((expanded?"Ocultar detalhes · ":"Mostrar detalhes · ")+slot);});
+   header.addView(info,new LinearLayout.LayoutParams(dp(48),dp(48)));
+   header.addView(exerciseIcon(R.drawable.ic_exercise_swap,"Trocar por similar · "+slot,()->switchExercise(exercise)),new LinearLayout.LayoutParams(dp(48),dp(48)));c.addView(details);
+   if(draft.optJSONObject(ExerciseSession.OVERRIDES)!=null&&draft.optJSONObject(ExerciseSession.OVERRIDES).has(slot)){c.addView(text("Só neste treino",13,green));details.addView(text("Planejado: "+names[selected][exercise],13,muted));}
   }
   int n=prefs.getInt("phase",0)==0?Math.min(2,counts[selected][exercise]):counts[selected][exercise];
   c.addView(text(n+" séries × "+reps[selected][exercise]+" reps",14,green));

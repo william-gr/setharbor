@@ -16,7 +16,7 @@ Custom exercises and future catalog references remain valid plan entries. An unr
 
 “Trocar por similar” immediately selects a uniformly random other exercise from the same group, substitution family, movement pattern and mechanic. Each press excludes the current movement. There is no alternative search, picker or confirmation. Sets and rep prescription remain those of the planned position.
 
-The current kg/repetition interface excludes elastic-band and isometric alternatives. If there is no compatible alternative, the app leaves the session intact and shows a message. Similarity is a catalog classification, not a claim that loads, equipment or execution are interchangeable. Equipment and load units are shown with the movement; assisted exercises record assistance, dumbbells record per dumbbell, and bodyweight uses zero kg without added load.
+The current kg/repetition interface excludes elastic-band and isometric alternatives. If there is no compatible alternative, the app leaves the session intact and shows a message. Similarity is a catalog classification, not a claim that loads, equipment or execution are interchangeable. Exercise information is hidden by default. The info icon toggles muscle groups, muscles, equipment, load units and notes inline. The small swap icon in the header performs the immediate random change. Both icons retain 48 dp touch targets and accessible descriptions. Equipment and load units are available in the details; assisted exercises record assistance, dumbbells record per dumbbell, and bodyweight uses zero kg without added load.
 
 Any entered kg/reps or checked set blocks switching that position, including sets hidden by the adaptation phase. Clearing the values and checks allows switching again. Other exercises' draft values remain intact.
 
@@ -24,4 +24,4 @@ Session overrides are stored inside `draft<N>.exerciseOverrides`, keyed by plan 
 
 ## Validation
 
-`./gradlew testDebugUnitTest assembleDebug assembleE2e lintDebug` checks catalog references, legacy identity, movement families, data protection, session isolation, snapshot immutability and malformed overrides. E2E scenarios 31–34 exercise random swaps, restart, blocked changes, real document export/restore and load separation through the Android UI. All previous scenarios remain in the suite.
+`./gradlew testDebugUnitTest assembleDebug assembleE2e lintDebug` checks catalog references, legacy identity, movement families, data protection, session isolation, snapshot immutability and malformed overrides. E2E scenarios 31–35 exercise random swaps, restart, blocked changes, real document export/restore and load separation through the Android UI. All previous scenarios remain in the suite.
