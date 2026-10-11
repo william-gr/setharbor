@@ -16,7 +16,7 @@ Aplicativo Android gratuito e open source (MIT) para registrar treinos de muscul
 - `app/src/main/res`: tema e ícone vetorial.
 - `app/src/e2e`: sobreposição exclusiva do APK E2E para confiar no certificado HTTPS das fixtures locais.
 - `e2e/android_ui.py`: interação com o dispositivo via ADB e XML do UI Automator.
-- `e2e/test_workout_app.py`: 35 cenários E2E.
+- `e2e/test_workout_app.py`: 41 cenários E2E.
 - `e2e/run.py`: execução e relatório JSON.
 - `.github/workflows/android-e2e.yml`: build/lint e E2E em PRs e pushes na main.
 
@@ -82,6 +82,12 @@ Semana 1: no máximo duas séries por exercício, respeitando exercícios de uma
 Revisão positiva, 1–7 dias, 1–20 exercícios por dia, 1–10 séries. IDs de dias são únicos; IDs de exercícios são únicos na ficha inteira. Preserve IDs nas revisões do mesmo exercício para manter a associação do último desempenho. Não reutilize um ID para um movimento diferente.
 
 Importação lê até 1 MB, valida antes de salvar e pede confirmação. Atualização HTTPS verifica ao abrir, aceita resposta HTTP 200 sem redirecionamento e só aplica revisões maiores quando não há rascunho. Falhas de rede preservam a ficha offline. Não há servidor ou endpoint pré-configurado.
+
+## Links de treino / ChatGPT
+
+WorkoutLink valida destinos exatos e fragmento v1 de JSON UTF-8 em Base64URL sem padding, máximo 64.000 caracteres. HTTPS: https://william-gr.github.io/setharbor/open/#v1.PAYLOAD; custom scheme: setharbor://workout#v1.PAYLOAD. Links abrem preview completo com confirmação, preservam histórico e bloqueiam rascunhos. onCreate/onNewIntent/rotação usam o mesmo contrato; não buscar URLs contidas no payload. WorkoutChatPrompt compartilha somente campos do contrato da ficha e catálogo, nunca history/cargas/rascunhos/metadados extras.
+
+São links HTTPS habilitados pelo usuário; GitHub Pages de projeto não fornece assetlinks.json na raiz do domínio. Não declarar verificação automática. web/open é fallback estático sem envio de ficha; workout-links.yml publica página e APK trial separado com hash/commit. Build preview usa com.william.treino.preview / SetHarbor Trial, sem CA E2E, e não acessa o app pessoal. Não instalar E2E no telefone. docs/CHATGPT_LINKS.md registra teste real de ChatGPT pendente; não confundir intents testados no emulador com integração ChatGPT comprovada.
 
 ## Backups
 

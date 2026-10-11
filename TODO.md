@@ -19,3 +19,6 @@ Não marcar execução/CI como concluídos sem consultar os resultados reais.
 - [x] Acrescentar 13 regressões JVM para catálogo, sessão e validação de ficha (26 testes totais).
 - [x] Exigir cobertura por classe de lógica: 90% linhas / 80% branches, com relatório HTML/XML, gate em check/CI e falha com dados ausentes.
 - [x] Criar workflow de APK da main mais recente, com versão YYYYMMDD do commit e artefato com SHA/proveniência.
+
+- [x] Implementar protótipo de links de treino, preview/validação, prompt por compartilhamento e APK trial separado.
+- [ ] Confirmar no celular real: ChatGPT aceita compartilhamento, gera codificação correta e preserva/abre o link sem cópia/importação.

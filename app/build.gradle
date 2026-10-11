@@ -40,6 +40,12 @@ android {
         buildTypes { debug { signingConfig signingConfigs.personalDebug } }
     }
     buildTypes {
+        // Side-by-side trial without fixture CA trust or access to personal data.
+        preview {
+            initWith debug
+            applicationIdSuffix '.preview'
+            matchingFallbacks = ['debug']
+        }
         e2e {
             initWith debug
             applicationIdSuffix '.e2e'

@@ -53,3 +53,13 @@ JaCoCo 0.8.14: `coreCoverageVerification` exige 90% de linhas e 80% de branches 
 | WorkoutPlan | 100% | 100% |
 
 26/26 JVM, 3/3 checks do driver, gate, builds debug/E2E e lint passaram localmente. O teste negativo executou somente WorkoutPlanTest: o gate falhou por cobertura 0% nas outras duas classes. Outro teste removeu temporariamente os dados de cobertura e excluiu a execução JVM: o prerequisito falhou explicitamente; o arquivo foi restaurado e a suíte completa passou novamente. [Documentação do plugin Gradle](https://docs.gradle.org/8.9/userguide/jacoco_plugin.html).
+
+## Protótipo de links ChatGPT — 2026-10-11
+
+34/34 testes JVM, gate de cobertura, builds debug/E2E/preview e lint debug/preview passaram. WorkoutLink e WorkoutChatPrompt têm 100% de linhas e branches; limites continuam 90%/80% por classe. Três checks do fallback web e três checks do driver passaram. APK preview confirma pacote com.william.treino.preview / SetHarbor Trial, sem certificados/recursos de confiança E2E.
+
+- Novos cenários 36–39 passaram em API 35 em 209,351 segundos: links cold/warm, Unicode, cancelar/aplicar/persistir/histórico, três dias, malformação, proteção de rascunhos e rotação/substituição de preview.
+- Regressões 12/14/20/27 e cenário 37 com a fixture pública passaram na execução de 381,548 segundos; cenário 40 falhou nessa execução somente porque o comando de setup pm set-app-links-user-selection estava sem --package. O erro foi consultado no artefato e o comando corrigido.
+- No APK final, cenários 39/40/41 passaram em 77,326 segundos: rotação com limpeza do diálogo, intents do browser e HTTPS resolvidos pelo sistema, share chooser e configurações Android reais. Nenhuma assertion foi removida. A seleção do domínio é aplicada e restaurada apenas no pacote E2E.
+
+Seis cenários novos (36–41) e quatro regressões apropriadas passaram localmente, sem skips. Não representa uma execução completa dos 41 cenários nem comprova comportamento do ChatGPT/Chrome no telefone. A matriz completa API29/35 executa após push. O teste real permanece pendente em TODO.md e docs/CHATGPT_LINKS.md: receber prompt, gerar Base64URL correto e preservar/abrir fragmento.

@@ -11,6 +11,7 @@ SetHarbor works offline, with no account, subscription or advertising. The curre
 - Offline catalog with 90 exercises, muscle groups, muscles and equipment.
 - One-button random similar exercise swaps for the current session, with separate load history.
 - Custom training plans with up to seven days, imported as JSON.
+- Experimental ChatGPT workout links: tap a link, review the plan and apply it without copying/importing files.
 - Weight and repetitions for each set, with completed sets hidden and available to review or undo.
 - Persistent drafts, previous exercise values and workout history.
 - Adaptation phases and a 60/90/120-second rest timer.
@@ -18,6 +19,12 @@ SetHarbor works offline, with no account, subscription or advertising. The curre
 - Optional HTTPS plan updates when opening the app; workout history stays on the device.
 
 The bundled five-day plan is an example. Import a compatible plan to use your own routine. Plan changes are blocked while drafts exist, and saved sessions retain their original plan.
+
+## Try ChatGPT workout links
+
+Install the separate **[SetHarbor Trial](https://william-gr.github.io/setharbor/)** to test links alongside your existing app. The page provides a three-day test workout and a free trial APK. In the app, **Planejar com ChatGPT** shares the current plan, catalog and link-generation instructions through Android. Incoming links show a full preview and preserve history. Drafts block replacement.
+
+Direct HTTPS opening currently needs Android's one-time supported-links setting; otherwise the browser provides an open button. This is a prototype: ChatGPT Android sharing, encoding and external-link behavior still need a real-phone test. See [setup, limitations and link contract](docs/CHATGPT_LINKS.md).
 
 ## Build
 
@@ -47,7 +54,7 @@ E2E_APK="$PWD/app/build/outputs/apk/e2e/app-e2e.apk" \
 ANDROID_SERIAL=emulator-5554 python3 e2e/run.py
 ```
 
-The 35 E2E scenarios use the real Android interface and document picker. They run only on emulators and clear only the separate E2E application. See [E2E instructions](e2e/README.md) and [local execution report](e2e/LOCAL_TEST_REPORT.md).
+The 41 E2E scenarios use the real Android interface and document picker. They run only on emulators and clear only the separate E2E application. See [E2E instructions](e2e/README.md) and [local execution report](e2e/LOCAL_TEST_REPORT.md).
 
 GitHub Actions builds, runs lint and executes E2E on Android APIs 29 and 35 for pull requests, pushes to `main` and manual runs. Logs, screenshots and results are retained as artifacts. All 35 scenarios passed locally on API 35 and in CI on both APIs 29 and 35, without skips; see the local report for verified results, environments and fixes.
 
@@ -55,7 +62,7 @@ GitHub Actions builds, runs lint and executes E2E on Android APIs 29 and 35 for 
 
 See [exercise catalog](docs/EXERCISE_CATALOG.md) for session swaps and exercise identity. See [CLAUDE.md](CLAUDE.md) for the JSON schema, architecture and persistence rules. The legacy application ID `com.william.treino` and JSON format identifier `meu-treino-plan` are retained for installed-app and backup compatibility.
 
-HTTPS updates require a reachable URL with a trusted certificate, a direct JSON response and a greater plan revision. No server is configured by default. The app has no direct ChatGPT or MCP connection; an external integration can publish the JSON to a configured HTTPS endpoint.
+HTTPS updates require a reachable URL with a trusted certificate, a direct JSON response and a greater plan revision. No server is configured by default. The app has no MCP connection. ChatGPT can propose a workout through the experimental link handoff; an external integration can also publish JSON to a configured HTTPS endpoint.
 
 The rest timer is intended for foreground use. Export backups before uninstalling or replacing your installation.
 

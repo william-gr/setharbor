@@ -3,6 +3,9 @@ local.properties
 build/
 app/build/
 dist/
+web/*.apk
+web/SHA256SUMS
+web/source-commit.txt
 *.jks
 e2e/artifacts/
 __pycache__/

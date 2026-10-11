@@ -64,3 +64,9 @@ A preparação força a parada do pacote E2E e exige confirmação de limpeza do
 Scenarios 31–35 cover immediate random changes excluding the current exercise, session reset after saving, restart persistence, entered/hidden set protection, valid and invalid real-document backup restoration, load history across catalog IDs and plan positions, and the details icon toggling initially hidden information without losing entered data. Local JVM tests validate catalog references and session rules before the CI emulator suite.
 
 `python3 e2e/driver_checks.py` verifica separadamente a recuperação limitada de dumps UI Automator mortos (exit 137). Assertions e outros erros não são repetidos; cada tentativa remove XML anterior. Esses três checks também rodam antes do emulador no CI.
+
+## Workout links
+
+Scenarios 36–40 cover cold/warm incoming links, preview cancellation, confirmed plan persistence and history preservation, the published three-day trial fixture, malformed payloads, draft protection, rotation, pending-link replacement and system resolution of HTTPS/browser intent URIs. Android 12+ user-selection is enabled only for the disposable E2E package and reset afterward. This verifies Android routing, not ChatGPT Android or Chrome UI; those require the real-phone trial in docs/CHATGPT_LINKS.md.
+
+Scenario 41 opens the real Android share chooser and supported-link settings, then returns to the app without replaying a workout link. It cannot verify ChatGPT as a receiving app because ChatGPT is not installed/logged in on the disposable emulator.

@@ -1,0 +1,45 @@
+name: Workout link page
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: workout-link-page
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test scripts/test_workout_link.cjs
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+      - name: Build tested trial APK
+        run: |
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"
+          ./gradlew --no-daemon coreCoverageVerification lintPreview assemblePreview
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging app/build/outputs/apk/preview/app-preview.apk > /tmp/trial-badging.txt
+          grep -F "name='com.william.treino.preview'" /tmp/trial-badging.txt
+          grep -F "application-label:'SetHarbor Trial'" /tmp/trial-badging.txt
+          cp app/build/outputs/apk/preview/app-preview.apk web/setharbor-trial.apk
+          (cd web && sha256sum setharbor-trial.apk > SHA256SUMS)
+          git rev-parse HEAD > web/source-commit.txt
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: web
+      - id: deploy
+        uses: actions/deploy-pages@v4

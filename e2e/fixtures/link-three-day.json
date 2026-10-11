@@ -1,0 +1,50 @@
+{
+  "format": "meu-treino-plan",
+  "schemaVersion": 1,
+  "revision": 2,
+  "title": "Teste ChatGPT · 3 dias",
+  "days": [
+    {
+      "id": "link-day-0",
+      "name": "Segunda",
+      "focus": "Teste de integração",
+      "exercises": [
+        {
+          "id": "link-slot-0",
+          "catalogId": "barbell-bench-press",
+          "name": "Supino reto barra",
+          "sets": 2,
+          "reps": "8–12"
+        }
+      ]
+    },
+    {
+      "id": "link-day-1",
+      "name": "Quarta",
+      "focus": "Teste de integração",
+      "exercises": [
+        {
+          "id": "link-slot-1",
+          "catalogId": "neutral-grip-lat-pulldown",
+          "name": "Puxada alta neutra",
+          "sets": 2,
+          "reps": "8–12"
+        }
+      ]
+    },
+    {
+      "id": "link-day-2",
+      "name": "Sexta",
+      "focus": "Teste de integração",
+      "exercises": [
+        {
+          "id": "link-slot-2",
+          "catalogId": "seated-leg-curl",
+          "name": "Flexora sentada",
+          "sets": 2,
+          "reps": "8–12"
+        }
+      ]
+    }
+  ]
+}

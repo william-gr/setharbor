@@ -40,7 +40,7 @@ jobs:
       - name: Tests, coverage gate, lint and APK
         run: |
           chmod +x gradlew
-          ./gradlew --no-daemon coreCoverageVerification lintDebug assembleDebug
+          ./gradlew --no-daemon coreCoverageVerification lintDebug lintPreview assembleDebug assemblePreview
       - name: Package and verify version
         env:
           APP_VERSION: ${{ steps.source.outputs.version }}
@@ -56,6 +56,13 @@ jobs:
         with:
           name: SetHarbor-${{ steps.source.outputs.version }}-${{ steps.source.outputs.sha }}
           path: dist/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Side-by-side link trial APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SetHarbor-Trial-${{ steps.source.outputs.version }}-${{ steps.source.outputs.sha }}
+          path: app/build/outputs/apk/preview/*.apk
           if-no-files-found: error
           retention-days: 30
       - name: Test and coverage reports

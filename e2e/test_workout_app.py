@@ -4,7 +4,7 @@ Run on an emulator: E2E_APK=app/build/outputs/apk/e2e/app-e2e.apk \
   python3 -m unittest discover -s e2e -p 'test_*.py' -v
 No mocks of Android Activities, SharedPreferences or document picker are used.
 """
-import http.server, json, os, ssl, tempfile, threading, time, unittest
+import base64, http.server, json, os, shlex, ssl, tempfile, threading, time, unittest
 from pathlib import Path
 from android_ui import AndroidUI, PACKAGE
 
@@ -345,5 +345,79 @@ class WorkoutAppE2E(unittest.TestCase):
         self.assertFalse(self.ui.has(text='Principais: Peitoral maior'))
         self.ui.scroll_to(desc='Carga · legacy-0-0 · 1');self.assertEqual('42',self.ui.nodes(desc='Carga · legacy-0-0 · 1')[-1].get('text'))
         self.ui.restart();self.assertFalse(self.ui.has(text='Grupo: Peito'))
+
+    def workout_link(self, plan=None, web=False):
+        if plan is None: plan=json.loads((FIXTURES/'updated.json').read_text())
+        encoded=base64.urlsafe_b64encode(json.dumps(plan,ensure_ascii=False,separators=(',',':')).encode()).decode().rstrip('=')
+        base='https://william-gr.github.io/setharbor/open/' if web else 'setharbor://workout'
+        return base+'#v1.'+encoded
+
+    def open_workout_link(self, address):
+        # Implicit VIEW intent, restricted to the disposable package. Android
+        # must resolve its manifest filter; no explicit Activity or app mocks.
+        result=self.ui.shell('am start -W -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -p '+PACKAGE+' -d '+shlex.quote(address))
+        self.assertNotIn('Error:',result)
+
+    def test_36_cold_link_preview_cancel_apply_preserves_history(self):
+        self.save_session()
+        plan=json.loads((FIXTURES/'updated.json').read_text());plan['title']='Força 💪 · café + & #'
+        self.ui.shell('am force-stop '+PACKAGE);self.open_workout_link(self.workout_link(plan))
+        self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'));self.ui.tap(text='Cancelar')
+        self.ui.restart();self.assertFalse(self.ui.has(text=plan['title']))
+        self.open_workout_link(self.workout_link(plan));self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'))
+        self.ui.tap(text='Aplicar treino');self.ui.wait(lambda:self.ui.has(text=plan['title']))
+        self.ui.restart();self.assertTrue(self.ui.has(text=plan['title']))
+        self.ui.history();self.assertTrue(self.ui.has(text='Supino reto barra\n40 kg × 8'))
+
+    def test_37_warm_https_link_realistic_three_day_plan(self):
+        plan=json.loads((FIXTURES/'link-three-day.json').read_text())
+        self.open_workout_link(self.workout_link(plan,web=True));self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'))
+        self.ui.tap(text='Aplicar treino');self.ui.wait(lambda:self.ui.has(text=plan['title']))
+        for day in plan['days']: self.ui.choose_day(day['name'])
+        self.ui.restart();self.assertTrue(self.ui.has(text=plan['title']))
+
+    def test_38_links_reject_invalid_payloads_and_protect_drafts(self):
+        for address in ['setharbor://workout#v1.A','setharbor://workout#v2.YQ','setharbor://workout#v1.e30','setharbor://workout#v1._w']:
+            self.open_workout_link(address);self.ui.wait(lambda:self.ui.has(text='Link de treino inválido'));self.ui.tap(text='OK')
+        self.ui.set_series(kg='42',reps='9');self.open_workout_link(self.workout_link())
+        self.ui.wait(lambda:self.ui.has(text='Treino em andamento'));self.ui.tap(text='OK');self.ui.restart()
+        self.ui.scroll_to(desc='Carga · legacy-0-0 · 1');self.assertEqual('42',self.ui.nodes(desc='Carga · legacy-0-0 · 1')[-1].get('text'))
+        self.assertFalse(self.ui.has(text='Ficha E2E revisada'))
+
+    def test_39_link_preview_survives_rotation_and_new_link_replaces_pending(self):
+        self.open_workout_link(self.workout_link());self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'))
+        try:
+            self.ui.shell('settings put system accelerometer_rotation 0');self.ui.shell('settings put system user_rotation 1')
+            self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'))
+            newer=json.loads((FIXTURES/'updated.json').read_text());newer['title']='Segundo link'
+            self.open_workout_link(self.workout_link(newer));self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'))
+            self.ui.tap(text='Aplicar treino');self.ui.wait(lambda:self.ui.has(text='Segundo link'))
+            self.ui.shell('settings put system user_rotation 0');self.ui.wait(lambda:self.ui.has(text='Segundo link'))
+            self.assertFalse(self.ui.has(text='Aplicar treino do link?'))
+        finally: self.ui.shell('settings put system user_rotation 0')
+
+    def test_40_system_resolves_https_and_browser_intent_link(self):
+        address=self.workout_link()
+        intent='intent://workout'+address.split('workout',1)[1]+'#Intent;scheme=setharbor;end'
+        # Same intent URI as the public browser fallback; no explicit component.
+        self.ui.shell('am start -W '+shlex.quote(intent));self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'))
+        self.ui.tap(text='Cancelar')
+        sdk=int(self.ui.shell('getprop ro.build.version.sdk'))
+        if sdk>=31:
+            self.ui.shell('pm set-app-links-user-selection --user 0 --package '+PACKAGE+' true william-gr.github.io')
+        try:
+            self.ui.shell('am start -W -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d '+shlex.quote(self.workout_link(web=True)))
+            self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'));self.ui.tap(text='Cancelar')
+        finally:
+            if sdk>=31: self.ui.shell('pm set-app-links-user-selection --user 0 --package '+PACKAGE+' false william-gr.github.io')
+
+    def test_41_prompt_share_and_link_settings_open_real_android_screens(self):
+        self.ui.tap(scroll=True,text='Planejar com ChatGPT')
+        self.ui.wait(lambda:'ChooserActivity' in self.ui.shell('dumpsys activity activities'))
+        self.ui.shell('input keyevent 4');self.ui.wait(lambda:self.ui.has(text='SetHarbor'))
+        self.ui.tap(scroll=True,text='Abrir links do ChatGPT diretamente')
+        self.ui.wait(lambda:self.ui.has(package='com.android.settings'))
+        self.ui.shell('input keyevent 4');self.ui.wait(lambda:self.ui.has(text='SetHarbor'))
+        self.assertFalse(self.ui.has(text='Aplicar treino do link?'))
 
 if __name__=='__main__': unittest.main(verbosity=2)
