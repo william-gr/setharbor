@@ -22,7 +22,7 @@ The bundled five-day plan is an example. Import a compatible plan to use your ow
 
 ## Try ChatGPT workout links
 
-Install the separate **[SetHarbor Trial](https://william-gr.github.io/setharbor/)** to test links alongside your existing app. The page provides a three-day test workout and a free trial APK. In the app, **Planejar com ChatGPT** shares the current plan, catalog and link-generation instructions through Android. Incoming links show a full preview and preserve history. Drafts block replacement.
+Install the separate **[SetHarbor Trial](https://william-gr.github.io/setharbor/)** to test links alongside your existing app. The page provides a three-day test workout and a free trial APK. For a short prompt without updating the installed trial, open **[Planejar com ChatGPT](https://william-gr.github.io/setharbor/chatgpt/)** on Android and use its share button. The ChatGPT guide and all 90 exercises live at that public address. In the updated app, **Planejar com ChatGPT** shares only a short request and guide link; **Revisar ficha com ChatGPT** additionally shares the sanitized current plan. Incoming links show a full preview and preserve history. Drafts block replacement.
 
 Direct HTTPS opening currently needs Android's one-time supported-links setting; otherwise the browser provides an open button. This is a prototype: ChatGPT Android sharing, encoding and external-link behavior still need a real-phone test. See [setup, limitations and link contract](docs/CHATGPT_LINKS.md).
 

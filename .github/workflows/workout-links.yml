@@ -22,6 +22,10 @@ jobs:
         with:
           node-version: '22'
       - run: node --test scripts/test_workout_link.cjs
+      - name: Check guide and publish canonical exercise catalog
+        run: |
+          python3 scripts/build_chatgpt_guide.py --check
+          python3 scripts/build_chatgpt_guide.py
       - uses: actions/setup-java@v5
         with:
           distribution: temurin

@@ -54,6 +54,7 @@ jobs:
           python3 -m py_compile e2e/*.py
           python3 e2e/driver_checks.py
           node --test scripts/test_workout_link.cjs
+          python3 scripts/build_chatgpt_guide.py --check
       - name: Execute all end-to-end scenarios
         uses: reactivecircus/android-emulator-runner@v2
         with:

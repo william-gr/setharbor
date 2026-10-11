@@ -412,9 +412,10 @@ class WorkoutAppE2E(unittest.TestCase):
             if sdk>=31: self.ui.shell('pm set-app-links-user-selection --user 0 --package '+PACKAGE+' false william-gr.github.io')
 
     def test_41_prompt_share_and_link_settings_open_real_android_screens(self):
-        self.ui.tap(scroll=True,text='Planejar com ChatGPT')
-        self.ui.wait(lambda:'ChooserActivity' in self.ui.shell('dumpsys activity activities'))
-        self.ui.shell('input keyevent 4');self.ui.wait(lambda:self.ui.has(text='SetHarbor'))
+        for label in ['Planejar com ChatGPT','Revisar ficha com ChatGPT']:
+            self.ui.tap(scroll=True,text=label)
+            self.ui.wait(lambda:'ChooserActivity' in self.ui.shell('dumpsys activity activities'))
+            self.ui.shell('input keyevent 4');self.ui.wait(lambda:self.ui.has(text='SetHarbor'))
         self.ui.tap(scroll=True,text='Abrir links do ChatGPT diretamente')
         self.ui.wait(lambda:self.ui.has(package='com.android.settings'))
         self.ui.shell('input keyevent 4');self.ui.wait(lambda:self.ui.has(text='SetHarbor'))

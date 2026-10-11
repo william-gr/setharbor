@@ -21,4 +21,6 @@ Não marcar execução/CI como concluídos sem consultar os resultados reais.
 - [x] Criar workflow de APK da main mais recente, com versão YYYYMMDD do commit e artefato com SHA/proveniência.
 
 - [x] Implementar protótipo de links de treino, preview/validação, prompt por compartilhamento e APK trial separado.
-- [ ] Confirmar no celular real: ChatGPT aceita compartilhamento, gera codificação correta e preserva/abre o link sem cópia/importação.
+- [x] Receber relato do usuário de que o protótipo de links pareceu funcionar no celular.
+- [x] Reduzir o prompt: guia/catálogo públicos, criar com texto curto e revisar com ficha opcional.
+- [ ] Confirmar no celular real que o ChatGPT consulta o guia público e devolve um link funcional usando o prompt curto.

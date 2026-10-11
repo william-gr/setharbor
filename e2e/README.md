@@ -69,4 +69,4 @@ Scenarios 31–35 cover immediate random changes excluding the current exercise,
 
 Scenarios 36–40 cover cold/warm incoming links, preview cancellation, confirmed plan persistence and history preservation, the published three-day trial fixture, malformed payloads, draft protection, rotation, pending-link replacement and system resolution of HTTPS/browser intent URIs. Android 12+ user-selection is enabled only for the disposable E2E package and reset afterward. This verifies Android routing, not ChatGPT Android or Chrome UI; those require the real-phone trial in docs/CHATGPT_LINKS.md.
 
-Scenario 41 opens the real Android share chooser and supported-link settings, then returns to the app without replaying a workout link. It cannot verify ChatGPT as a receiving app because ChatGPT is not installed/logged in on the disposable emulator.
+Scenario 41 opens the real Android share chooser for both new-plan and current-plan review requests and supported-link settings, then returns to the app without replaying a workout link. It cannot verify ChatGPT as a receiving app because ChatGPT is not installed/logged in on the disposable emulator.

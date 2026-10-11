@@ -63,3 +63,11 @@ JaCoCo 0.8.14: `coreCoverageVerification` exige 90% de linhas e 80% de branches 
 - No APK final, cenários 39/40/41 passaram em 77,326 segundos: rotação com limpeza do diálogo, intents do browser e HTTPS resolvidos pelo sistema, share chooser e configurações Android reais. Nenhuma assertion foi removida. A seleção do domínio é aplicada e restaurada apenas no pacote E2E.
 
 Seis cenários novos (36–41) e quatro regressões apropriadas passaram localmente, sem skips. Não representa uma execução completa dos 41 cenários nem comprova comportamento do ChatGPT/Chrome no telefone. A matriz completa API29/35 executa após push. O teste real permanece pendente em TODO.md e docs/CHATGPT_LINKS.md: receber prompt, gerar Base64URL correto e preservar/abrir fragmento.
+
+## Prompt curto e guia público — 2026-10-11
+
+Criar envia apenas pedido curto, revisão atual e URL fixa do guia; revisar inclui somente o contrato sanitizado da ficha. O catálogo de 90 exercícios e instruções de codificação estão no HTML público gerado do asset/constantes reais. O pedido original da ficha padrão tinha cerca de 13.934 caracteres; o teste de criação exige menos de 650 caracteres e comprova ausência da ficha/catálogo/metadados.
+
+35 testes JVM, gate por classe (WorkoutChatPrompt 100% linhas/branches), builds debug/E2E/preview e lint debug/preview passaram. Cinco checks web verificam links existentes, catálogo público, tamanho/privacidade do pedido, Web Share, cancelamento e indisponibilidade. Três checks do driver passaram. O cenário 41 atualizado abriu os dois share choosers reais (criar e revisar) e as configurações Android em API35, sem skips, em 39,796 segundos. Não foi repetida localmente a suíte completa dos 41 cenários para esta alteração do prompt.
+
+A página pública oferece compartilhamento de um pedido curto sem dados pessoais, usando o Trial já instalado e sem exigir atualização/reinstalação. A consulta do guia pelo ChatGPT do usuário permanece pendente; o relato anterior indicou que o handoff original pareceu funcionar.

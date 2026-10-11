@@ -6,6 +6,7 @@ dist/
 web/*.apk
 web/SHA256SUMS
 web/source-commit.txt
+web/chatgpt/catalog.json
 *.jks
 e2e/artifacts/
 __pycache__/
