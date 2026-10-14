@@ -27,3 +27,9 @@ Não marcar execução/CI como concluídos sem consultar os resultados reais.
 
 - [x] Permitir salvar séries feitas com peso/repetições opcionais e apresentar corretamente histórico/valores anteriores.
 - [x] Adicionar pesquisa de execução no Google para exercícios planejados, trocados e personalizados.
+
+## Pesquisa futura: sequência cíclica de treinos
+
+- [ ] Pesquisar organização por letras (A, B, C…) em vez de dias da semana, mantendo a ordem mesmo quando o usuário falta ou muda os dias de treino.
+
+Comportamento a avaliar: A → B → C → A; faltar um dia não avança a sequência. O próximo treino deve depender do último concluído e salvo, não do calendário, e permanecer correto após reiniciar o app. Avaliar seleção manual, repetição/pulo de um treino e quando essas ações alteram o próximo sugerido. Preservar rascunhos, identidade dos exercícios, histórico e backups; estudar compatibilidade com fichas existentes (`days`), importação, links e instruções do ChatGPT. Esta tarefa é de pesquisa/proposta; a implementação fica para depois.
