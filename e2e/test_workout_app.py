@@ -119,7 +119,7 @@ class WorkoutAppE2E(unittest.TestCase):
         self.assertTrue(self.ui.has(text='Nenhum treino concluído ainda.'))
 
     def test_07_invalid_checked_values_cannot_be_saved(self):
-        self.ui.check_series();self.ui.tap(scroll=True,text='Concluir e salvar treino')
+        self.ui.set_series(kg="40",reps="0");self.ui.check_series();self.ui.tap(scroll=True,text='Concluir e salvar treino')
         self.assertFalse(self.ui.has(text='Salvar treino?'));self.ui.history()
         self.assertTrue(self.ui.has(text='Nenhum treino concluído ainda.'))
 
@@ -407,6 +407,9 @@ class WorkoutAppE2E(unittest.TestCase):
             self.ui.shell('pm set-app-links-user-selection --user 0 --package '+PACKAGE+' true william-gr.github.io')
         try:
             self.ui.shell('am start -W -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d '+shlex.quote(self.workout_link(web=True)))
+            if sdk<31: self.ui.wait(lambda:self.ui.has(**{'resource-id':'android:id/button_once'}) or self.ui.has(text='Aplicar treino do link?'))
+            if sdk<31 and self.ui.has(**{'resource-id':'android:id/button_once'}):
+                self.ui.tap(text='SetHarbor');self.ui.tap(**{'resource-id':'android:id/button_once'})
             self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'));self.ui.tap(text='Cancelar')
         finally:
             if sdk>=31: self.ui.shell('pm set-app-links-user-selection --user 0 --package '+PACKAGE+' false william-gr.github.io')
@@ -420,5 +423,43 @@ class WorkoutAppE2E(unittest.TestCase):
         self.ui.wait(lambda:self.ui.has(package='com.android.settings'))
         self.ui.shell('input keyevent 4');self.ui.wait(lambda:self.ui.has(text='SetHarbor'))
         self.assertFalse(self.ui.has(text='Aplicar treino do link?'))
+
+    def test_42_save_without_values_preserves_completion_and_previous_load(self):
+        self.save_session();self.ui.check_series();self.ui.finish();self.ui.restart()
+        self.ui.scroll_to(text='Último: 40 kg × 8');self.assertTrue(self.ui.has(text='Último: 40 kg × 8'))
+        self.ui.history();self.assertTrue(self.ui.has(text='Supino reto barra\nSérie concluída · sem carga/repetições registradas'))
+        self.ui.tap(scroll=True,text='Voltar ao treino')
+        backup=self.ui.export_backup('e2e-optional-values.json')
+        latest=backup['history'][-1]['sets'];self.assertTrue(latest['0_0done']);self.assertEqual('',latest['0_0kg']);self.assertEqual('',latest['0_0reps'])
+        self.ui.reset();self.ui.restore_backup(self.json_file('e2e-optional-restore.json',backup))
+        self.ui.wait(lambda:self.ui.has(text='Restaurar backup?'));self.ui.tap(text='Restaurar');self.ui.history()
+        self.assertTrue(self.ui.has(text='Supino reto barra\nSérie concluída · sem carga/repetições registradas'))
+
+    def test_43_save_partial_values(self):
+        self.ui.fill('8',desc='Repetições · legacy-0-0 · 1');self.ui.check_series();self.ui.finish()
+        self.ui.fill('42',desc='Carga · legacy-0-0 · 1');self.ui.check_series();self.ui.finish();self.ui.history()
+        self.assertTrue(self.ui.has(text='Supino reto barra\n42 kg · repetições não registradas'))
+        self.assertTrue(self.ui.has(text='Supino reto barra\n8 reps · carga não registrada'))
+
+    def test_44_execution_search_uses_actual_swapped_and_custom_names(self):
+        def search(name,slot):
+            self.ui.scroll_to(text=name);self.assertTrue(self.ui.has(text=name))
+            self.ui.adb('logcat','-c')
+            self.ui.tap(scroll=True,desc='Pesquisar execução · '+slot)
+            self.ui.wait(lambda:self.ui.has(package='com.android.chrome'))
+            # Android redacts the URL path/query in activity dumps and logcat.
+            # Verify real VIEW/Google/browser routing here; JVM tests verify
+            # exact UTF-8 queries. Do not accept Chrome first-run terms.
+            logs=self.ui.adb('logcat','-d','-s','ActivityTaskManager:I','ActivityManager:I')
+            self.assertIn('act=android.intent.action.VIEW',logs)
+            self.assertIn('dat=https://www.google.com/',logs)
+            self.assertIn('com.android.chrome',logs)
+            self.ui.shell('input keyevent 4');self.ui.wait(lambda:self.ui.has(text='SetHarbor'))
+        search('Supino reto barra','legacy-0-0')
+        self.ui.top();self.ui.tap(scroll=True,desc='Trocar por similar · legacy-0-0');name=self.swapped_name();search(name,'legacy-0-0')
+        # A custom plan has no catalog match but still offers execution search.
+        self.ui.reset();plan=json.loads((FIXTURES/'updated.json').read_text());item=plan['days'][0]['exercises'][0];item.pop('catalogId',None);item['name']='Flexão custom + café & #';item['id']='custom-google'
+        self.open_workout_link(self.workout_link(plan));self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'));self.ui.tap(text='Aplicar treino')
+        search(item['name'],item['id'])
 
 if __name__=='__main__': unittest.main(verbosity=2)

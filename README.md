@@ -12,7 +12,9 @@ SetHarbor works offline, with no account, subscription or advertising. The curre
 - One-button random similar exercise swaps for the current session, with separate load history.
 - Custom training plans with up to seven days, imported as JSON.
 - Experimental ChatGPT workout links: tap a link, review the plan and apply it without copying/importing files.
-- Weight and repetitions for each set, with completed sets hidden and available to review or undo.
+- Optional weight and repetitions for each set: mark completed sets and save even without measurements.
+- Google execution searches for the actual exercise, including session swaps and custom exercises.
+- Completed sets hidden and available to review or undo.
 - Persistent drafts, previous exercise values and workout history.
 - Adaptation phases and a 60/90/120-second rest timer.
 - JSON backup and restore, including the active plan, history and drafts.
@@ -54,7 +56,7 @@ E2E_APK="$PWD/app/build/outputs/apk/e2e/app-e2e.apk" \
 ANDROID_SERIAL=emulator-5554 python3 e2e/run.py
 ```
 
-The 41 E2E scenarios use the real Android interface and document picker. They run only on emulators and clear only the separate E2E application. See [E2E instructions](e2e/README.md) and [local execution report](e2e/LOCAL_TEST_REPORT.md).
+The 44 E2E scenarios use the real Android interface and document picker. They run only on emulators and clear only the separate E2E application. See [E2E instructions](e2e/README.md) and [local execution report](e2e/LOCAL_TEST_REPORT.md).
 
 GitHub Actions builds, runs lint and executes E2E on Android APIs 29 and 35 for pull requests, pushes to `main` and manual runs. Logs, screenshots and results are retained as artifacts. All 35 scenarios passed locally on API 35 and in CI on both APIs 29 and 35, without skips; see the local report for verified results, environments and fixes.
 

@@ -24,3 +24,6 @@ Não marcar execução/CI como concluídos sem consultar os resultados reais.
 - [x] Receber relato do usuário de que o protótipo de links pareceu funcionar no celular.
 - [x] Reduzir o prompt: guia/catálogo públicos, criar com texto curto e revisar com ficha opcional.
 - [ ] Confirmar no celular real que o ChatGPT consulta o guia público e devolve um link funcional usando o prompt curto.
+
+- [x] Permitir salvar séries feitas com peso/repetições opcionais e apresentar corretamente histórico/valores anteriores.
+- [x] Adicionar pesquisa de execução no Google para exercícios planejados, trocados e personalizados.

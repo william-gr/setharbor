@@ -16,7 +16,7 @@ Aplicativo Android gratuito e open source (MIT) para registrar treinos de muscul
 - `app/src/main/res`: tema e ícone vetorial.
 - `app/src/e2e`: sobreposição exclusiva do APK E2E para confiar no certificado HTTPS das fixtures locais.
 - `e2e/android_ui.py`: interação com o dispositivo via ADB e XML do UI Automator.
-- `e2e/test_workout_app.py`: 41 cenários E2E.
+- `e2e/test_workout_app.py`: 44 cenários E2E.
 - `e2e/run.py`: execução e relatório JSON.
 - `.github/workflows/android-e2e.yml`: build/lint e E2E em PRs e pushes na main.
 
@@ -54,7 +54,9 @@ Não interprete sessões antigas usando a ficha atual. A cópia da ficha no hist
 
 Trocar a ficha é bloqueado enquanto houver rascunhos, para não misturar posições entre programas. Não descarte dados ao resolver esse bloqueio. Ocultar uma série marcada altera apenas a apresentação; os valores continuam no rascunho e só séries marcadas entram no histórico.
 
-Semana 1: no máximo duas séries por exercício, respeitando exercícios de uma série. Semana 2/Normal: volume da ficha. Zero kg é válido para peso corporal; repetições precisam ser maiores que zero.
+Semana 1: no máximo duas séries por exercício, respeitando exercícios de uma série. Semana 2/Normal: volume da ficha. Peso e repetições são opcionais em séries marcadas como feitas; cada campo pode ficar vazio independentemente. Se preenchidos, carga deve ser finita e >=0 (aceita vírgula decimal), repetições inteiro >0. Exigir ao menos uma série marcada para salvar. WorkoutSet centraliza validação e apresentação: vazio é dado não registrado, nunca zero. Histórico mostra conclusão/valores parciais; Último ignora sessões sem nenhuma medição daquele exercício para preservar o desempenho registrado anterior. Backup v3 continua com strings vazias e done=true, sem migração de formato.
+
+Cada cartão tem link acessível Ver execução no Google, com alvo de 48dp. ExerciseSearch gera HTTPS /search?q=nome+exercício+execução+correta com UTF-8/URL encoding; nome vem do exercício real da sessão (inclusive trocas e personalizados). Só abre ACTION_VIEW mediante toque, sem enviar histórico/cargas. Falta de navegador mostra mensagem, não fecha o app.
 
 ## Contrato da ficha
 
