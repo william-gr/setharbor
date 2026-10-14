@@ -8,19 +8,20 @@ SetHarbor works offline, with no account, subscription or advertising. The curre
 
 ## Features
 
+- Cyclic workouts A/B/C: saving the expected workout advances; missed days do not. Extra sessions preserve the next workout.
 - Offline catalog with 90 exercises, muscle groups, muscles and equipment.
 - One-button random similar exercise swaps for the current session, with separate load history.
-- Custom training plans with up to seven days, imported as JSON.
+- Custom training plans with up to seven workouts, imported as JSON.
 - Experimental ChatGPT workout links: tap a link, review the plan and apply it without copying/importing files.
 - Optional weight and repetitions for each set: mark completed sets and save even without measurements.
 - Google execution searches for the actual exercise, including session swaps and custom exercises.
 - Completed sets hidden and available to review or undo.
 - Persistent drafts, previous exercise values and workout history.
 - Adaptation phases and a 60/90/120-second rest timer.
-- JSON backup and restore, including the active plan, history and drafts.
+- JSON backup and restore, including the active plan, history, drafts and next workout.
 - Optional HTTPS plan updates when opening the app; workout history stays on the device.
 
-The bundled five-day plan is an example. Import a compatible plan to use your own routine. Plan changes are blocked while drafts exist, and saved sessions retain their original plan.
+The bundled five-workout plan is an example. Import a compatible plan to use your own routine. Plan changes are blocked while drafts exist, and saved sessions retain their original plan.
 
 ## Try ChatGPT workout links
 
@@ -56,13 +57,17 @@ E2E_APK="$PWD/app/build/outputs/apk/e2e/app-e2e.apk" \
 ANDROID_SERIAL=emulator-5554 python3 e2e/run.py
 ```
 
-The 44 E2E scenarios use the real Android interface and document picker. They run only on emulators and clear only the separate E2E application. See [E2E instructions](e2e/README.md) and [local execution report](e2e/LOCAL_TEST_REPORT.md).
+The 51 E2E scenarios use the real Android interface and document picker. They run only on emulators and clear only the separate E2E application. See [E2E instructions](e2e/README.md) and [local execution report](e2e/LOCAL_TEST_REPORT.md).
 
 GitHub Actions builds, runs lint and executes E2E on Android APIs 29 and 35 for pull requests, pushes to `main` and manual runs. Logs, screenshots and results are retained as artifacts. All 35 scenarios passed locally on API 35 and in CI on both APIs 29 and 35, without skips; see the local report for verified results, environments and fixes.
 
 ## Plans and compatibility
 
 See [exercise catalog](docs/EXERCISE_CATALOG.md) for session swaps and exercise identity. See [CLAUDE.md](CLAUDE.md) for the JSON schema, architecture and persistence rules. The legacy application ID `com.william.treino` and JSON format identifier `meu-treino-plan` are retained for installed-app and backup compatibility.
+
+Workouts follow the plan's ordered A–G sequence independently of the calendar. The app suggests the next workout on opening, or resumes the last selected draft. Viewing another workout does not move the cursor; **Definir como próximo** explicitly repositions it. Confirming a saved session advances only when it is the expected workout, even with blank weight/repetitions. Other sessions are labeled as extras. Backups use v4 and still restore v1–v3. Existing weekday-named plans remain compatible through the unchanged `days` JSON field; old history names stay intact.
+
+A higher revision with shared workout IDs preserves the next workout across imports and ChatGPT links. HTTPS updates preserve a surviving cursor ID. A new plan or removal of that ID resets to A and reports the reset. Preserve stable workout IDs when revising a plan; unrelated programs should use new IDs.
 
 HTTPS updates require a reachable URL with a trusted certificate, a direct JSON response and a greater plan revision. No server is configured by default. The app has no MCP connection. ChatGPT can propose a workout through the experimental link handoff; an external integration can also publish JSON to a configured HTTPS endpoint.
 

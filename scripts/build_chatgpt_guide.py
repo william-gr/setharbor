@@ -32,12 +32,12 @@ assert len(url) <= """+str(limit)
 <button id="share" type="button">Planejar com ChatGPT</button><p id="share-status" role="status"></p>
 <p>Depois de conversar, toque no link devolvido pelo ChatGPT para revisar e aplicar a ficha no SetHarbor já instalado.</p>
 <h2>Instruções para o ChatGPT</h2>
-<p>Pergunte objetivos, dias disponíveis e equipamentos antes de criar. Use os catalogIds exatos da tabela abaixo e adapte volume/repetições ao pedido. Ao revisar uma ficha enviada, preserve IDs de posições somente se o movimento permanecer igual. Não invente catalogIds. Se não puder consultar esta página ou executar a codificação, explique a limitação em vez de inventar um link.</p>
+<p>Pergunte objetivos, frequência e equipamentos antes de criar. Organize uma sequência cíclica A/B/C; faltar um dia não muda o próximo treino. Use os catalogIds exatos da tabela abaixo e adapte volume/repetições ao pedido. Ao revisar, incremente revision e preserve os IDs dos treinos mantidos para conservar o próximo da sequência. Use IDs novos para um programa novo. Ao revisar uma ficha enviada, preserve IDs de posições somente se o movimento permanecer igual. Não invente catalogIds. Se não puder consultar esta página ou executar a codificação, explique a limitação em vez de inventar um link.</p>
 <p>Entregue um link clicável com o texto <strong>Abrir no SetHarbor</strong>, não uma solicitação para copiar JSON ou importar arquivo. Mostre também um resumo do treino para revisão. A ficha fica no fragmento do próprio link; não hospede a ficha do usuário nem envie histórico/cargas para esta página.</p>
 <h2>Contrato da ficha</h2>
 <ul><li>format: meu-treino-plan; schemaVersion: 1; revision: inteiro positivo, maior que a revisão atual quando fornecida.</li>
-<li>title: texto não vazio até 120 caracteres; days: 1–7 dias.</li>
-<li>Dia: id único na ficha (até 80), name (até 80), focus opcional não vazio (até 200), exercises: 1–20 exercícios.</li>
+<li>title: texto não vazio até 120 caracteres; days: 1–7 treinos em ordem cíclica.</li>
+<li>Treino (campo days, preservado por compatibilidade): id único na ficha (até 80), name (até 80), focus opcional não vazio (até 200), exercises: 1–20 exercícios.</li>
 <li>Exercício: id único na ficha inteira (até 80), catalogId da tabela, name (até 120), sets inteiro 1–10, reps texto não vazio (até 40).</li>
 <li>id identifica a posição; catalogId identifica o movimento. O mesmo movimento em dias diferentes precisa de IDs de posição diferentes.</li></ul>
 <pre>'''+html.escape(json.dumps(example,ensure_ascii=False,indent=2))+'''</pre>

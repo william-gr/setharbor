@@ -1,6 +1,6 @@
 # Proposta: sequência cíclica A/B/C
 
-Pesquisa do código concluída em 2026-10-14. Este documento propõe o comportamento; não altera o aplicativo.
+Pesquisa do código concluída em 2026-10-14. Implementação autorizada pelo usuário em 2026-10-14; o comportamento abaixo foi implementado e verificado localmente.
 
 ## O que existe hoje
 
@@ -24,7 +24,7 @@ Guardar um `nextWorkoutId` separado da seleção de tela. Usar o ID estável do 
 | Salvar outro treino como sessão extra | Registra histórico, mas mantém o próximo esperado |
 | Escolher explicitamente “Definir como próximo” | Reposiciona a sequência; não cria uma sessão no histórico |
 
-Recomendação para treinos fora da ordem: tratá-los como extras por padrão, para não desorganizar o ciclo ao repetir um treino. A confirmação de salvamento existente deve informar qual será o próximo, sem adicionar outro diálogo. “Definir como próximo” permite pular ou retomar uma posição intencionalmente. Essa decisão ainda pode ser ajustada antes da implementação.
+Recomendação para treinos fora da ordem: tratá-los como extras por padrão, para não desorganizar o ciclo ao repetir um treino. A confirmação de salvamento existente deve informar qual será o próximo, sem adicionar outro diálogo. “Definir como próximo” permite pular ou retomar uma posição intencionalmente. O usuário confirmou essa regra.
 
 Uma sessão salva com parte das séries, inclusive sem peso/repetições, conta como concluída: o usuário confirmou o encerramento. Não exigir concluir todas as séries nem registrar medições para avançar.
 
@@ -55,3 +55,7 @@ E2E: salvar A e abrir B; concluir o último e voltar a A; reiniciar sem avançar
 ## Próxima implementação
 
 Implementar cursor persistente, seleção A/B/C, avanço atômico ao salvar, migração e backup v4 seguindo esta proposta. Não incluir agenda, notificações ou recomendações de frequência/descanso nesta mudança: o ciclo organiza a ordem escolhida pelo usuário.
+
+## Critério de continuidade implementado
+
+O contrato v1 não tem ID global de programa. Importações e links representam revisão quando têm revisão maior e algum ID de treino em comum; HTTPS é o canal de revisão configurado. Nessas revisões, o cursor sobrevivente é mantido, independentemente da posição. Outras importações/links são fichas novas e começam em A. IDs novos devem ser usados para programas não relacionados. A confirmação de importação/link explica esse comportamento.

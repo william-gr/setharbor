@@ -34,6 +34,11 @@ class WorkoutAppE2E(unittest.TestCase):
         cls.ui=AndroidUI(os.environ.get('ADB','adb'),os.environ.get('ANDROID_SERIAL'))
         if cls.ui.shell('getprop ro.kernel.qemu')!='1':
             raise RuntimeError('Use an emulator. Tests never clear data on a physical phone.')
+        # A boot property alone does not mean the launcher has rendered.
+        # Assert actual system UI readiness before launching the first test;
+        # do not retry or dismiss failures of the application under test.
+        cls.ui.shell('input keyevent 3');cls.ui.shell('wm dismiss-keyguard')
+        cls.ui.wait(lambda:any('launcher' in n.get('package','') for n in cls.ui.dump().iter('node')),45)
         apk=Path(os.environ.get('E2E_APK','app/build/outputs/apk/e2e/app-e2e.apk'))
         if not apk.is_file(): raise RuntimeError(f'Build assembleE2e first: APK missing: {apk}')
         cls.ui.adb('install','-r',str(apk),timeout=240)
@@ -76,13 +81,13 @@ class WorkoutAppE2E(unittest.TestCase):
         self.ui.import_plan(FIXTURES/'updated.json')
         self.ui.wait(lambda:self.ui.has(text='Importar ficha?'))
         self.ui.tap(text='Importar')
-        self.ui.wait(lambda:self.ui.has(text='Ficha E2E revisada'))
+        self.ui.wait(lambda:self.ui.has(text='Ficha E2E revisada'));self.ui.choose_day('Treino A')
 
     def json_file(self,name,payload):
         path=Path(self.temp.name)/name;path.write_text(json.dumps(payload,ensure_ascii=False));return path
 
     def test_01_first_launch_all_five_days(self):
-        for day,exercise in [('Segunda','Supino reto barra'),('Terça','Puxada alta neutra'),('Quarta','Desenvolvimento máquina'),('Quinta','Supino inclinado Smith'),('Sexta','Rosca Scott barra W')]:
+        for day,exercise in [('Treino A','Supino reto barra'),('Treino B','Puxada alta neutra'),('Treino C','Desenvolvimento máquina'),('Treino D','Supino inclinado Smith'),('Treino E','Rosca Scott barra W')]:
             self.ui.choose_day(day);self.ui.scroll_to(text=exercise);self.assertTrue(self.ui.has(text=exercise))
 
     def test_02_readaptation_and_full_volume(self):
@@ -115,12 +120,12 @@ class WorkoutAppE2E(unittest.TestCase):
 
     def test_06_finish_empty_does_not_create_history(self):
         self.ui.tap(scroll=True,text='Concluir e salvar treino')
-        self.assertFalse(self.ui.has(text='Salvar treino?'));self.ui.history()
+        self.assertFalse(self.ui.has(text='Salvar treino?'));self.ui.top();self.assertTrue(self.ui.has(text='Próximo: Treino A'));self.ui.history()
         self.assertTrue(self.ui.has(text='Nenhum treino concluído ainda.'))
 
     def test_07_invalid_checked_values_cannot_be_saved(self):
         self.ui.set_series(kg="40",reps="0");self.ui.check_series();self.ui.tap(scroll=True,text='Concluir e salvar treino')
-        self.assertFalse(self.ui.has(text='Salvar treino?'));self.ui.history()
+        self.assertFalse(self.ui.has(text='Salvar treino?'));self.ui.top();self.assertTrue(self.ui.has(text='Próximo: Treino A'));self.ui.history()
         self.assertTrue(self.ui.has(text='Nenhum treino concluído ainda.'))
 
     def test_08_cancel_finish_keeps_draft(self):
@@ -131,7 +136,7 @@ class WorkoutAppE2E(unittest.TestCase):
     def test_09_completed_session_history_and_previous_values(self):
         self.save_session();self.ui.history()
         self.assertTrue(self.ui.has(text='Supino reto barra\n40 kg × 8'))
-        self.ui.tap(scroll=True,text='Voltar ao treino');self.ui.scroll_to(text='Último: 40 kg × 8')
+        self.ui.tap(scroll=True,text='Voltar ao treino');self.ui.choose_day('Treino A');self.ui.scroll_to(text='Último: 40 kg × 8')
         self.assertTrue(self.ui.has(text='Último: 40 kg × 8'))
         self.assertFalse(self.ui.has(text='1 de 2 séries concluídas'))
 
@@ -172,9 +177,9 @@ class WorkoutAppE2E(unittest.TestCase):
             self.ui.restart();self.assertTrue(self.ui.has(text='5-Day Workout Plan'))
 
     def test_16_export_restore_roundtrip_with_history_and_draft(self):
-        self.save_session();self.ui.set_series(kg='47.5',reps='6')
-        backup=self.ui.export_backup();self.assertEqual(3,backup['version']);self.assertEqual(1,len(backup['history']))
-        self.assertEqual('47.5',backup['draft0']['0_0kg'])
+        self.save_session();self.ui.choose_day('Treino A');self.ui.set_series(kg='47.5',reps='6')
+        backup=self.ui.export_backup();self.assertEqual(4,backup['version']);self.assertEqual(1,len(backup['history']))
+        self.assertEqual('47.5',backup['draft0']['0_0kg']);self.assertEqual('day-1',backup['nextWorkoutId']);self.assertEqual(0,backup['day'])
         self.ui.reset();self.ui.restore_backup(self.json_file('roundtrip.json',backup))
         self.ui.wait(lambda:self.ui.has(text='Restaurar backup?'));self.ui.tap(text='Restaurar')
         self.ui.restart();self.ui.scroll_to(desc='Carga · legacy-0-0 · 1')
@@ -232,9 +237,9 @@ class WorkoutAppE2E(unittest.TestCase):
         FixtureHandler.requests=[];self.ui.restart();time.sleep(1)
         self.assertFalse(FixtureHandler.requests)
 
-    def test_25_selected_day_and_phase_survive_restart(self):
-        self.ui.choose_day('Sexta');self.ui.phase();self.ui.restart()
-        self.assertTrue(self.ui.has(text='Rosca Scott barra W'))
+    def test_25_selected_draft_and_phase_survive_restart(self):
+        self.ui.choose_day('Treino E');self.ui.phase();self.ui.set_series(exercise='legacy-4-0');self.ui.restart()
+        self.ui.scroll_to(text='Rosca Scott barra W');self.assertTrue(self.ui.has(text='Rosca Scott barra W'))
         self.ui.scroll_to(desc='Carga · legacy-4-0 · 3');self.assertTrue(self.ui.has(desc='Carga · legacy-4-0 · 3'))
 
     def test_26_timer_reaches_completion(self):
@@ -270,7 +275,7 @@ class WorkoutAppE2E(unittest.TestCase):
     def test_30_version2_backup_restores_imported_plan(self):
         self.plan_import();backup=self.ui.export_backup('e2e-plan-backup.json')
         self.assertEqual(2,backup['plan']['revision'])
-        self.assertEqual(3,backup['version']);backup['version']=2  # Preserve older backup compatibility.
+        self.assertEqual(4,backup['version']);backup['version']=2  # Preserve older backup compatibility.
         self.ui.reset();self.ui.restore_backup(self.json_file('revised-backup.json',backup))
         self.ui.wait(lambda:self.ui.has(text='Restaurar backup?'));self.ui.tap(text='Restaurar')
         self.ui.restart();self.assertTrue(self.ui.has(text='Ficha E2E revisada'))
@@ -291,7 +296,7 @@ class WorkoutAppE2E(unittest.TestCase):
         second=self.swapped_name();self.assertIn(second,names);self.assertNotEqual(first,second)
         self.ui.restart();self.assertEqual(second,self.swapped_name())
         self.ui.set_series(kg='15',reps='10');self.ui.check_series(name=second);self.ui.finish()
-        self.assertEqual('Supino reto barra',self.swapped_name())
+        self.ui.choose_day('Treino A');self.assertEqual('Supino reto barra',self.swapped_name())
         self.ui.history();self.assertTrue(self.ui.has(text=second+'\n15 kg × 10'))
 
     def test_32_entered_data_blocks_swap_including_hidden_sets(self):
@@ -307,7 +312,7 @@ class WorkoutAppE2E(unittest.TestCase):
     def test_33_swapped_backup_restores_and_history_loads_stay_separate(self):
         self.ui.tap(scroll=True,desc='Trocar por similar · legacy-0-0');name=self.swapped_name()
         self.ui.set_series(kg='17',reps='9');backup=self.ui.export_backup('e2e-swapped-backup.json')
-        self.assertEqual(3,backup['version'])
+        self.assertEqual(4,backup['version'])
         target=backup['draft0']['exerciseOverrides']['legacy-0-0']
         self.ui.reset();self.ui.restore_backup(self.json_file('swapped-restore.json',backup))
         self.ui.wait(lambda:self.ui.has(text='Restaurar backup?'));self.ui.tap(text='Restaurar')
@@ -318,7 +323,7 @@ class WorkoutAppE2E(unittest.TestCase):
         self.assertEqual(target,saved['history'][0]['plan']['days'][0]['exercises'][0]['catalogId'])
         self.assertEqual('barbell-bench-press',saved['plan']['days'][0]['exercises'][0]['catalogId'])
         self.assertFalse(saved['draft0'])
-        self.ui.restart();self.ui.scroll_to(desc='Carga · legacy-0-0 · 1')
+        self.ui.restart();self.ui.choose_day('Treino A');self.ui.scroll_to(desc='Carga · legacy-0-0 · 1')
         self.assertFalse(self.ui.has(text='Último: 17 kg × 9'))
         # Recreate the same exercise in a different plan position: loads follow
         # catalog identity, while a different movement in the same slot does not.
@@ -373,7 +378,7 @@ class WorkoutAppE2E(unittest.TestCase):
         plan=json.loads((FIXTURES/'link-three-day.json').read_text())
         self.open_workout_link(self.workout_link(plan,web=True));self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'))
         self.ui.tap(text='Aplicar treino');self.ui.wait(lambda:self.ui.has(text=plan['title']))
-        for day in plan['days']: self.ui.choose_day(day['name'])
+        for i in range(len(plan['days'])): self.ui.choose_day('Treino '+chr(65+i))
         self.ui.restart();self.assertTrue(self.ui.has(text=plan['title']))
 
     def test_38_links_reject_invalid_payloads_and_protect_drafts(self):
@@ -425,7 +430,7 @@ class WorkoutAppE2E(unittest.TestCase):
         self.assertFalse(self.ui.has(text='Aplicar treino do link?'))
 
     def test_42_save_without_values_preserves_completion_and_previous_load(self):
-        self.save_session();self.ui.check_series();self.ui.finish();self.ui.restart()
+        self.save_session();self.ui.choose_day('Treino A');self.ui.check_series();self.ui.finish();self.ui.restart();self.ui.choose_day('Treino A')
         self.ui.scroll_to(text='Último: 40 kg × 8');self.assertTrue(self.ui.has(text='Último: 40 kg × 8'))
         self.ui.history();self.assertTrue(self.ui.has(text='Supino reto barra\nSérie concluída · sem carga/repetições registradas'))
         self.ui.tap(scroll=True,text='Voltar ao treino')
@@ -437,7 +442,7 @@ class WorkoutAppE2E(unittest.TestCase):
 
     def test_43_save_partial_values(self):
         self.ui.fill('8',desc='Repetições · legacy-0-0 · 1');self.ui.check_series();self.ui.finish()
-        self.ui.fill('42',desc='Carga · legacy-0-0 · 1');self.ui.check_series();self.ui.finish();self.ui.history()
+        self.ui.choose_day('Treino A');self.ui.fill('42',desc='Carga · legacy-0-0 · 1');self.ui.check_series();self.ui.finish();self.ui.history()
         self.assertTrue(self.ui.has(text='Supino reto barra\n42 kg · repetições não registradas'))
         self.assertTrue(self.ui.has(text='Supino reto barra\n8 reps · carga não registrada'))
 
@@ -461,5 +466,109 @@ class WorkoutAppE2E(unittest.TestCase):
         self.ui.reset();plan=json.loads((FIXTURES/'updated.json').read_text());item=plan['days'][0]['exercises'][0];item.pop('catalogId',None);item['name']='Flexão custom + café & #';item['id']='custom-google'
         self.open_workout_link(self.workout_link(plan));self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'));self.ui.tap(text='Aplicar treino')
         search(item['name'],item['id'])
+
+    def test_45_cycle_advances_wraps_and_restart_ignores_manual_view(self):
+        self.assertTrue(self.ui.has(text='Próximo: Treino A'))
+        self.ui.choose_day('Treino C');self.ui.restart()
+        self.assertTrue(self.ui.has(text='Treino A'));self.assertTrue(self.ui.has(text='Próximo: Treino A'))
+        self.ui.check_series();self.ui.finish(save=False);self.ui.top()
+        self.assertTrue(self.ui.has(text='Próximo: Treino A'))
+        self.ui.finish();self.ui.restart();self.assertTrue(self.ui.has(text='Treino B'))
+        self.assertTrue(self.ui.has(text='Próximo: Treino B'))
+        self.ui.choose_day('Treino E');self.ui.tap(text='Definir como próximo')
+        self.ui.check_series(name='Rosca Scott barra W');self.ui.finish();self.ui.restart()
+        self.assertTrue(self.ui.has(text='Próximo: Treino A'));self.assertTrue(self.ui.has(text='Treino A'))
+        backup=self.ui.export_backup('cycle-wrap.json')
+        self.assertEqual(['Treino A','Treino E'],[r['workoutLabel'] for r in backup['history']])
+        self.assertTrue(all(not r['extra'] for r in backup['history']))
+        self.assertEqual('day-0',backup['nextWorkoutId'])
+
+    def test_46_extra_preserves_cursor_and_other_draft(self):
+        self.ui.choose_day('Treino C');self.ui.set_series(exercise='legacy-2-0',kg='21',reps='6')
+        self.ui.restart();self.assertTrue(self.ui.has(text='Próximo: Treino A'))
+        self.ui.choose_day('Treino B');self.ui.check_series(name='Puxada alta neutra')
+        self.ui.tap(scroll=True,text='Concluir e salvar treino');self.ui.wait(lambda:self.ui.has(text='Salvar treino?'))
+        self.assertIn('Sessão extra. Próximo continua: Treino A',self.ui.last_xml)
+        self.ui.tap(text='Salvar');self.ui.restart();self.assertTrue(self.ui.has(text='Treino A'))
+        backup=self.ui.export_backup('cycle-extra.json')
+        self.assertTrue(backup['history'][0]['extra']);self.assertEqual('day-0',backup['nextWorkoutId'])
+        self.assertEqual('21',backup['draft2']['0_0kg'])
+        self.ui.choose_day('Treino C');self.ui.tap(text='Definir como próximo');self.ui.restart()
+        self.assertTrue(self.ui.has(text='Próximo: Treino C'))
+        self.ui.scroll_to(desc='Carga · legacy-2-0 · 1');self.assertEqual('21',self.ui.nodes(desc='Carga · legacy-2-0 · 1')[-1].get('text'))
+
+    def test_47_v3_migration_and_invalid_v4_preserve_state(self):
+        self.save_session();backup=self.ui.export_backup('cycle-migration.json')
+        backup['version']=3;backup.pop('nextWorkoutId');backup.pop('day')
+        self.ui.reset();self.ui.restore_backup(self.json_file('v3-cycle.json',backup))
+        self.ui.wait(lambda:self.ui.has(text='Restaurar backup?'));self.ui.tap(text='Restaurar');self.ui.restart()
+        self.assertTrue(self.ui.has(text='Próximo: Treino B'))
+        current=self.ui.export_backup('cycle-after-v3.json');self.assertEqual('day-1',current['nextWorkoutId'])
+        for patch in [{'nextWorkoutId':'missing'},{'day':7}]:
+            bad=dict(current);bad.update(patch);self.ui.restore_backup(self.json_file('bad-cycle.json',bad))
+            self.ui.wait(lambda:self.ui.has(text='SetHarbor'));self.assertFalse(self.ui.has(text='Restaurar backup?'))
+        self.ui.restart();self.assertTrue(self.ui.has(text='Próximo: Treino B'))
+        self.ui.history();self.assertTrue(self.ui.has(text='Supino reto barra\n40 kg × 8'))
+        self.ui.tap(scroll=True,text='Voltar ao treino')
+        # A legacy session still belongs to a revision that removes/adds workouts.
+        revised=json.loads(json.dumps(backup));revised['plan']['days']=[revised['plan']['days'][0],revised['plan']['days'][2]]
+        for record in revised['history']:
+            for key in ['nextWorkoutId','workoutId','workoutLabel','extra']: record.pop(key,None)
+        self.ui.restore_backup(self.json_file('v3-revised-cycle.json',revised));self.ui.wait(lambda:self.ui.has(text='Restaurar backup?'));self.ui.tap(text='Restaurar')
+        self.ui.restart();migrated=self.ui.export_backup('cycle-partial-ids.json');self.assertEqual('day-2',migrated['nextWorkoutId'])
+
+    def test_48_revision_preserves_cursor_new_import_resets(self):
+        self.save_session();self.ui.configure_url(self.url+'/updated.json')
+        self.ui.wait(lambda:self.ui.has(text='Ficha E2E revisada'),30);self.ui.restart()
+        self.assertTrue(self.ui.has(text='Próximo: Treino B'))
+        self.ui.import_plan(FIXTURES/'link-three-day.json');self.ui.wait(lambda:self.ui.has(text='Importar ficha?'));self.ui.tap(text='Importar')
+        self.ui.restart();self.assertTrue(self.ui.has(text='Próximo: Treino A'))
+
+    def test_49_link_revision_reorder_and_removed_cursor(self):
+        self.save_session();plan=json.loads((HERE.parent/'app/src/main/assets/default-plan.json').read_text())
+        plan['revision']=2;plan['days'][0],plan['days'][1]=plan['days'][1],plan['days'][0]
+        self.open_workout_link(self.workout_link(plan));self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'));self.ui.tap(text='Aplicar treino')
+        self.ui.restart();self.assertTrue(self.ui.has(text='Próximo: Treino A'))
+        backup=self.ui.export_backup('cycle-reordered.json');self.assertEqual('day-1',backup['nextWorkoutId'])
+        plan['revision']=3;plan['days']=plan['days'][1:]
+        self.open_workout_link(self.workout_link(plan));self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'));self.ui.tap(text='Aplicar treino')
+        self.ui.restart();backup=self.ui.export_backup('cycle-removed.json');self.assertEqual('day-0',backup['nextWorkoutId'])
+        self.assertEqual(1,len(backup['history']));self.assertEqual('day-0',backup['history'][0]['workoutId'])
+
+    def test_50_failed_storage_keeps_history_draft_and_cursor(self):
+        self.ui.set_series();self.ui.check_series();before=self.ui.export_backup('before-storage-failure.json')
+        # Real disk failure, isolated to the debuggable disposable E2E package.
+        # The app can read existing prefs, but cannot rename/create preference files.
+        self.ui.shell('run-as '+PACKAGE+' chmod 500 shared_prefs')
+        try:
+            self.ui.finish();after=self.ui.export_backup('after-storage-failure.json')
+            for key in ['history','draft0','nextWorkoutId','day']:
+                self.assertEqual(before[key],after[key],key)
+        finally:
+            self.ui.shell('run-as '+PACKAGE+' chmod 700 shared_prefs')
+        self.ui.restart();self.ui.top();self.assertTrue(self.ui.has(text='Próximo: Treino A'))
+        self.ui.scroll_to(text='1 de 2 séries concluídas');self.assertTrue(self.ui.has(text='1 de 2 séries concluídas'))
+        self.ui.finish();self.ui.restart();self.assertTrue(self.ui.has(text='Próximo: Treino B'))
+
+    def test_51_opaque_workout_ids_survive_restart_cycle_and_backup(self):
+        plan=json.loads((FIXTURES/'link-three-day.json').read_text())
+        identifiers=['a\0 & " ☕\r\n','b\x01 < & café','c ["quoted"] 💪']
+        for day,identity in zip(plan['days'],identifiers): day['id']=identity
+        self.open_workout_link(self.workout_link(plan));self.ui.wait(lambda:self.ui.has(text='Aplicar treino do link?'));self.ui.tap(text='Aplicar treino')
+        self.ui.restart();self.assertTrue(self.ui.has(text=plan['title']));self.assertTrue(self.ui.has(text='Próximo: Treino A'))
+        self.ui.check_series(name=plan['days'][0]['exercises'][0]['name']);self.ui.finish();self.ui.restart()
+        self.assertTrue(self.ui.has(text='Próximo: Treino B'))
+        slot=plan['days'][1]['exercises'][0]['id'];self.ui.set_series(exercise=slot,kg='17',reps='6')
+        self.ui.choose_day('Treino C');self.ui.tap(text='Definir como próximo');self.ui.restart()
+        self.assertTrue(self.ui.has(text='Próximo: Treino C'))
+        self.ui.check_series(name=plan['days'][2]['exercises'][0]['name']);self.ui.finish();self.ui.restart()
+        self.assertTrue(self.ui.has(text='Próximo: Treino A'))
+        backup=self.ui.export_backup('opaque-cursor.json');self.assertEqual(identifiers[0],backup['nextWorkoutId'])
+        self.assertEqual([identifiers[0],identifiers[2]],[r['workoutId'] for r in backup['history']])
+        self.assertEqual('17',backup['draft1']['0_0kg'])
+        self.ui.reset();self.ui.restore_backup(self.json_file('opaque-restore.json',backup))
+        self.ui.wait(lambda:self.ui.has(text='Restaurar backup?'));self.ui.tap(text='Restaurar');self.ui.restart()
+        restored=self.ui.export_backup('opaque-restored.json');self.assertEqual(identifiers[0],restored['nextWorkoutId'])
+        self.assertEqual(identifiers,[day['id'] for day in restored['plan']['days']]);self.assertEqual('17',restored['draft1']['0_0kg'])
 
 if __name__=='__main__': unittest.main(verbosity=2)

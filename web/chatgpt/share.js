@@ -1,6 +1,6 @@
 'use strict';
 function newWorkoutRequest() {
-  return 'Quero criar uma ficha nova no SetHarbor. Leia as instruções e o catálogo em https://william-gr.github.io/setharbor/chatgpt/ Pergunte meus objetivos, dias disponíveis e equipamentos antes de criar. Entregue um link clicável Abrir no SetHarbor, sem copiar JSON nem importar arquivo. Se não conseguir consultar a página ou gerar o link corretamente, avise; não invente IDs ou codificação.';
+  return 'Quero criar uma ficha nova no SetHarbor. Leia as instruções e o catálogo em https://william-gr.github.io/setharbor/chatgpt/ Pergunte meus objetivos, frequência e equipamentos antes de criar. Organize treinos cíclicos A/B/C, sem dias fixos. Entregue um link clicável Abrir no SetHarbor, sem copiar JSON nem importar arquivo. Se não conseguir consultar a página ou gerar o link corretamente, avise; não invente IDs ou codificação.';
 }
 if (typeof module !== 'undefined') module.exports = newWorkoutRequest;
 if (typeof document !== 'undefined') {

@@ -10,6 +10,7 @@ class AndroidUI:
         self.prefix = [adb] + (['-s', serial] if serial else [])
         self.last_xml = ''
         self.last_adb_error = None
+        self.last_launch_result = None
 
     def adb(self, *args, timeout=90, check=True):
         try:
@@ -26,12 +27,13 @@ class AndroidUI:
     def launch(self):
         self.shell('input keyevent 82')
         self.shell('wm dismiss-keyguard')
-        self.shell(f'am start -W -n {PACKAGE}/{ACTIVITY}')
+        self.last_launch_result=self.shell(f'am start -W -n {PACKAGE}/{ACTIVITY}')
         self.wait(lambda: self.has(text='SetHarbor'), 30)
 
     def reset(self):
         # Never clear the user's personal package: E2E has a different applicationId.
         self.last_adb_error=None
+        self.last_launch_result=None
         self.shell(f'am force-stop {PACKAGE}')
         try:
             cleared=self.shell(f'pm clear {PACKAGE}')
@@ -44,8 +46,8 @@ class AndroidUI:
             self.adb('wait-for-device',timeout=30)
             cleared=self.shell(f'pm clear {PACKAGE}')
         if cleared!='Success': raise AssertionError(f'E2E data reset failed: {cleared}')
+        # Fresh data must open A without the driver selecting it for the app.
         self.launch()
-        self.choose_day('Segunda')
 
     def restart(self):
         self.shell(f'am force-stop {PACKAGE}')
@@ -132,7 +134,7 @@ class AndroidUI:
         raise AssertionError(f'Cannot scroll to {attrs}')
 
     def top(self):
-        if self.has(desc='Dia do treino'): return
+        if self.has(desc='Treino da sequência'): return
         previous=''
         for _ in range(25):
             self.dump()
@@ -157,7 +159,7 @@ class AndroidUI:
         time.sleep(.3)
 
     def choose_day(self, day):
-        self.top(); self.tap(desc='Dia do treino'); self.tap(text=day)
+        self.top(); self.tap(desc='Treino da sequência'); self.tap(text=day)
 
     def phase(self, phase='Normal · volume completo · RIR 1–2'):
         self.top(); self.tap(desc='Modo do treino'); self.tap(text=phase)
@@ -245,6 +247,8 @@ class AndroidUI:
     def artifacts(self, directory):
         directory=Path(directory); directory.mkdir(parents=True,exist_ok=True)
         (directory/'window.xml').write_text(self.last_xml)
+        if self.last_launch_result is not None:
+            (directory/'last-launch.txt').write_text(self.last_launch_result)
         if self.last_adb_error:
             (directory/'adb-error.json').write_text(json.dumps(self.last_adb_error,indent=2))
         try:(directory/'logcat.txt').write_text(self.adb('logcat','-d','-t','1000',check=False))

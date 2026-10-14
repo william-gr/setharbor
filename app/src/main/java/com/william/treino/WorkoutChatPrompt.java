@@ -8,7 +8,7 @@ public final class WorkoutChatPrompt {
  public static String create(JSONObject plan,boolean includeCurrentPlan) throws Exception {
   WorkoutPlan.validate(plan);
   String request="Quero "+(includeCurrentPlan?"revisar minha ficha":"criar uma ficha nova")+" no SetHarbor. Leia as instruções e o catálogo em "+GUIDE_URL
-   +" Pergunte meus objetivos, dias disponíveis e equipamentos antes de criar. Entregue um link clicável Abrir no SetHarbor, sem copiar JSON nem importar arquivo. "
+   +" Pergunte meus objetivos, frequência e equipamentos antes de criar. Organize treinos cíclicos A/B/C, sem dias fixos. Entregue um link clicável Abrir no SetHarbor, sem copiar JSON nem importar arquivo. "
    +"Se não conseguir consultar a página ou gerar o link corretamente, avise; não invente IDs ou codificação. Revisão atual: "+plan.getLong("revision")+".";
   if(!includeCurrentPlan)return request;
   // Share only the plan contract, never arbitrary imported metadata.

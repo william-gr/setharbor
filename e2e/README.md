@@ -28,7 +28,7 @@ Fixtures JSON são copiadas para Downloads; importar/restaurar usa o DocumentsUI
 
 | Testes | Comportamento verificado |
 |---|---|
-| 01–03 | Cinco dias, readaptação/volume completo e persistência dos valores após reinício |
+| 01–03 | Cinco treinos cíclicos, readaptação/volume completo e persistência dos valores após reinício |
 | 04–05 | Ocultar série marcada, revelar, desfazer check e preservar check após reinício |
 | 06–10 | Treino vazio, dados inválidos, cancelar conclusão, histórico/últimos valores e somente séries marcadas |
 | 11, 26–27 | Iniciar/parar/trocar cronômetro, término de contagem e rotação com rascunho |
@@ -74,3 +74,11 @@ Scenario 41 opens the real Android share chooser for both new-plan and current-p
 ## Optional measurements and execution searches
 
 Scenarios 42–44 cover saving completed sets with neither measurement, retaining earlier measured performance, history/restart/real backup round trip, independent partial measurements and Google execution links for planned, swapped and custom exercise names. Scenario 07 now enters an invalid nonblank value; blanks are supported. Scenario 29 still rejects zero reps and accepts zero kg. JVM tests cover optional-value validation/formatting and UTF-8/query escaping.
+
+Scenarios 45–49 cover expected-save advancement, wraparound, manual viewing/restart without advancement, cancellation, empty measurements, extras, explicit repositioning, retention of another workout's draft, backup v4 validation, migration from v3, HTTPS revisions, new plans, link reordering and removal of the expected ID. Scenario 25 resumes a selected draft rather than a calendar/day selection. The selector uses Treino A–G; legacy JSON weekday names remain supported. Earlier save/history tests explicitly choose A again when checking previous performance, because saving A now selects B.
+
+Scenario 50 injects an actual preference write failure by temporarily removing write permission from shared_prefs in the disposable E2E package. It compares history/draft/cursor/selection before and after the failed save, restores permissions in finally, restarts to check disk state, then successfully saves and advances. Never use this injection on a personal package.
+
+Setup waits for a rendered, unlocked launcher before the first app launch, after confirming the device is an emulator. Each scenario retains the latest am start response in last-launch.txt for diagnosing startup failures. This does not retry failed app launches. The aggregate CI job limit is 120 minutes for 51 real-UI scenarios; individual UI timeouts and assertions remain unchanged.
+
+Scenario 51 uses opaque workout IDs with Unicode, quotes and control characters allowed by the plan contract. It verifies restart, advance, explicit repositioning, wraparound and real backup restore, retaining another workout draft. The internal preference cursor is JSON escaped; backup v4 keeps the logical ID string.
