@@ -1,9 +1,6 @@
-name: Android E2E
+name: Legacy native Android E2E
 
 on:
-  pull_request:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

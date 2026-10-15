@@ -7,14 +7,14 @@ if (typeof document !== 'undefined') {
   document.getElementById('share').addEventListener('click', async () => {
     const status=document.getElementById('share-status');
     if (!navigator.share) {
-      status.textContent='Abra esta página no navegador do Android para compartilhar com o ChatGPT.';
+      status.textContent='Abra esta página no navegador do celular para compartilhar com o ChatGPT.';
       return;
     }
     try {
       await navigator.share({text:newWorkoutRequest()});
       status.textContent='Pedido compartilhado. Continue a conversa no ChatGPT.';
     } catch (error) {
-      status.textContent=error.name==='AbortError'?'Compartilhamento cancelado.':'Não foi possível compartilhar. Tente abrir esta página no navegador do Android.';
+      status.textContent=error.name==='AbortError'?'Compartilhamento cancelado.':'Não foi possível compartilhar. Tente abrir esta página no navegador do celular.';
     }
   });
 }

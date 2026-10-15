@@ -31,14 +31,26 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: gradle
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.0'
+          channel: stable
+          cache: true
       - name: Build tested trial APK
         run: |
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"
-          ./gradlew --no-daemon coreCoverageVerification lintPreview assemblePreview
-          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging app/build/outputs/apk/preview/app-preview.apk > /tmp/trial-badging.txt
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0" "platforms;android-36" "build-tools;36.0.0"
+          cd flutter_app
+          flutter pub get --enforce-lockfile
+          flutter analyze --no-pub
+          flutter test --branch-coverage
+          cd ..
+          python3 scripts/check_flutter_coverage.py
+          python3 scripts/build_flutter.py apk --edition preview
+          (cd flutter_app/android && ./gradlew --no-daemon lintPreviewRelease)
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging flutter_app/build/app/outputs/apk/preview/release/app-preview-release.apk > /tmp/trial-badging.txt
           grep -F "name='com.william.treino.preview'" /tmp/trial-badging.txt
           grep -F "application-label:'SetHarbor Trial'" /tmp/trial-badging.txt
-          cp app/build/outputs/apk/preview/app-preview.apk web/setharbor-trial.apk
+          cp flutter_app/build/app/outputs/apk/preview/release/app-preview-release.apk web/setharbor-trial.apk
           (cd web && sha256sum setharbor-trial.apk > SHA256SUMS)
           git rev-parse HEAD > web/source-commit.txt
       - uses: actions/configure-pages@v5

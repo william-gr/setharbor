@@ -2,7 +2,7 @@
 try {
   const handoff = workoutHandoff(location.hash);
   document.getElementById('status').textContent = handoff.title;
-  document.getElementById('open').href = handoff.intent;
+  document.getElementById('open').href = (/Android/i.test(navigator.userAgent) ? handoff.intent : handoff.direct);
   document.getElementById('direct').href = handoff.direct;
   document.getElementById('open').hidden = false;
   document.getElementById('hint').hidden = false;

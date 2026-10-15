@@ -1,78 +1,79 @@
 # SetHarbor
 
-[![Android E2E](https://github.com/william-gr/setharbor/actions/workflows/android-e2e.yml/badge.svg)](https://github.com/william-gr/setharbor/actions/workflows/android-e2e.yml)
+[![Flutter Android and iOS](https://github.com/william-gr/setharbor/actions/workflows/flutter.yml/badge.svg)](https://github.com/william-gr/setharbor/actions/workflows/flutter.yml)
 
-A free, open-source Android workout tracker. Record your sets, keep your workout history and update your training plan without rebuilding the app.
+A free, open-source workout tracker for **Android and iOS**, built with **Flutter and Riverpod**. It works offline, without accounts, subscriptions, advertising or a backend. The interface is in Portuguese. MIT licensed.
 
-SetHarbor works offline, with no account, subscription or advertising. The current interface is in Portuguese. Android 8.0 or later is required.
+- Cyclic workouts A → B → C, independent of weekdays. Saving an extra session preserves the expected next workout.
+- Optional weight and repetitions, hidden completed sets, drafts, immutable history and last measured performance.
+- Offline catalog of 90 exercises, muscle/equipment information, session-only similar swaps and execution searches on Google.
+- Rest timer, JSON plan import, portable backups and optional HTTPS plan updates.
+- Short ChatGPT planning prompts and workout links with a complete preview before applying.
 
-## Features
+## Try it
 
-- Cyclic workouts A/B/C: saving the expected workout advances; missed days do not. Extra sessions preserve the next workout.
-- Offline catalog with 90 exercises, muscle groups, muscles and equipment.
-- One-button random similar exercise swaps for the current session, with separate load history.
-- Custom training plans with up to seven workouts, imported as JSON.
-- Experimental ChatGPT workout links: tap a link, review the plan and apply it without copying/importing files.
-- Optional weight and repetitions for each set: mark completed sets and save even without measurements.
-- Google execution searches for the actual exercise, including session swaps and custom exercises.
-- Completed sets hidden and available to review or undo.
-- Persistent drafts, previous exercise values and workout history.
-- Adaptation phases and a 60/90/120-second rest timer.
-- JSON backup and restore, including the active plan, history, drafts and next workout.
-- Optional HTTPS plan updates when opening the app; workout history stays on the device.
+The **[SetHarbor Trial page](https://william-gr.github.io/setharbor/)** distributes a separate Android APK and a sample workout link. Trial has its own data and can coexist with the personal app. [Latest main APK workflow](https://github.com/william-gr/setharbor/actions/workflows/build-apk.yml) also provides downloadable APKs with source commit and SHA256.
 
-The bundled five-workout plan is an example. Import a compatible plan to use your own routine. Plan changes are blocked while drafts exist, and saved sessions retain their original plan.
+CI APKs use a generated development signing key. An update must retain the installed app's signing key; back up before reinstalling an app signed with another key. Automatic migration cannot bypass Android's signing checks. Never install an E2E APK on a personal phone.
 
-## Try ChatGPT workout links
+iOS source and simulator builds are available; App Store/TestFlight distribution and a real iPhone check still require Apple signing and device validation. An unsigned `.app` is not an installable iPhone release.
 
-Install the separate **[SetHarbor Trial](https://william-gr.github.io/setharbor/)** to test links alongside your existing app. The page provides a three-day test workout and a free trial APK. For a short prompt without updating the installed trial, open **[Planejar com ChatGPT](https://william-gr.github.io/setharbor/chatgpt/)** on Android and use its share button. The ChatGPT guide and all 90 exercises live at that public address. In the updated app, **Planejar com ChatGPT** shares only a short request and guide link; **Revisar ficha com ChatGPT** additionally shares the sanitized current plan. Incoming links show a full preview and preserve history. Drafts block replacement.
+## Development
 
-Direct HTTPS opening currently needs Android's one-time supported-links setting; otherwise the browser provides an open button. This is a prototype: ChatGPT Android sharing, encoding and external-link behavior still need a real-phone test. See [setup, limitations and link contract](docs/CHATGPT_LINKS.md).
-
-## Build
-
-Use JDK 17 and Android SDK 35. The Gradle wrapper pins Gradle 8.9 and the project uses Android Gradle Plugin 8.7.3.
+The current app lives in **`flutter_app/`**. Use Flutter **3.47.0**, Dart 3.13, JDK 17+ and Android SDK 36. Android 8.0+ is supported. iOS development requires macOS and Xcode; the project targets iOS 15+ as configured by Flutter/Xcode.
 
 ```sh
-./gradlew testDebugUnitTest assembleDebug lintDebug
+cd flutter_app
+flutter pub get --enforce-lockfile
+flutter run --flavor preview                  # Android
+flutter run -d <iphone-simulator-id>           # iOS simulator
 ```
 
-Run `./gradlew coreCoverageVerification` to execute the JVM tests, generate HTML/XML reports and enforce **90% line / 80% branch coverage for each core class**. The gate also runs through `check` and before CI emulator tests. It covers all application Java classes except `MainActivity`, its nested classes, and generated Android classes. Real-UI E2E tests cover the Activity. New core classes are included automatically. Missing classes, tests or execution data fail the gate. Reports: `app/build/reports/jacoco/coreCoverageReport/`.
-
-The APK is written to `app/build/outputs/apk/debug/app-debug.apk`. Windows users can use `gradlew.bat`. CI produces development APKs; no Play Store release is published yet. Keep the same signing key when updating an existing installation.
-
-### Download the latest main APK
-
-[Build latest main APK](https://github.com/william-gr/setharbor/actions/workflows/build-apk.yml) runs on pushes to `main` and can also be started with **Run workflow**. It always checks out the latest `main`, runs JVM tests, the coverage gate and lint, and uploads a downloadable APK artifact for 30 days. No tag is required.
-
-Both `versionName` and `versionCode` use the source commit's recorded committer date as `YYYYMMDD` (not the build date). Builds from the same day share the version; the filename `SetHarbor-YYYYMMDD-COMMIT.apk`, `build-info.json` and `SHA256SUMS` identify the exact source and APK. Local builds use the same rule; source archives without Git can pass `-PappVersionDate=YYYYMMDD`.
-
-These APKs use a CI-generated debug key, which changes between runners. They cannot replace an installation signed with another key; preserve the original signing key and export a backup before replacing an existing installation. E2E APKs and fixture certificates are excluded from this downloadable app.
-
-## Tests
+From the repository root, build versions from the latest source commit's recorded date:
 
 ```sh
-./gradlew assembleE2e
-E2E_APK="$PWD/app/build/outputs/apk/e2e/app-e2e.apk" \
-ANDROID_SERIAL=emulator-5554 python3 e2e/run.py
+python3 scripts/build_flutter.py apk --edition personal
+python3 scripts/build_flutter.py apk --edition preview
+python3 scripts/build_flutter.py ios
 ```
 
-The 51 E2E scenarios use the real Android interface and document picker. They run only on emulators and clear only the separate E2E application. See [E2E instructions](e2e/README.md) and [local execution report](e2e/LOCAL_TEST_REPORT.md).
+Android versionName/versionCode are **YYYYMMDD**; iOS uses **YYYY.MM.DD** and build number **YYYYMMDD** to meet Apple's version syntax. Builds on the same source date share a version. Source SHA and checksums identify the exact APK. Android output: `flutter_app/build/app/outputs/apk/<edition>/release/`. The optional ignored `signing/personal-debug.jks` retains the personal Android signing identity.
 
-GitHub Actions builds, runs lint and executes E2E on Android APIs 29 and 35 for pull requests, pushes to `main` and manual runs. Logs, screenshots and results are retained as artifacts. All 35 scenarios passed locally on API 35 and in CI on both APIs 29 and 35, without skips; see the local report for verified results, environments and fixes.
+## Compatibility and migration
 
-## Plans and compatibility
+The Android package remains `com.william.treino` (Trial `.preview`, tests `.e2e`). On the first Flutter launch, the app reads the native `training` preferences, validates and copies the complete state into an atomic JSON file. Original preferences remain intact. It preserves plans, measured/unmeasured history, legacy snapshots, drafts and exercise overrides, phase, selected workout, stable next-workout ID and the optional update URL. An invalid or failed migration displays an error instead of resetting data.
 
-See [exercise catalog](docs/EXERCISE_CATALOG.md) for session swaps and exercise identity. See [CLAUDE.md](CLAUDE.md) for the JSON schema, architecture and persistence rules. The legacy application ID `com.william.treino` and JSON format identifier `meu-treino-plan` are retained for installed-app and backup compatibility.
+Backup **v4** and restore **v1–v4**, plan schema 1 and existing workout links remain compatible. Drafts continue to block plan replacement. See [migration architecture and verification](docs/FLUTTER_MIGRATION.md), [catalog contract](docs/EXERCISE_CATALOG.md) and [cyclic workouts](docs/CYCLIC_WORKOUTS_PROPOSAL.md).
 
-Workouts follow the plan's ordered A–G sequence independently of the calendar. The app suggests the next workout on opening, or resumes the last selected draft. Viewing another workout does not move the cursor; **Definir como próximo** explicitly repositions it. Confirming a saved session advances only when it is the expected workout, even with blank weight/repetitions. Other sessions are labeled as extras. Backups use v4 and still restore v1–v3. Existing weekday-named plans remain compatible through the unchanged `days` JSON field; old history names stay intact.
+## Tests and coverage
 
-A higher revision with shared workout IDs preserves the next workout across imports and ChatGPT links. HTTPS updates preserve a surviving cursor ID. A new plan or removal of that ID resets to A and reports the reset. Preserve stable workout IDs when revising a plan; unrelated programs should use new IDs.
+```sh
+cd flutter_app
+flutter analyze --no-pub
+flutter test --branch-coverage
+cd ..
+python3 scripts/check_flutter_coverage.py
+python3 scripts/test_flutter_coverage.py
+```
 
-HTTPS updates require a reachable URL with a trusted certificate, a direct JSON response and a greater plan revision. No server is configured by default. The app has no MCP connection. ChatGPT can propose a workout through the experimental link handoff; an external integration can also publish JSON to a configured HTTPS endpoint.
+The gate automatically requires **90% line / 80% branch coverage per Dart logic file**, including new helpers. Only the UI directory and entry point are excluded; widget/device tests cover those. Missing files, execution data or branch instrumentation fail the gate. Coverage: `flutter_app/coverage/lcov.info`.
 
-The rest timer is intended for foreground use. Export backups before uninstalling or replacing your installation.
+```sh
+cd flutter_app
+flutter test integration_test/app_test.dart -d emulator-5554 --flavor e2e --no-uninstall
+# Or select an iPhone simulator (without --flavor).
+```
 
-## Contributing and license
+The [Flutter workflow](.github/workflows/flutter.yml) runs analysis, coverage, Android integration/OS tests on APIs 29/35 and iOS simulator tests. Android OS tests additionally install the native baseline and update it in place to verify migration, real disk failure rollback, document export/restore/import, cold/warm links and sharing. They refuse physical devices and use only `.e2e`. iOS XCTest verifies native links and system picker/share presentation. See [verification report](docs/FLUTTER_MIGRATION.md).
 
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and [TODO.md](TODO.md). SetHarbor is available under the [MIT license](LICENSE), free to use, modify and redistribute.
+The Java implementation in `app/`, root Gradle build and its 51 Python E2E cases remain as a migration reference. Their [legacy workflow](.github/workflows/android-e2e.yml) is manual; they do not test the Flutter interface. Their historical results are in [LOCAL_TEST_REPORT.md](e2e/LOCAL_TEST_REPORT.md).
+
+## ChatGPT handoff
+
+**Planejar com ChatGPT** shares a short request pointing to the [public guide and catalog](https://william-gr.github.io/setharbor/chatgpt/). **Revisar ficha com ChatGPT** also shares the sanitized plan, excluding loads, history, drafts and arbitrary metadata. The returned link opens a full confirmation preview. The app does not call an OpenAI API and requires no API key.
+
+Android HTTPS links need the supported-links setting; the browser fallback opens an Android intent. On iOS, the browser button opens `setharbor://workout`. Verified Apple universal links are not configured on the shared GitHub Pages domain. Real ChatGPT/iPhone behavior still needs validation; simulator deep links do not prove the external ChatGPT flow. [Link contract and limitations](docs/CHATGPT_LINKS.md).
+
+## License
+
+[MIT](LICENSE). The app remains free. Flutter and dependencies retain their own compatible license notices.

@@ -1,0 +1,22 @@
+name: setharbor
+description: Offline workout tracker for Android and iOS. Free and MIT licensed.
+publish_to: none
+version: 2026.10.14+20261014
+environment:
+  sdk: ^3.13.0
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.4.3
+  diacritic: ^0.1.6
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/default-plan.json
+    - assets/exercise-catalog.json

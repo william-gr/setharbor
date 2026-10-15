@@ -46,3 +46,8 @@ JVM tests exercise Unicode round trips, the real default plan, strict destinatio
 References: [Android deep links](https://developer.android.com/training/app-links/create-deeplinks), [Chrome Android intents](https://developer.chrome.com/docs/android/intents).
 
 The static guide is generated from the canonical catalog and WorkoutLink constants by `scripts/build_chatgpt_guide.py`; `--check` rejects stale HTML in CI. The deploy publishes the complete canonical JSON alongside a readable 90-row table with IDs, bilingual names, group, equipment and primary muscles. The Web Share button invokes native sharing only after an explicit click, with text only; unavailable sharing and cancellation show a message. Tests check these cases and exclude catalog/plan data from the shared web text.
+
+
+## Flutter / iOS
+
+A implementação compartilhada mantém o contrato do link e o preview com confirmação. iOS registra setharbor://workout; o botão do fallback web usa esse esquema no iPhone, e conserva Android intent no Android. Não há entitlement/associação de Apple universal links configurado para o domínio compartilhado GitHub Pages. Assinatura/distribuição e o fluxo completo no ChatGPT/iPhone real continuam pendentes; testes no simulador não comprovam esse fluxo externo. Veja docs/FLUTTER_MIGRATION.md.

@@ -1,5 +1,19 @@
 # SetHarbor — documentação para agentes
 
+## Aplicação atual: Flutter + Riverpod (Android e iOS)
+
+O app mantido está em `flutter_app/`, com Flutter3.47 / Dart3.13 e Riverpod3. `lib/domain` contém regras puras; `application/workout_controller.dart` usa AsyncNotifier e transações serializadas; `data/platform_gateway.dart` permite injeção nos testes; `lib/ui` contém as telas. Android Kotlin e iOS Swift limitam-se a IO atômico, documentos/compartilhamento/links e HTTPS com TLS padrão/sem redirects/1MB. Consulte `docs/FLUTTER_MIGRATION.md` para decisões e resultados.
+
+Use `flutter analyze --no-pub` e `flutter test --branch-coverage` dentro de flutter_app, depois `python3 scripts/check_flutter_coverage.py` na raiz. O gate exige90% linhas/80% branches por arquivo Dart não UI, incluindo novos helpers automaticamente; não reduza limites/exclua lógica. `scripts/test_flutter_coverage.py` verifica falhas negativas. Integrações reais: `flutter_app/integration_test/app_test.dart`; Android OS/migração: `flutter_app/e2e/android_smoke.py`, somente emulador e pacote.e2e. iOS XCTest verifica integrações nativas. Não declare testes executados se apenas compilaram.
+
+Build: `python3 scripts/build_flutter.py apk --edition personal|preview|e2e` (opção --debug para E2E); iOS: `python3 scripts/build_flutter.py ios` sem assinatura. Data do commit YYYYMMDD em Android; iOS usa YYYY.MM.DD/buildYYYYMMDD. Preserve IDs, assinatura e MIT. Não publique chave, TEAM pessoal ou identidade Apple no projeto. Workflows atuais compilam Flutter; o workflow Java antigo é manual e serve de referência, com resultados antigos preservados honestamente.
+
+Migração automática Android: leia SharedPreferences training, valide tudo, grave um estado JSON com AtomicFile e só publique o estado Riverpod após sucesso. Nunca apague as preferências originais, restaure dados antigos por cima de um estado Flutter corrompido, ou faça reset silencioso. Arquivo Flutter é autoritativo após a primeira gravação. iOS usa Application Support/.atomic. Cada edição tem dados próprios. Mesmo pacote/chave é condição para atualizar uma instalação existente sem reinstalar.
+
+Todos os contratos e invariantes abaixo continuam aplicáveis ao Flutter: identidade de movimentos, cursor, snapshots, drafts, backupsv1–v4, campos opcionais, prompt sem dados privados, preview/confirmar links e bloqueio de substituição com rascunhos. As referências a Java/Gradle/SharedPreferences diretas e aos51E2E nativos abaixo descrevem a **implementação legada preservada em app/**, não a arquitetura da UI atual.
+
+## Referência da implementação Android legada
+
 ## Objetivo
 
 Aplicativo Android gratuito e open source (MIT) para registrar treinos de musculação. A ficha de exemplo tem cinco dias e pode ser substituída por qualquer programa compatível. O app registra carga/repetições, oculta séries concluídas, conserva histórico, cronometra descanso e recebe fichas atualizadas sem recompilar.

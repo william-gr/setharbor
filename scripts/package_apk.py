@@ -15,7 +15,7 @@ def package():
     # Reject drift between the workflow's source step and the actual checkout.
     if os.environ.get('APP_VERSION', date) != date or not commit.startswith(os.environ.get('SOURCE_SHA', commit)):
         raise ValueError('APK source metadata does not match the checkout')
-    apk = Path('app/build/outputs/apk/debug/app-debug.apk')
+    apk = Path('flutter_app/build/app/outputs/apk/personal/release/app-personal-release.apk')
     metadata = json.loads(apk.with_name('output-metadata.json').read_text())
     if metadata['applicationId'] != 'com.william.treino':
         raise ValueError('Only the regular application APK may be packaged')
@@ -30,7 +30,7 @@ def package():
     (output / 'SHA256SUMS').write_text(f'{checksum}  {name}\n')
     (output / 'build-info.json').write_text(json.dumps({
         'branch': 'main', 'commit': commit, 'versionName': date,
-        'versionCode': int(date), 'apk': name, 'buildType': 'debug', 'sha256': checksum,
+        'versionCode': int(date), 'apk': name, 'buildType': 'release', 'framework': 'Flutter', 'sha256': checksum,
     }, indent=2) + '\n')
     if os.environ.get('GITHUB_STEP_SUMMARY'):
         with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:

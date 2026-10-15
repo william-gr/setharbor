@@ -29,9 +29,14 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: gradle
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.0'
+          channel: stable
+          cache: true
       - name: Install compile SDK
         run: |
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0" "platforms;android-36" "build-tools;36.0.0"
       - name: Source version
         id: source
         run: |
@@ -40,7 +45,16 @@ jobs:
       - name: Tests, coverage gate, lint and APK
         run: |
           chmod +x gradlew
-          ./gradlew --no-daemon coreCoverageVerification lintDebug lintPreview assembleDebug assemblePreview
+          cd flutter_app
+          flutter pub get --enforce-lockfile
+          flutter analyze --no-pub
+          flutter test --branch-coverage
+          cd ..
+          python3 scripts/check_flutter_coverage.py
+          python3 scripts/test_flutter_coverage.py
+          python3 scripts/build_flutter.py apk --edition personal
+          python3 scripts/build_flutter.py apk --edition preview
+          cd flutter_app/android && ./gradlew --no-daemon lintPersonalRelease lintPreviewRelease
       - name: Package and verify version
         env:
           APP_VERSION: ${{ steps.source.outputs.version }}
@@ -62,7 +76,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SetHarbor-Trial-${{ steps.source.outputs.version }}-${{ steps.source.outputs.sha }}
-          path: app/build/outputs/apk/preview/*.apk
+          path: flutter_app/build/app/outputs/apk/preview/release/*.apk
           if-no-files-found: error
           retention-days: 30
       - name: Test and coverage reports
@@ -70,6 +84,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: apk-build-reports-${{ github.run_id }}
-          path: app/build/reports/
+          path: |
+            flutter_app/coverage/
+            flutter_app/build/app/reports/
           if-no-files-found: warn
           retention-days: 14

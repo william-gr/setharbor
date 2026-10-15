@@ -48,7 +48,20 @@ test('web button shares only short text and handles cancellation or unavailable 
   let sent;
   assert.ok((await click({share:async value=>sent=value})).includes('Pedido compartilhado'));
   assert.deepEqual(Object.keys(sent),['text']);assert.equal(sent.text,newWorkoutRequest());
-  assert.ok((await click({})).includes('navegador do Android'));
+  assert.ok((await click({})).includes('navegador do celular'));
   assert.equal(await click({share:async()=>{throw {name:'AbortError'};}}),'Compartilhamento cancelado.');
   assert.ok((await click({share:async()=>{throw Error('unavailable');}})).includes('Não foi possível'));
+});
+test('handoff button uses custom scheme on iOS and intent on Android', () => {
+  for (const userAgent of ['iPhone OS 27', 'Android 15', 'Macintosh']) {
+    const elements = Object.fromEntries(['status', 'open', 'direct', 'hint'].map(id => [id, {hidden:true}]));
+    const hash = fragment({format:'meu-treino-plan',schemaVersion:1,title:'Treino',days:[{}]});
+    vm.runInNewContext(fs.readFileSync('web/open/page.js','utf8'), {
+      location:{hash}, navigator:{userAgent}, workoutHandoff:handoff,
+      document:{getElementById:id => elements[id]},
+    });
+    assert.equal(elements.open.href, /Android/.test(userAgent) ? handoff(hash).intent : handoff(hash).direct);
+    assert.equal(elements.direct.href, handoff(hash).direct);
+    assert.equal(elements.open.hidden,false);
+  }
 });

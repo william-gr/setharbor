@@ -35,3 +35,16 @@ Não marcar execução/CI como concluídos sem consultar os resultados reais.
 Comportamento a avaliar: A → B → C → A; faltar um dia não avança a sequência. O próximo treino deve depender do último concluído e salvo, não do calendário, e permanecer correto após reiniciar o app. Avaliar seleção manual, repetição/pulo de um treino e quando essas ações alteram o próximo sugerido. Preservar rascunhos, identidade dos exercícios, histórico e backups; estudar compatibilidade com fichas existentes (`days`), importação, links e instruções do ChatGPT. Esta tarefa é de pesquisa/proposta; a implementação fica para depois.
 
 - [x] Implementar a sequência cíclica conforme a proposta: cursor por ID, seleção A/B/C, avanço ao salvar, migração, backup v4 e testes. Regra confirmada pelo usuário: sessões fora da ordem são extras e não avançam o cursor. 51 cenários locais cobertos em rodada completa de49 e verificação final de6; ver e2e/LOCAL_TEST_REPORT.md.
+
+## Migração Flutter / iOS
+
+- [x] Portar catálogo, contratos de dados e regras do app para Dart.
+- [x] Gerenciar estado e dependências com Riverpod3, mantendo regras fora das telas.
+- [x] Implementar telas compartilhadas Android/iOS e migração automática dos dados Android.
+- [x] Preservar backupsv1–v4, links, histórico, rascunhos, trocas e sequência.
+- [x] Validar25testes Flutter/gate90%linhas80%branches e3integrações em Android e iOS.
+- [x] Verificar atualização Java→Flutter, falha real de disco, documentos, links e compartilhamento no emulador Android.
+- [x] Concluir lint Android e2testes XCTest nativos iOS (arquivos, links e compartilhamento).
+- [ ] Confirmar CI da migração Flutter em AndroidAPI29/35 e iOS.
+- [ ] Validar num iPhone real e configurar assinatura/distribuição iOS.
+- [ ] Validar fluxo completo do ChatGPT no iPhone, incluindo leitura do guia e retorno pelo navegador/custom scheme.
