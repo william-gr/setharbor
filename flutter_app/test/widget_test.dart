@@ -88,4 +88,44 @@ void main() {
     expect(find.text('Descanso'), findsOneWidget);
     await tester.pumpWidget(const SizedBox());
   });
+  testWidgets(
+    'rest timer survives scrolling offscreen and keyed list reordering',
+    (tester) async {
+      var insert = false;
+      late StateSetter update;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: StatefulBuilder(
+              builder: (context, setState) {
+                update = setState;
+                return ListView(
+                  children: [
+                    if (insert) const Text('Definir como próximo'),
+                    const RestTimer(key: ValueKey('rest-timer')),
+                    for (var i = 0; i < 30; i++)
+                      SizedBox(height: 150, child: Text('Exercise $i')),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('90 s'));
+      await tester.pump();
+      await tester.drag(find.byType(ListView), const Offset(0, -1800));
+      await tester.pumpAndSettle();
+      update(() => insert = true);
+      await tester.pumpAndSettle();
+      await tester.drag(find.byType(ListView), const Offset(0, 5000));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Descanso  '), findsOneWidget);
+      expect(find.text('Descanso'), findsNothing);
+      await tester.tap(find.text('Parar'));
+      await tester.pump();
+      expect(find.text('Descanso'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
 }

@@ -379,7 +379,7 @@ class _WorkoutHomeState extends ConsumerState<WorkoutHome> {
                     }
                   },
                 ),
-                const RestTimer(),
+                const RestTimer(key: ValueKey('rest-timer')),
                 for (var e = 0; e < exercisesOf(s.plan, s.selected).length; e++)
                   ExerciseCard(
                     key: ValueKey(
@@ -680,7 +680,10 @@ class RestTimer extends StatefulWidget {
   State<RestTimer> createState() => _RestTimerState();
 }
 
-class _RestTimerState extends State<RestTimer> {
+class _RestTimerState extends State<RestTimer>
+    with AutomaticKeepAliveClientMixin<RestTimer> {
+  @override
+  bool get wantKeepAlive => true;
   final watch = Stopwatch();
   Timer? timer;
   int duration = 0, remaining = 0;
@@ -711,44 +714,47 @@ class _RestTimerState extends State<RestTimer> {
   }
 
   @override
-  Widget build(BuildContext context) => Card(
-    child: Padding(
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        children: [
-          Text(
-            duration == 0
-                ? 'Descanso'
-                : remaining == 0
-                ? 'Descanso concluído'
-                : 'Descanso  ${remaining ~/ 60}:${(remaining % 60).toString().padLeft(2, '0')}',
-          ),
-          Row(
-            children: [
-              for (final sec in [60, 90, 120])
-                Expanded(
-                  child: TextButton(
-                    onPressed: () => start(sec),
-                    child: Text('$sec s'),
+  Widget build(BuildContext context) {
+    super.build(context);
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            Text(
+              duration == 0
+                  ? 'Descanso'
+                  : remaining == 0
+                  ? 'Descanso concluído'
+                  : 'Descanso  ${remaining ~/ 60}:${(remaining % 60).toString().padLeft(2, '0')}',
+            ),
+            Row(
+              children: [
+                for (final sec in [60, 90, 120])
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () => start(sec),
+                      child: Text('$sec s'),
+                    ),
                   ),
-                ),
-            ],
-          ),
-          TextButton(
-            onPressed: () {
-              timer?.cancel();
-              watch.stop();
-              setState(() {
-                duration = 0;
-                remaining = 0;
-              });
-            },
-            child: const Text('Parar'),
-          ),
-        ],
+              ],
+            ),
+            TextButton(
+              onPressed: () {
+                timer?.cancel();
+                watch.stop();
+                setState(() {
+                  duration = 0;
+                  remaining = 0;
+                });
+              },
+              child: const Text('Parar'),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class HistoryScreen extends StatelessWidget {

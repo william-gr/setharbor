@@ -42,7 +42,7 @@ Comportamento a avaliar: A → B → C → A; faltar um dia não avança a sequ�
 - [x] Gerenciar estado e dependências com Riverpod3, mantendo regras fora das telas.
 - [x] Implementar telas compartilhadas Android/iOS e migração automática dos dados Android.
 - [x] Preservar backupsv1–v4, links, histórico, rascunhos, trocas e sequência.
-- [x] Validar25testes Flutter/gate90%linhas80%branches e3integrações em Android e iOS.
+- [x] Validar26testes Flutter/gate90%linhas80%branches e3integrações em Android e iOS.
 - [x] Verificar atualização Java→Flutter, falha real de disco, documentos, links e compartilhamento no emulador Android.
 - [x] Concluir lint Android e2testes XCTest nativos iOS (arquivos, links e compartilhamento).
 - [ ] Confirmar CI da migração Flutter em AndroidAPI29/35 e iOS.
