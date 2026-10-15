@@ -70,9 +70,13 @@ final class RunnerTests: XCTestCase {
     let save = app.buttons["Save"].firstMatch
     XCTAssertTrue(save.waitForExistence(timeout: 15), app.debugDescription)
     let filename = app.textFields["DOCPicker.filenameTextField"]
-    XCTAssertTrue(filename.exists)
+    // A cold Files provider can expose its navigation bar before the export
+    // filename field. Wait for the editable form, not merely the Save button.
+    XCTAssertTrue(filename.waitForExistence(timeout: 30), app.debugDescription)
     filename.tap(); filename.typeText("-" + String(UUID().uuidString.prefix(8)))
     let backupName = try XCTUnwrap(filename.value as? String)
+    let saveEnabled = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: save)
+    XCTAssertEqual(XCTWaiter.wait(for: [saveEnabled], timeout: 15), .completed, app.debugDescription)
     screenshot("native-export-picker"); save.tap()
     XCTAssertTrue(item("Backup exportado.").waitForExistence(timeout: 15), app.debugDescription)
     tapScrolled("Restaurar backup")

@@ -44,7 +44,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [29, 35]
+        api: [35]
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-java@v5
@@ -98,6 +98,7 @@ jobs:
       - name: Compile iOS without signing
         run: python3 scripts/build_flutter.py ios
       - name: Boot an available iPhone simulator
+        timeout-minutes: 15
         id: simulator
         run: |
           python3 scripts/ios_simulator.py >> "$GITHUB_OUTPUT"

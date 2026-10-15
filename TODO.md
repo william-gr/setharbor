@@ -45,6 +45,7 @@ Comportamento a avaliar: A → B → C → A; faltar um dia não avança a sequ�
 - [x] Validar26testes Flutter/gate90%linhas80%branches e3integrações em Android e iOS.
 - [x] Verificar atualização Java→Flutter, falha real de disco, documentos, links e compartilhamento no emulador Android.
 - [x] Concluir lint Android e2testes XCTest nativos iOS (arquivos, links e compartilhamento).
-- [ ] Confirmar CI da migração Flutter em AndroidAPI29/35 e iOS.
+- [ ] Confirmar CI da migração Flutter em AndroidAPI35 e iOS.
+- [ ] Retomar a validação AndroidAPI29 posteriormente, conforme preferência do usuário. A gravação e os três testes Dart passaram; o driver HTTPS falhou ao abrir/configurar o diálogo.
 - [ ] Validar num iPhone real e configurar assinatura/distribuição iOS.
 - [ ] Validar fluxo completo do ChatGPT no iPhone, incluindo leitura do guia e retorno pelo navegador/custom scheme.

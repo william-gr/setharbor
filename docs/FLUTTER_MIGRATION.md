@@ -30,7 +30,7 @@ The payload is bounded to 64,000 characters, strict Base64URL without padding an
 
 Use `scripts/build_flutter.py` from the repository root. It reads Git's source committer date: Android YYYYMMDD for version name/code; iOS YYYY.MM.DD for marketing version and YYYYMMDD for build. iOS requires dotted numeric marketing versions; the date semantics stay the same. APK source SHA/checksum metadata remains available. iOS builds in CI are unsigned and are not an IPA distribution.
 
-`flutter.yml` validates shared logic and runs Android API29/35 plus iOS simulator tests. iOS native tests wait until Flutter scrolling settles before tapping, use unique export filenames, and disable diagnostic collection that stalled the local simulator for ten minutes on early failures. `build-apk.yml` and `workout-links.yml` publish optimized Flutter personal/Trial APKs. `android-e2e.yml` is the manual legacy Java reference suite: its UI driver expects native widgets and is not a Flutter regression gate. It was retired from push/PR when the maintained application changed frameworks, not reported as passing. The final pre-migration run 38606014609 had 50/51 passes on each API (API29 scenario05; API35 scenario41 failed); previous local native results remain in the historical report.
+`flutter.yml` validates shared logic and runs Android API35 plus iOS simulator tests (API29 deferred at the user’s request). iOS native tests wait until Flutter scrolling settles before tapping, use unique export filenames, and disable diagnostic collection that stalled the local simulator for ten minutes on early failures. `build-apk.yml` and `workout-links.yml` publish optimized Flutter personal/Trial APKs. `android-e2e.yml` is the manual legacy Java reference suite: its UI driver expects native widgets and is not a Flutter regression gate. It was retired from push/PR when the maintained application changed frameworks, not reported as passing. The final pre-migration run 38606014609 had 50/51 passes on each API (API29 scenario05; API35 scenario41 failed); previous local native results remain in the historical report.
 
 Coverage requires 90% lines / 80% branches **per non-UI Dart source file**, automatically discovering new helpers. Missing coverage/instrumentation fails. The legacy Java gate remains unchanged for baseline builds. Native integration code is validated through OS/device tests rather than included in a Dart percentage.
 
@@ -57,5 +57,16 @@ failed cases. The hosted case separately requires all three Dart results.
 The 26 Flutter tests, coverage gate, analyzer, personal/Trial release builds and
 lint, unsigned iOS release build, six web tests and guide consistency check passed.
 Logs and native results are retained under `e2e/artifacts/flutter-integration/`
-and `e2e/artifacts/flutter-ios-integration/`. GitHub API29/35/iOS revalidation
+and `e2e/artifacts/flutter-ios-integration/`. GitHub API35/iOS revalidation
 remains pending until this fix is pushed and that run completes.
+
+
+Follow-up run 38775026530: Android35 passed the complete suite. Android29 passed
+all three shared tests, migration and the real disk-failure regression, then
+failed in the HTTPS UI driver; further API29 work is deferred at the user's
+request. The iOS hosted case reported all three Dart scenarios passing and fresh
+sharing passed. The export UI test saw Save before the filename field existed
+on the cold iOS26 Files provider; it now waits for the editable filename and
+an enabled Save button before interacting, preserving the actual export/restore
+assertions. Simulator startup is bounded with progress on stderr, allowing the
+seven-minute cold startup observed in CI without consuming the whole job.
