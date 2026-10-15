@@ -80,6 +80,8 @@ jobs:
           name: flutter-android-api-${{ matrix.api }}
           path: |
             e2e/artifacts/flutter-os/
+            e2e/artifacts/flutter-integration/
+            flutter_app/build/app/outputs/androidTest-results/
             flutter_app/build/app/reports/
             flutter_app/build/app/outputs/flutter-apk/*e2e*.apk
   ios:
@@ -99,16 +101,12 @@ jobs:
         id: simulator
         run: |
           python3 scripts/ios_simulator.py >> "$GITHUB_OUTPUT"
-      - name: Test shared app on iOS
-        run: cd flutter_app && flutter test integration_test/app_test.dart -d '${{ steps.simulator.outputs.device }}' --no-uninstall --reporter expanded
-      - name: Native iOS link, document and share UI
-        run: |
-          cd flutter_app
-          flutter build ios --simulator --debug --no-codesign
-          cd ios
-          xcodebuild test -workspace Runner.xcworkspace -scheme Runner -destination 'platform=iOS Simulator,id=${{ steps.simulator.outputs.device }}' -only-testing:RunnerTests -parallel-testing-enabled NO -collect-test-diagnostics never CODE_SIGNING_ALLOWED=NO -resultBundlePath ../../e2e/artifacts/flutter-ios.xcresult
+      - name: Shared Dart scenarios and native iOS links, documents and sharing
+        run: python3 scripts/test_flutter_ios.py --device '${{ steps.simulator.outputs.device }}'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: flutter-ios-results
-          path: e2e/artifacts/flutter-ios.xcresult
+          path: |
+            e2e/artifacts/flutter-ios.xcresult
+            e2e/artifacts/flutter-ios-integration/

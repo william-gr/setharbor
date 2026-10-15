@@ -19,6 +19,7 @@ android {
         applicationId = "com.william.treino"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         minSdk = 26
         targetSdk = flutter.targetSdkVersion
         // Uses the version code from pubspec.yaml. When using split APKs, 1000 * ABI_VERSION
@@ -60,4 +61,15 @@ kotlin {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // integration_test carries older transitive versions; align the debug host
+    // and instrumentation classpaths for AGP consistent dependency resolution.
+    debugImplementation("androidx.test:runner:1.6.2")
+    debugImplementation("androidx.test:rules:1.6.1")
+    debugImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test:runner:1.6.2")
+    androidTestImplementation("androidx.test:rules:1.6.1")
+    androidTestImplementation("junit:junit:4.13.2")
 }

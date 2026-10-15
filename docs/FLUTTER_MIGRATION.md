@@ -14,7 +14,7 @@ The shared app is in `flutter_app/`. The native Java app stays in `app/` as an e
 
 Android application ID remains `com.william.treino`; `.preview` and `.e2e` retain their independent sandboxes. The same signing key is required to update any existing installation. The missing original personal key is not recoverable through a framework migration. CI development keys are still ephemeral; no phone is uninstalled or modified by tests.
 
-At the first Flutter launch, the Android bridge reads every primitive from SharedPreferences `training`. Dart decodes plan/history/drafts, binds old history without snapshots to the original plan, migrates encoded or older raw next-workout IDs, validates state and writes `files/training-flutter.json` through `AtomicFile` with an explicit file sync. Original preferences are left intact. A failed validation/write never marks the migration complete. Once the Flutter file exists it is authoritative; a corrupt file fails visibly rather than silently importing stale Java data.
+At the first Flutter launch, the Android bridge reads every primitive from SharedPreferences `training`. Dart decodes plan/history/drafts, binds old history without snapshots to the original plan, migrates encoded or older raw next-workout IDs, validates state and writes `files/training-flutter.json` through a sibling temporary file with explicit file sync and a checked atomic `Os.rename`. Original preferences are left intact. A failed validation/write never marks the migration complete. Once the Flutter file exists it is authoritative; a corrupt file fails visibly rather than silently importing stale Java data.
 
 On iOS, the state is an atomic UTF-8 JSON file in Application Support, protected until the first device unlock. Files imported from the document picker are validated before confirmation. Export remains backup v4; restore accepts v1/v2/v3/v4, preserves optional blank measurements, movement overrides and the stable cursor. iOS document selection starts in the app Documents folder, which is exposed to Files; the private workout state remains in Application Support. The optional private update URL is local only and excluded from backups and ChatGPT prompts.
 
@@ -41,6 +41,21 @@ Coverage requires 90% lines / 80% branches **per non-UI Dart source file**, auto
 - Three shared integration tests passed on Android and three on iOS, using actual native storage. They exercise UI completion, optional measurements, sequence, catalog/search, drafts/overrides, extras, opaque IDs, history, backup restore and reopening.
 - Android OS smoke passed: native-to-Flutter update without uninstall, preserved original preferences/data, real read-only-filesystem failure with rollback/restart/retry, real export/restore/import, cold/warm link preview/cancel/apply and native share sheet. The final normal APK passed the same full OS smoke after UI/IO refinements. Native HTTPS also passed with trusted fixture TLS: higher revision preserves history, redirects/HTTP503/over1MB responses are rejected without changing the plan.
 - Personal/Trial release APKs and unsigned iOS device/simulator builds compiled. Personal/Trial release lint and E2E debug lint passed. Two native iOS XCUITests passed, including fresh sharing, cold/warm links, document export to a uniquely named file, restore/confirmation and sharing again after restore. XCTest waits for a stable Flutter accessibility frame because UIKit idle checks do not include Flutter scroll physics.
-- API29 and GitHub Actions checks for the Flutter migration are pending until the commit is pushed. A real iPhone and real ChatGPT handoff remain unverified; no personal phone was touched.
+- The initial Flutter CI run 38666890553 exposed a storage-failure regression on API29; API35/iOS timed out at Flutter tool test startup. The API29 implementation of `AtomicFile` could log a failed backup rename and still truncate the original. The checked temporary-file replacement fixes that path; `AtomicFile.openRead` remains only for recovering older backups. CI now uses native Android instrumentation and a hosted iOS XCTest to collect the same three Dart scenarios without VM-service discovery. Each command is bounded and retains logs/results. Full CI revalidation is pending. A real iPhone and real ChatGPT handoff remain unverified; no personal phone was touched.
 
 The rest timer has a stable key and explicitly keeps its state when scrolled out of the lazy list, including when the extra-workout action changes list positions. A widget regression starts it, scrolls offscreen, reorders the list, returns and verifies the countdown is still active before stopping it.
+
+
+## CI failure follow-up, 2026-10-15
+
+The checked Android writer and native CI runners passed local verification:
+three shared Dart scenarios via Android instrumentation, the full Android OS
+migration/disk-failure/documents/links/share suite, HTTPS checks and E2E lint;
+three shared Dart scenarios in one hosted iOS XCTest plus two native UI tests,
+with no failures or skips. XCTest summary checks reject missing, skipped or
+failed cases. The hosted case separately requires all three Dart results.
+The 26 Flutter tests, coverage gate, analyzer, personal/Trial release builds and
+lint, unsigned iOS release build, six web tests and guide consistency check passed.
+Logs and native results are retained under `e2e/artifacts/flutter-integration/`
+and `e2e/artifacts/flutter-ios-integration/`. GitHub API29/35/iOS revalidation
+remains pending until this fix is pushed and that run completes.

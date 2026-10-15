@@ -77,3 +77,10 @@ Android HTTPS links need the supported-links setting; the browser fallback opens
 ## License
 
 [MIT](LICENSE). The app remains free. Flutter and dependencies retain their own compatible license notices.
+
+CI device tests use native Android instrumentation and a hosted iOS XCTest to
+collect the shared Dart results without Flutter tool VM-service discovery.
+With exactly one disposable Android emulator attached, run
+`python3 scripts/test_flutter_android.py` (requires the native E2E baseline APK).
+For a booted iOS simulator, run `python3 scripts/test_flutter_ios.py --device UUID`.
+Both runners retain bounded command logs and native results under `e2e/artifacts/`.

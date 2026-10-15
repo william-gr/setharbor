@@ -52,16 +52,20 @@ class MainActivity : FlutterActivity() {
                     "writeState" -> {
                         val text = call.arguments as String
                         io.execute {
-                            val file = stateFile
-                            var output: java.io.FileOutputStream? = null
+                            val base = stateFile.baseFile
+                            val temporary = File(base.path + ".new")
                             try {
-                                output = file.startWrite()
-                                output.write(text.toByteArray(StandardCharsets.UTF_8))
-                                output.fd.sync()
-                                file.finishWrite(output)
+                                // Android 10 AtomicFile logs a failed backup rename
+                                // and can still truncate the original. Never open it
+                                // for writing: commit only by a checked Linux rename.
+                                java.io.FileOutputStream(temporary).use { output ->
+                                    output.write(text.toByteArray(StandardCharsets.UTF_8))
+                                    output.fd.sync()
+                                }
+                                android.system.Os.rename(temporary.path, base.path)
                                 runOnUiThread { result.success(null) }
                             } catch (e: Exception) {
-                                if (output != null) file.failWrite(output)
+                                temporary.delete()
                                 runOnUiThread { result.error("storage", "Falha ao gravar. Seu treino continua aberto.", null) }
                             }
                         }

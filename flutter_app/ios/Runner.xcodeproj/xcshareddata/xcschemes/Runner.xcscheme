@@ -56,6 +56,9 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference skipped="NO" parallelizable="NO">
+            <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="F17000000000000000000005" BuildableName="SharedIntegrationTests.xctest" BlueprintName="SharedIntegrationTests" ReferencedContainer="container:Runner.xcodeproj"/>
+         </TestableReference>
          <TestableReference
             skipped = "NO"
             parallelizable = "YES">
