@@ -33,6 +33,47 @@ final class RunnerTests: XCTestCase {
     }
     XCTFail("Missing visible control: \(label)\n\(app.debugDescription)")
   }
+  private func localFilesRoot() {
+    // Leave an app folder cached by Files before choosing an external location.
+    let back = app.buttons.matching(NSPredicate(format: "identifier == %@ AND label == %@", "BackButton", "On My iPhone")).firstMatch
+    if back.exists { back.tap() }
+    let local = app.cells.containing(.staticText, identifier: "On My iPhone").firstMatch
+    if local.exists { local.tap() }
+  }
+  private func createBackupFolder(_ name: String) {
+    let more = app.buttons["More"].firstMatch
+    XCTAssertTrue(more.waitForExistence(timeout: 15), app.debugDescription)
+    localFilesRoot()
+    let root = app.navigationBars.descendants(matching: .any).matching(NSPredicate(format: "identifier != %@ AND (label == %@ OR label BEGINSWITH %@)", "BackButton", "On My iPhone", "On My iPhone,")).firstMatch
+    XCTAssertTrue(root.waitForExistence(timeout: 15), app.debugDescription)
+    more.tap()
+    let newFolder = item("New Folder")
+    XCTAssertTrue(newFolder.waitForExistence(timeout: 15), app.debugDescription)
+    newFolder.tap()
+    let inline = app.descendants(matching: .any).matching(identifier: "DOC.inlineRenameField").firstMatch
+    let alertField = app.alerts.textFields.firstMatch
+    let naming = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in
+      inline.exists || alertField.exists
+    }, object: nil)
+    XCTAssertEqual(XCTWaiter.wait(for: [naming], timeout: 15), .completed, app.debugDescription)
+    let field = inline.exists ? inline : alertField
+    if let value = field.value as? String {
+      field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: value.count))
+    }
+    field.typeText(name)
+    if inline.exists { field.typeText("\n") }
+    else {
+      let create = app.alerts.buttons["Create"].firstMatch
+      if create.exists { create.tap() } else { app.alerts.buttons["Done"].firstMatch.tap() }
+    }
+    let title = app.navigationBars.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", name)).firstMatch
+    if !title.waitForExistence(timeout: 2) {
+      let folder = app.cells.containing(.staticText, identifier: name).firstMatch
+      XCTAssertTrue(folder.waitForExistence(timeout: 15), app.debugDescription)
+      folder.tap()
+    }
+    XCTAssertTrue(title.waitForExistence(timeout: 15), app.debugDescription)
+  }
   private func screenshot(_ name: String) {
     let attachment = XCTAttachment(screenshot: app.screenshot())
     attachment.name = name; attachment.lifetime = .keepAlways; add(attachment)
@@ -49,9 +90,10 @@ final class RunnerTests: XCTestCase {
     continueAfterFailure = false
     app.launch()
     XCTAssertTrue(item("SetHarbor").waitForExistence(timeout: 30))
+    let originalTitle = "iOS native link " + String(UUID().uuidString.prefix(8))
     let plan: [String: Any] = [
       "format":"meu-treino-plan", "schemaVersion":1, "revision":100,
-      "title":"iOS native link", "days":[["id":"ios-a", "name":"A", "focus":"Teste iOS", "exercises":[["id":"ios-slot", "catalogId":"barbell-bench-press", "name":"Supino reto barra", "sets":2, "reps":"8–12"]]]]
+      "title":originalTitle, "days":[["id":"ios-a", "name":"A", "focus":"Teste iOS", "exercises":[["id":"ios-slot", "catalogId":"barbell-bench-press", "name":"Supino reto barra", "sets":2, "reps":"8–12"]]]]
     ]
     let bytes = try JSONSerialization.data(withJSONObject: plan)
     let encoded = bytes.base64EncodedString().replacingOccurrences(of: "+", with: "-").replacingOccurrences(of: "/", with: "_").replacingOccurrences(of: "=", with: "")
@@ -64,28 +106,48 @@ final class RunnerTests: XCTestCase {
     XCUIDevice.shared.system.open(url)
     XCTAssertTrue(item("Aplicar treino do link?").waitForExistence(timeout: 30))
     item("Aplicar treino").tap()
-    XCTAssertTrue(item("iOS native link").waitForExistence(timeout: 15))
+    XCTAssertTrue(item(originalTitle).waitForExistence(timeout: 15))
     screenshot("cold-link-applied")
+    let folderName = "SetHarbor-E2E-" + String(UUID().uuidString.prefix(8))
     tapScrolled("Exportar backup")
+    createBackupFolder(folderName)
     let save = app.buttons["Save"].firstMatch
     XCTAssertTrue(save.waitForExistence(timeout: 15), app.debugDescription)
-    let filename = app.textFields["DOCPicker.filenameTextField"]
-    // A cold Files provider can expose its navigation bar before the export
-    // filename field. Wait for the editable form, not merely the Save button.
-    XCTAssertTrue(filename.waitForExistence(timeout: 30), app.debugDescription)
-    filename.tap(); filename.typeText("-" + String(UUID().uuidString.prefix(8)))
-    let backupName = try XCTUnwrap(filename.value as? String)
+    // Export pickers differ by OS/linked SDK: the filename editor is optional.
+    // Verify the actual file roundtrip using a unique plan payload instead.
+    let backupName = "meu-treino-backup"
     let saveEnabled = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: save)
     XCTAssertEqual(XCTWaiter.wait(for: [saveEnabled], timeout: 15), .completed, app.debugDescription)
     screenshot("native-export-picker"); save.tap()
+    let replace = app.buttons["Replace"].firstMatch
+    if replace.waitForExistence(timeout: 2) { replace.tap() }
     XCTAssertTrue(item("Backup exportado.").waitForExistence(timeout: 15), app.debugDescription)
+    var replacement = plan
+    let replacementTitle = "Replacement " + originalTitle
+    replacement["title"] = replacementTitle
+    replacement["revision"] = 101
+    let replacementData = try JSONSerialization.data(withJSONObject: replacement)
+    let replacementEncoded = replacementData.base64EncodedString().replacingOccurrences(of: "+", with: "-").replacingOccurrences(of: "/", with: "_").replacingOccurrences(of: "=", with: "")
+    XCUIDevice.shared.system.open(try XCTUnwrap(URL(string: "setharbor://workout#v1.\(replacementEncoded)")))
+    XCTAssertTrue(item("Aplicar treino do link?").waitForExistence(timeout: 15))
+    item("Aplicar treino").tap()
+    XCTAssertTrue(item(replacementTitle).waitForExistence(timeout: 15))
     tapScrolled("Restaurar backup")
-    let file = app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", backupName)).firstMatch
+    let file = app.descendants(matching: .any).matching(NSPredicate(format: "label == %@ OR label == %@ OR label BEGINSWITH %@ OR label BEGINSWITH %@", backupName, backupName + ".json", backupName + ",", backupName + ".json,")).firstMatch
+    let currentFolder = app.navigationBars.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", folderName)).firstMatch
+    XCTAssertTrue(app.buttons["More"].firstMatch.waitForExistence(timeout: 15), app.debugDescription)
+    if !currentFolder.exists {
+      localFilesRoot()
+      let folder = app.cells.containing(.staticText, identifier: folderName).firstMatch
+      XCTAssertTrue(folder.waitForExistence(timeout: 15), app.debugDescription)
+      folder.tap()
+    }
     XCTAssertTrue(file.waitForExistence(timeout: 15), app.debugDescription)
     screenshot("native-import-picker"); file.tap()
     XCTAssertTrue(item("Restaurar backup?").waitForExistence(timeout: 15), app.debugDescription)
     item("Restaurar").tap()
     XCTAssertTrue(item("Backup restaurado.").waitForExistence(timeout: 15))
+    XCTAssertTrue(item(originalTitle).waitForExistence(timeout: 15), app.debugDescription)
     let dismissed = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: item("Backup restaurado."))
     XCTAssertEqual(XCTWaiter.wait(for: [dismissed], timeout: 8), .completed)
     tapScrolled("Planejar com ChatGPT")

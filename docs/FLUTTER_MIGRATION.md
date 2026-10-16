@@ -16,7 +16,7 @@ Android application ID remains `com.william.treino`; `.preview` and `.e2e` retai
 
 At the first Flutter launch, the Android bridge reads every primitive from SharedPreferences `training`. Dart decodes plan/history/drafts, binds old history without snapshots to the original plan, migrates encoded or older raw next-workout IDs, validates state and writes `files/training-flutter.json` through a sibling temporary file with explicit file sync and a checked atomic `Os.rename`. Original preferences are left intact. A failed validation/write never marks the migration complete. Once the Flutter file exists it is authoritative; a corrupt file fails visibly rather than silently importing stale Java data.
 
-On iOS, the state is an atomic UTF-8 JSON file in Application Support, protected until the first device unlock. Files imported from the document picker are validated before confirmation. Export remains backup v4; restore accepts v1/v2/v3/v4, preserves optional blank measurements, movement overrides and the stable cursor. iOS document selection starts in the app Documents folder, which is exposed to Files; the private workout state remains in Application Support. The optional private update URL is local only and excluded from backups and ChatGPT prompts.
+On iOS, the state is an atomic UTF-8 JSON file in Application Support, protected until the first device unlock. Files imported from the document picker are validated before confirmation. Export remains backup v4; restore accepts v1/v2/v3/v4, preserves optional blank measurements, movement overrides and the stable cursor. iOS document selection uses the location managed by Files, including external storage; the private workout state remains in Application Support. The optional private update URL is local only and excluded from backups and ChatGPT prompts.
 
 A later reinstall with a different signing key requires the existing backup flow. Migrating Android data automatically does not imply transferring data automatically to a separate iPhone; the portable backup can move between platforms.
 
@@ -30,7 +30,7 @@ The payload is bounded to 64,000 characters, strict Base64URL without padding an
 
 Use `scripts/build_flutter.py` from the repository root. It reads Git's source committer date: Android YYYYMMDD for version name/code; iOS YYYY.MM.DD for marketing version and YYYYMMDD for build. iOS requires dotted numeric marketing versions; the date semantics stay the same. APK source SHA/checksum metadata remains available. iOS builds in CI are unsigned and are not an IPA distribution.
 
-`flutter.yml` validates shared logic and runs Android API35 plus iOS simulator tests (API29 deferred at the user’s request). iOS native tests wait until Flutter scrolling settles before tapping, use unique export filenames, and disable diagnostic collection that stalled the local simulator for ten minutes on early failures. `build-apk.yml` and `workout-links.yml` publish optimized Flutter personal/Trial APKs. `android-e2e.yml` is the manual legacy Java reference suite: its UI driver expects native widgets and is not a Flutter regression gate. It was retired from push/PR when the maintained application changed frameworks, not reported as passing. The final pre-migration run 38606014609 had 50/51 passes on each API (API29 scenario05; API35 scenario41 failed); previous local native results remain in the historical report.
+`flutter.yml` validates shared logic and runs Android API35 plus iOS simulator tests (API29 deferred at the user’s request). iOS native tests wait until Flutter scrolling settles before tapping, use a unique backup payload and verify restoration after replacing the active plan, and disable diagnostic collection that stalled the local simulator for ten minutes on early failures. `build-apk.yml` and `workout-links.yml` publish optimized Flutter personal/Trial APKs. `android-e2e.yml` is the manual legacy Java reference suite: its UI driver expects native widgets and is not a Flutter regression gate. It was retired from push/PR when the maintained application changed frameworks, not reported as passing. The final pre-migration run 38606014609 had 50/51 passes on each API (API29 scenario05; API35 scenario41 failed); previous local native results remain in the historical report.
 
 Coverage requires 90% lines / 80% branches **per non-UI Dart source file**, automatically discovering new helpers. Missing coverage/instrumentation fails. The legacy Java gate remains unchanged for baseline builds. Native integration code is validated through OS/device tests rather than included in a Dart percentage.
 
@@ -40,7 +40,7 @@ Coverage requires 90% lines / 80% branches **per non-UI Dart source file**, auto
 - 26 Dart/controller/channel/widget tests passed. Pure domain files: 100% lines and branches. Riverpod controller: 93.2% lines / 96.8% branches. Platform channel: 100% lines/branches. Gate passed; negative checks verify low/missing coverage and newly added logic fail.
 - Three shared integration tests passed on Android and three on iOS, using actual native storage. They exercise UI completion, optional measurements, sequence, catalog/search, drafts/overrides, extras, opaque IDs, history, backup restore and reopening.
 - Android OS smoke passed: native-to-Flutter update without uninstall, preserved original preferences/data, real read-only-filesystem failure with rollback/restart/retry, real export/restore/import, cold/warm link preview/cancel/apply and native share sheet. The final normal APK passed the same full OS smoke after UI/IO refinements. Native HTTPS also passed with trusted fixture TLS: higher revision preserves history, redirects/HTTP503/over1MB responses are rejected without changing the plan.
-- Personal/Trial release APKs and unsigned iOS device/simulator builds compiled. Personal/Trial release lint and E2E debug lint passed. Two native iOS XCUITests passed, including fresh sharing, cold/warm links, document export to a uniquely named file, restore/confirmation and sharing again after restore. XCTest waits for a stable Flutter accessibility frame because UIKit idle checks do not include Flutter scroll physics.
+- Personal/Trial release APKs and unsigned iOS device/simulator builds compiled. Personal/Trial release lint and E2E debug lint passed. Two native iOS XCUITests passed, including fresh sharing, cold/warm links, document export to a real file, restore/confirmation and sharing again after restore. XCTest waits for a stable Flutter accessibility frame because UIKit idle checks do not include Flutter scroll physics.
 - The initial Flutter CI run 38666890553 exposed a storage-failure regression on API29; API35/iOS timed out at Flutter tool test startup. The API29 implementation of `AtomicFile` could log a failed backup rename and still truncate the original. The checked temporary-file replacement fixes that path; `AtomicFile.openRead` remains only for recovering older backups. CI now uses native Android instrumentation and a hosted iOS XCTest to collect the same three Dart scenarios without VM-service discovery. Each command is bounded and retains logs/results. Full CI revalidation is pending. A real iPhone and real ChatGPT handoff remain unverified; no personal phone was touched.
 
 The rest timer has a stable key and explicitly keeps its state when scrolled out of the lazy list, including when the extra-workout action changes list positions. A widget regression starts it, scrolls offscreen, reorders the list, returns and verifies the countdown is still active before stopping it.
@@ -89,3 +89,38 @@ coverage gate passed; Android instrumentation reported three passing scenarios;
 the Android OS suite and all HTTPS rejection cases passed with stable touches;
 the hosted iOS case reported all three Dart scenarios passing, followed by two
 passing native iOS UI cases with no skips. Final remote CI is still pending.
+
+
+## Native backup compatibility follow-up, 2026-10-16
+
+Run 38885486422 passed unit/coverage and the full Android35 suite. The hosted iOS
+case reported all three Dart scenarios passing; native sharing passed, while the
+export picker still had Save disabled and no filename editor on the CI SDK26
+build. The exact iOS26.4.1 runtime was installed locally and a clean installation
+passed the existing UI tests under SDK27, confirming the CI behavior is not
+reproduced by runtime version alone.
+
+The bridge now lets Files manage the selected location instead of forcing the
+app's Documents sandbox. The native regression validates the supported export
+operation without requiring a particular filename editor: it exports a uniquely
+identified plan, applies a different plan, restores the actual file through Files
+and asserts that the original unique title returns. Existing-file replacement
+uses the system confirmation. The initial iOS26.4.1 content roundtrip passed;
+final SDK26 CI validation remains pending.
+
+The native content roundtrip passed on a clean iOS26 simulator and on a repeat
+with an existing backup, including the system Replace confirmation. CI also
+retains the unsigned simulator app bundle so SDK-specific behavior can be
+reproduced locally from the exact CI build if needed.
+
+The final native test explicitly creates a uniquely named folder at the On My
+iPhone root through Files, exports there, changes the plan, reopens that exact
+folder and restores the backup's unique payload. This avoids stale app-folder
+locations and proves the export is outside the app sandbox. Both native tests
+passed on iOS27 with this external-folder flow. This replaces assumptions about
+a particular filename editor and app-folder overwrite behavior; actual save,
+restore, content equality, link and share assertions remain mandatory.
+
+Final local external-folder validation passed: two native cases on iOS26.4.1,
+two on iOS27, and the unsigned iOS release build. SDK26 CI revalidation remains
+pending; Android35 full CI and shared Dart tests were already green on fd9afbe.

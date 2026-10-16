@@ -111,3 +111,4 @@ jobs:
           path: |
             e2e/artifacts/flutter-ios.xcresult
             e2e/artifacts/flutter-ios-integration/
+            flutter_app/build/ios/iphonesimulator/Runner.app/

@@ -99,8 +99,8 @@ final class PlatformBridge: NSObject, UIDocumentPickerDelegate {
           documentLimit = limit
           picker = UIDocumentPickerViewController(forOpeningContentTypes: [.json], asCopy: true)
         }
-        let documents = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        picker.directoryURL = documents
+        // Files owns the user-selected backup location, including external
+        // storage. Keep its location history rather than forcing our sandbox.
         documentResult = result
         picker.delegate = self; picker.allowsMultipleSelection = false
         controller.present(picker, animated: true)
