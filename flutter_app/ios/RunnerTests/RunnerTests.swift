@@ -67,11 +67,8 @@ final class RunnerTests: XCTestCase {
       if create.exists { create.tap() } else { app.alerts.buttons["Done"].firstMatch.tap() }
     }
     let title = app.navigationBars.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", name)).firstMatch
-    if !title.waitForExistence(timeout: 2) {
-      let folder = app.cells.containing(.staticText, identifier: name).firstMatch
-      XCTAssertTrue(folder.waitForExistence(timeout: 15), app.debugDescription)
-      folder.tap()
-    }
+    // Files enters the new folder asynchronously after committing its name.
+    // Wait for that navigation instead of racing it with another folder tap.
     XCTAssertTrue(title.waitForExistence(timeout: 15), app.debugDescription)
   }
   private func screenshot(_ name: String) {

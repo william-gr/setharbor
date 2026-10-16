@@ -124,3 +124,14 @@ restore, content equality, link and share assertions remain mandatory.
 Final local external-folder validation passed: two native cases on iOS26.4.1,
 two on iOS27, and the unsigned iOS release build. SDK26 CI revalidation remains
 pending; Android35 full CI and shared Dart tests were already green on fd9afbe.
+
+
+The automatic aeff763 run passed Android35 and shared iOS scenarios, then found
+a race in the new-folder test helper: Files asynchronously entered the newly
+created directory while the helper was trying to tap its old parent cell. The
+helper now waits for the destination navigation title without that redundant
+touch. Both native tests passed locally against the exact unmodified SDK26 app
+bundle downloaded from CI, running on iOS26.4.1 (23E254a). The local XCTest
+configuration pointed its UI target at that artifact; only executable permission
+bits lost by artifact packaging were restored. Result:
+`/tmp/setharbor-ci-sdk26-app/probe.xcresult`, two passes, no skips/failures.
