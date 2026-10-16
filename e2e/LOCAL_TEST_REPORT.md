@@ -94,3 +94,17 @@ Após refinamentos da migração (sessão cujo ID ainda existe mesmo com treinos
 **44/44 JVM**, gate90% linhas/80% branches por classe, APKs debug/E2E/preview e lint debug/preview passaram no build final. WorkoutSequence tem100% de linhas/branches; demais classes mantêm limites, sem novas exclusões. Cinco checks web, três checks do driver, py_compile e guia canônico passaram. OpenJDK21 local/SDK35; CI continua JDK17. App pessoal/celular não foram usados; somente AVD descartável/pacote E2E. Nenhum termo do Chrome foi aceito.
 
 A matriz da versão anterior47758a5, execução38555356927, concluiu: **API35 44/44**, **API29 43/44**. Artefato API29 baixado: o cenário01 falhou em setUp ao aguardar a primeira abertura, com launcher em screenshot/XML; os outros43 passaram, incluindo40/44. Os logs disponíveis não comprovam a causa exata do timeout. O novo setup espera o launcher renderizado/desbloqueado antes da primeira abertura e registra a resposta de am start em last-launch.txt. Não faz retry de app que falhou; reset deixa o app selecionar A naturalmente. O limite agregado da CI foi elevado para120 minutos para51 cenários reais; timeouts/assertions individuais não foram relaxados. A nova matriz API29/35 será disparada ao publicar; ainda não foi declarada aprovada.
+
+
+## Flutter / Riverpod — CI aprovada em 2026-10-16
+
+A [execução38918416649](https://github.com/william-gr/setharbor/actions/runs/38918416649),
+commit `f755776`, passou todos os jobs: 26 testes Flutter, análise/formatação,
+gate90%linhas/80%branches por arquivo de lógica, três integrações Android35,
+migração Java→Flutter/rollback real/documentos/links/share/HTTPS/lint, três
+integrações Dart iOS em XCTest hospedado e dois testes nativos iOS. Artefatos
+baixados e conferidos, sem falhas/skips. O backup iOS é exportado/restaurado pelo
+Files e seu conteúdo único é comparado depois de substituir a ficha. A restauração
+preserva o destino lembrado pelo Files. Android29 está adiado por preferência do
+usuário; iPhone físico/assinatura e fluxo ChatGPT no iPhone seguem pendentes.
+Detalhes e proveniência do Trial em [FLUTTER_MIGRATION.md](../docs/FLUTTER_MIGRATION.md).

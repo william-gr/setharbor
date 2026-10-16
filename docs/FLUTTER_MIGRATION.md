@@ -2,6 +2,34 @@
 
 The shared app is in `flutter_app/`. The native Java app stays in `app/` as an executable migration baseline, not a second actively developed UI. New APK workflows build Flutter. Existing plan/catalog/link formats are intentionally unchanged.
 
+## Verified status — 2026-10-16
+
+[CI 38918416649](https://github.com/william-gr/setharbor/actions/runs/38918416649)
+passed all jobs on source `f755776348d0faa837802e714b56a5028ccc3ea8`:
+26 Flutter tests, analysis/formatting, the per-file 90% line / 80% branch gate,
+Android35 instrumentation (three scenarios), full migration/OS/HTTPS/lint checks,
+and iOS shared integration (three Dart scenarios in one hosted XCTest) plus both
+native UI cases. Downloaded reports confirm no skips/failures. Logic coverage is
+100% in domain files; controller 93.2% lines / 96.8% branches; platform gateway
+100%. The gate's negative checks also passed in CI.
+
+Native iOS backup export and restore use real Files UI and compare a unique plan
+payload after applying a different plan. Files can reopen its SetHarbor folder
+after local-source selection; restore checks the remembered destination first.
+Earlier diagnostic entries below describe superseded test helpers.
+
+[APK build 38918416670](https://github.com/william-gr/setharbor/actions/runs/38918416670)
+and [Pages 38918416940](https://github.com/william-gr/setharbor/actions/runs/38918416940)
+also passed. The public Trial was downloaded and verified against source
+`f755776`, version `20261016`, package `com.william.treino.preview`, with the
+canonical 90-exercise catalog and no E2E CA. SHA256:
+`b4c6c5fb2a2c29db8f98343e038511c9581083ff462c21014408a84683b6c5e3`.
+The following documentation-only commit does not rebuild these artifacts.
+
+Android29 validation remains deferred at the user's request. Real iPhone
+validation, Apple signing/distribution and the full short-prompt ChatGPT flow on
+iPhone remain pending. The project remains free and MIT licensed.
+
 ## Architecture
 
 - Pure Dart: plan validation, catalog/aliases/legacy identity, optional measurements, swaps/snapshots, cyclic cursor, history, backup validation and migration.
