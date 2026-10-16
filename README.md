@@ -64,7 +64,7 @@ flutter test integration_test/app_test.dart -d emulator-5554 --flavor e2e --no-u
 # Or select an iPhone simulator (without --flavor).
 ```
 
-The [Flutter workflow](.github/workflows/flutter.yml) runs analysis, coverage, Android integration/OS tests on APIs 29/35 and iOS simulator tests. Android OS tests additionally install the native baseline and update it in place to verify migration, real disk failure rollback, document export/restore/import, cold/warm links and sharing. They refuse physical devices and use only `.e2e`. iOS XCTest verifies native links and system picker/share presentation. See [verification report](docs/FLUTTER_MIGRATION.md).
+The [Flutter workflow](.github/workflows/flutter.yml) runs analysis, coverage, Android integration/OS tests on API35 and iOS simulator tests (API29 validation is deferred). Android OS tests additionally install the native baseline and update it in place to verify migration, real disk failure rollback, document export/restore/import, cold/warm links and sharing. They refuse physical devices and use only `.e2e`. iOS XCTest verifies native links and system picker/share presentation. See [verification report](docs/FLUTTER_MIGRATION.md).
 
 The Java implementation in `app/`, root Gradle build and its 51 Python E2E cases remain as a migration reference. Their [legacy workflow](.github/workflows/android-e2e.yml) is manual; they do not test the Flutter interface. Their historical results are in [LOCAL_TEST_REPORT.md](e2e/LOCAL_TEST_REPORT.md).
 

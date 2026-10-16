@@ -12,7 +12,7 @@ import 'package:setharbor/domain/links.dart';
 import 'package:setharbor/ui/workout_app.dart';
 
 void main() {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() async {
     if (await PlatformGateway.channel.invokeMethod<bool>('testEnvironment') !=
         true) {
@@ -20,7 +20,13 @@ void main() {
         'Integration tests require an Android E2E emulator or iOS simulator. No data was changed.',
       );
     }
+    // XCTest/UiAutomation can enable accessibility during the first case,
+    // introducing a platform-owned handle after flutter_test records its
+    // baseline (flutter/flutter#129231). Enable it before that baseline;
+    // application handle leak checks remain active and semantics stay tested.
+    binding.platformDispatcher.semanticsEnabledTestValue = true;
   });
+  tearDownAll(binding.platformDispatcher.clearSemanticsEnabledTestValue);
   testWidgets(
     'offline workout UI saves optional sets, advances and survives native disk reload',
     (tester) async {

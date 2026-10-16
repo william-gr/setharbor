@@ -70,3 +70,22 @@ on the cold iOS26 Files provider; it now waits for the editable filename and
 an enabled Save button before interacting, preserving the actual export/restore
 assertions. Simulator startup is bounded with progress on stderr, allowing the
 seven-minute cold startup observed in CI without consuming the whole job.
+
+
+Run 38784938584 found a shared-driver timing issue on Android35: Flutter scroll
+inertia moved a button between the accessibility dump and the touch, so the
+HTTPS modal did not open and the driver typed into a workout field. The Flutter
+OS driver now requires a stable accessibility frame before one touch and checks
+that the URL modal exists before typing. It never retries a failed touch.
+The hosted iOS run also exposed a platform-owned accessibility handle being
+created during the first test. Integration setup enables platform semantics
+before test baselines and restores the override after the suite; app handle
+leak assertions and accessibility remain enabled. See the related framework
+[UiAutomation issue](https://github.com/flutter/flutter/issues/129231).
+
+
+Local validation after these timing fixes: analyzer, 26 tests and per-file
+coverage gate passed; Android instrumentation reported three passing scenarios;
+the Android OS suite and all HTTPS rejection cases passed with stable touches;
+the hosted iOS case reported all three Dart scenarios passing, followed by two
+passing native iOS UI cases with no skips. Final remote CI is still pending.

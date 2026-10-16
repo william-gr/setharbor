@@ -20,6 +20,37 @@ class FlutterUI(AndroidUI):
         if text is None:return nodes
         return [n for n in nodes if n.get('text','').casefold()==text.casefold() or text in n.get('content-desc','').split('\n')]
 
+
+    def tap(self, scroll=False, **attrs):
+        matches=self.nodes(**attrs)
+        if not matches and scroll:
+            self.scroll_to(**attrs)
+        previous=None
+        changed_at=time.monotonic()
+        deadline=time.monotonic()+15
+        while time.monotonic()<deadline:
+            matches=self.nodes(**attrs)
+            if matches:
+                node=matches[-1]
+                bounds=node.get('bounds')
+                if bounds!=previous:
+                    previous=bounds;changed_at=time.monotonic()
+                elif time.monotonic()-changed_at>=.5:
+                    # UI Automator's idle check does not include Flutter scroll
+                    # physics. Synthesize one touch only after the frame settles.
+                    self.tap_node(node);return
+            else:
+                previous=None;changed_at=time.monotonic()
+            time.sleep(.2)
+        raise AssertionError(f'Control did not settle before touch: {attrs}')
+
+    def configure_url(self, url):
+        self.tap(scroll=True,text='Atualização online')
+        # Never type into an arbitrary workout field if the modal did not open.
+        self.wait(lambda:self.has(text='Salvar e verificar'))
+        self.fill(url,cls='android.widget.EditText')
+        self.tap(text='Salvar e verificar')
+
 ui=FlutterUI(os.environ.get('ADB','adb'),os.environ.get('ANDROID_SERIAL','emulator-5554'))
 ARTIFACTS=ROOT/'e2e/artifacts/flutter-os'
 
