@@ -108,7 +108,9 @@ final class RunnerTests: XCTestCase {
     tapScrolled("Restaurar backup")
     let file = app.descendants(matching: .any).matching(NSPredicate(format: "label == %@ OR label == %@ OR label BEGINSWITH %@ OR label BEGINSWITH %@", backupName, backupName + ".json", backupName + ",", backupName + ".json,")).firstMatch
     XCTAssertTrue(app.buttons["More"].firstMatch.waitForExistence(timeout: 15), app.debugDescription)
-    localFilesRoot()
+    // Files may reopen the saved app folder after choosing its local source.
+    // Inspect that remembered destination before navigating away from it.
+    if !file.waitForExistence(timeout: 15) { localFilesRoot() }
     XCTAssertTrue(file.waitForExistence(timeout: 15), app.debugDescription)
     screenshot("native-import-picker"); file.tap()
     XCTAssertTrue(item("Restaurar backup?").waitForExistence(timeout: 15), app.debugDescription)

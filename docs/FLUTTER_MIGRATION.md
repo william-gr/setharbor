@@ -168,3 +168,16 @@ SDK26 CI app with an initialized provider and again after erasing only the
 disposable simulator, proving the first-open path. Evidence:
 `/tmp/setharbor-ci-done/root.xcresult` and `root-cold.xcresult`, two passes each.
 The prior run passed unit/coverage and Android35; final remote iOS is pending.
+
+
+Run 38913133584 passed unit/coverage, Android35 and shared iOS tests. Native
+export succeeded, but Files asynchronously reopened SetHarbor after the local
+source selection. Its export screenshot shows SetHarbor, and the subsequent
+restore picker initially opened that same folder. The test incorrectly left it
+for the root, where the backup did not exist (the SetHarbor cell showed one
+item). Restore now looks for the actual backup in the remembered location
+before using root navigation as a fallback. Thus the destination is managed
+by Files and may be root or SetHarbor; the prior root-only description was too
+strong. Actual export/change/restore/content assertions remain intact. Both
+native cases passed with the exact 3cc310b SDK26 CI app on iOS26.4.1:
+`/tmp/setharbor-ci-done/remembered.xcresult`. Remote revalidation is pending.
