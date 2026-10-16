@@ -146,3 +146,12 @@ Both native cases passed on a newly created iOS26.4.1 simulator against that
 run's exact SDK26 app bundle, with no failures or skips. Evidence:
 `/tmp/setharbor-ci-sdk26-cold/probe.xcresult`. Remote revalidation is pending.
 Android29 remains deferred by user request; Android35 and iOS remain required.
+
+
+Run 38905149159 passed unit/coverage and the complete Android35 job. The iOS
+navigation wait worked, but the Files inline rename remained focused after an
+injected newline. Its accessibility tree exposed the real keyboard Done button.
+The test now taps that button to commit the name. Both native cases passed with
+the exact b7c04e6 SDK26 CI app on iOS26.4.1, result
+`/tmp/setharbor-ci-done/probe.xcresult`. No application behavior or backup
+assertions changed; remote iOS revalidation remains required.

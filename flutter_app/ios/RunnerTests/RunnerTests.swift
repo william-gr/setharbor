@@ -68,8 +68,13 @@ final class RunnerTests: XCTestCase {
       field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: value.count))
     }
     field.typeText(name)
-    if inline.exists { field.typeText("\n") }
-    else {
+    if inline.exists {
+      // The Files text view treats injected newlines differently across SDKs.
+      // Commit through its real keyboard action, as a user would.
+      let done = app.keyboards.buttons["Done"].firstMatch
+      XCTAssertTrue(done.waitForExistence(timeout: 15), app.debugDescription)
+      done.tap()
+    } else {
       let create = app.alerts.buttons["Create"].firstMatch
       if create.exists { create.tap() } else { app.alerts.buttons["Done"].firstMatch.tap() }
     }
