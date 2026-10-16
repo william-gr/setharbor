@@ -155,3 +155,16 @@ The test now taps that button to commit the name. Both native cases passed with
 the exact b7c04e6 SDK26 CI app on iOS26.4.1, result
 `/tmp/setharbor-ci-done/probe.xcresult`. No application behavior or backup
 assertions changed; remote iOS revalidation remains required.
+
+
+A clean-provider reproduction showed that even keyboard Done can leave Files'
+inline folder rename active (also confirmed in CI run 38908625976). Creating a
+folder is incidental to the app contract. The native test now saves directly at
+the external On My iPhone root, which exposes an enabled Save button, then
+changes the plan and restores the exported file to verify its unique payload.
+The helper for folder creation was removed; document IO, content assertions,
+links and sharing remain mandatory. Both native cases passed against the exact
+SDK26 CI app with an initialized provider and again after erasing only the
+disposable simulator, proving the first-open path. Evidence:
+`/tmp/setharbor-ci-done/root.xcresult` and `root-cold.xcresult`, two passes each.
+The prior run passed unit/coverage and Android35; final remote iOS is pending.

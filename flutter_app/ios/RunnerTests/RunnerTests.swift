@@ -47,42 +47,6 @@ final class RunnerTests: XCTestCase {
     if back.exists && back.isHittable { back.tap() } else { local.tap() }
     XCTAssertTrue(root.waitForExistence(timeout: 15), app.debugDescription)
   }
-  private func createBackupFolder(_ name: String) {
-    let more = app.buttons["More"].firstMatch
-    XCTAssertTrue(more.waitForExistence(timeout: 15), app.debugDescription)
-    localFilesRoot()
-    let root = app.navigationBars.descendants(matching: .any).matching(NSPredicate(format: "identifier != %@ AND (label == %@ OR label BEGINSWITH %@)", "BackButton", "On My iPhone", "On My iPhone,")).firstMatch
-    XCTAssertTrue(root.waitForExistence(timeout: 15), app.debugDescription)
-    more.tap()
-    let newFolder = item("New Folder")
-    XCTAssertTrue(newFolder.waitForExistence(timeout: 15), app.debugDescription)
-    newFolder.tap()
-    let inline = app.descendants(matching: .any).matching(identifier: "DOC.inlineRenameField").firstMatch
-    let alertField = app.alerts.textFields.firstMatch
-    let naming = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in
-      inline.exists || alertField.exists
-    }, object: nil)
-    XCTAssertEqual(XCTWaiter.wait(for: [naming], timeout: 15), .completed, app.debugDescription)
-    let field = inline.exists ? inline : alertField
-    if let value = field.value as? String {
-      field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: value.count))
-    }
-    field.typeText(name)
-    if inline.exists {
-      // The Files text view treats injected newlines differently across SDKs.
-      // Commit through its real keyboard action, as a user would.
-      let done = app.keyboards.buttons["Done"].firstMatch
-      XCTAssertTrue(done.waitForExistence(timeout: 15), app.debugDescription)
-      done.tap()
-    } else {
-      let create = app.alerts.buttons["Create"].firstMatch
-      if create.exists { create.tap() } else { app.alerts.buttons["Done"].firstMatch.tap() }
-    }
-    let title = app.navigationBars.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", name)).firstMatch
-    // Files enters the new folder asynchronously after committing its name.
-    // Wait for that navigation instead of racing it with another folder tap.
-    XCTAssertTrue(title.waitForExistence(timeout: 15), app.debugDescription)
-  }
   private func screenshot(_ name: String) {
     let attachment = XCTAttachment(screenshot: app.screenshot())
     attachment.name = name; attachment.lifetime = .keepAlways; add(attachment)
@@ -117,9 +81,9 @@ final class RunnerTests: XCTestCase {
     item("Aplicar treino").tap()
     XCTAssertTrue(item(originalTitle).waitForExistence(timeout: 15))
     screenshot("cold-link-applied")
-    let folderName = "SetHarbor-E2E-" + String(UUID().uuidString.prefix(8))
     tapScrolled("Exportar backup")
-    createBackupFolder(folderName)
+    XCTAssertTrue(app.buttons["More"].firstMatch.waitForExistence(timeout: 15), app.debugDescription)
+    localFilesRoot()
     let save = app.buttons["Save"].firstMatch
     XCTAssertTrue(save.waitForExistence(timeout: 15), app.debugDescription)
     // Export pickers differ by OS/linked SDK: the filename editor is optional.
@@ -143,14 +107,8 @@ final class RunnerTests: XCTestCase {
     XCTAssertTrue(item(replacementTitle).waitForExistence(timeout: 15))
     tapScrolled("Restaurar backup")
     let file = app.descendants(matching: .any).matching(NSPredicate(format: "label == %@ OR label == %@ OR label BEGINSWITH %@ OR label BEGINSWITH %@", backupName, backupName + ".json", backupName + ",", backupName + ".json,")).firstMatch
-    let currentFolder = app.navigationBars.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", folderName)).firstMatch
     XCTAssertTrue(app.buttons["More"].firstMatch.waitForExistence(timeout: 15), app.debugDescription)
-    if !currentFolder.exists {
-      localFilesRoot()
-      let folder = app.cells.containing(.staticText, identifier: folderName).firstMatch
-      XCTAssertTrue(folder.waitForExistence(timeout: 15), app.debugDescription)
-      folder.tap()
-    }
+    localFilesRoot()
     XCTAssertTrue(file.waitForExistence(timeout: 15), app.debugDescription)
     screenshot("native-import-picker"); file.tap()
     XCTAssertTrue(item("Restaurar backup?").waitForExistence(timeout: 15), app.debugDescription)
