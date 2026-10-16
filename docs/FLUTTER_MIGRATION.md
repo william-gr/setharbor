@@ -135,3 +135,14 @@ bundle downloaded from CI, running on iOS26.4.1 (23E254a). The local XCTest
 configuration pointed its UI target at that artifact; only executable permission
 bits lost by artifact packaging were restored. Result:
 `/tmp/setharbor-ci-sdk26-app/probe.xcresult`, two passes, no skips/failures.
+
+
+Run 38897044207 again passed unit/coverage, Android35 and all three shared iOS
+scenarios. The complete native log identified an earlier cold-provider race:
+Files exposed More before its location/back controls, so the helper checked them
+too soon and waited for a root it had never navigated to. The helper now waits
+for a visible, hittable root/back/location before choosing its navigation action.
+Both native cases passed on a newly created iOS26.4.1 simulator against that
+run's exact SDK26 app bundle, with no failures or skips. Evidence:
+`/tmp/setharbor-ci-sdk26-cold/probe.xcresult`. Remote revalidation is pending.
+Android29 remains deferred by user request; Android35 and iOS remain required.

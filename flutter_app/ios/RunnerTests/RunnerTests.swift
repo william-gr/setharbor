@@ -34,11 +34,18 @@ final class RunnerTests: XCTestCase {
     XCTFail("Missing visible control: \(label)\n\(app.debugDescription)")
   }
   private func localFilesRoot() {
-    // Leave an app folder cached by Files before choosing an external location.
+    let root = app.navigationBars.descendants(matching: .any).matching(NSPredicate(format: "identifier != %@ AND (label == %@ OR label BEGINSWITH %@)", "BackButton", "On My iPhone", "On My iPhone,")).firstMatch
     let back = app.buttons.matching(NSPredicate(format: "identifier == %@ AND label == %@", "BackButton", "On My iPhone")).firstMatch
-    if back.exists { back.tap() }
     let local = app.cells.containing(.staticText, identifier: "On My iPhone").firstMatch
-    if local.exists { local.tap() }
+    // Files publishes its toolbar before the location/back controls on a cold
+    // provider. Wait for a usable navigation state before deciding what to tap.
+    let ready = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in
+      (root.exists && root.isHittable) || (back.exists && back.isHittable) || (local.exists && local.isHittable)
+    }, object: nil)
+    XCTAssertEqual(XCTWaiter.wait(for: [ready], timeout: 30), .completed, app.debugDescription)
+    if root.exists && root.isHittable { return }
+    if back.exists && back.isHittable { back.tap() } else { local.tap() }
+    XCTAssertTrue(root.waitForExistence(timeout: 15), app.debugDescription)
   }
   private func createBackupFolder(_ name: String) {
     let more = app.buttons["More"].firstMatch
