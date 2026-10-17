@@ -112,10 +112,10 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Catálogo de exercícios'));
       await tester.pumpAndSettle();
-      expect(find.text('90 exercícios'), findsOneWidget);
+      expect(find.text('115 exercícios'), findsOneWidget);
       await tester.enterText(find.byType(TextField), 'supino');
       await tester.pumpAndSettle();
-      expect(find.text('90 exercícios'), findsNothing);
+      expect(find.text('115 exercícios'), findsNothing);
       await tester.pumpWidget(const SizedBox());
       await tester.pumpAndSettle();
       container.invalidate(workoutProvider);

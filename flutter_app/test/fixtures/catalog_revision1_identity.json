@@ -1,0 +1,1064 @@
+{
+  "barbell-bench-press": {
+    "name": {
+      "pt": "Supino reto barra",
+      "en": "Barbell bench press"
+    },
+    "aliases": [
+      "Supino reto com barra"
+    ],
+    "group": "chest",
+    "movementPattern": "horizontal-push",
+    "mechanic": "compound",
+    "substitutionFamily": "flat-chest-press"
+  },
+  "dumbbell-bench-press": {
+    "name": {
+      "pt": "Supino reto halteres",
+      "en": "Dumbbell bench press"
+    },
+    "aliases": [],
+    "group": "chest",
+    "movementPattern": "horizontal-push",
+    "mechanic": "compound",
+    "substitutionFamily": "flat-chest-press"
+  },
+  "smith-bench-press": {
+    "name": {
+      "pt": "Supino reto Smith",
+      "en": "Smith bench press"
+    },
+    "aliases": [],
+    "group": "chest",
+    "movementPattern": "horizontal-push",
+    "mechanic": "compound",
+    "substitutionFamily": "flat-chest-press"
+  },
+  "machine-chest-press": {
+    "name": {
+      "pt": "Supino reto máquina",
+      "en": "Machine chest press"
+    },
+    "aliases": [
+      "Chest press / supino máquina",
+      "Chest press",
+      "Supino máquina"
+    ],
+    "group": "chest",
+    "movementPattern": "horizontal-push",
+    "mechanic": "compound",
+    "substitutionFamily": "flat-chest-press"
+  },
+  "push-up": {
+    "name": {
+      "pt": "Flexão de braços",
+      "en": "Push-up"
+    },
+    "aliases": [],
+    "group": "chest",
+    "movementPattern": "horizontal-push",
+    "mechanic": "compound",
+    "substitutionFamily": "flat-chest-press"
+  },
+  "incline-barbell-bench-press": {
+    "name": {
+      "pt": "Supino inclinado barra",
+      "en": "Incline barbell bench press"
+    },
+    "aliases": [],
+    "group": "chest",
+    "movementPattern": "diagonal-push",
+    "mechanic": "compound",
+    "substitutionFamily": "incline-chest-press"
+  },
+  "incline-dumbbell-bench-press": {
+    "name": {
+      "pt": "Supino inclinado halteres",
+      "en": "Incline dumbbell bench press"
+    },
+    "aliases": [],
+    "group": "chest",
+    "movementPattern": "diagonal-push",
+    "mechanic": "compound",
+    "substitutionFamily": "incline-chest-press"
+  },
+  "incline-smith-bench-press": {
+    "name": {
+      "pt": "Supino inclinado Smith",
+      "en": "Incline Smith bench press"
+    },
+    "aliases": [
+      "Supino inclinado Smith / máquina"
+    ],
+    "group": "chest",
+    "movementPattern": "diagonal-push",
+    "mechanic": "compound",
+    "substitutionFamily": "incline-chest-press"
+  },
+  "incline-machine-chest-press": {
+    "name": {
+      "pt": "Supino inclinado máquina",
+      "en": "Incline machine chest press"
+    },
+    "aliases": [],
+    "group": "chest",
+    "movementPattern": "diagonal-push",
+    "mechanic": "compound",
+    "substitutionFamily": "incline-chest-press"
+  },
+  "cable-chest-fly": {
+    "name": {
+      "pt": "Crucifixo no cabo",
+      "en": "Cable chest fly"
+    },
+    "aliases": [
+      "Crossover no cabo",
+      "Crossover"
+    ],
+    "group": "chest",
+    "movementPattern": "horizontal-adduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "chest-fly"
+  },
+  "dumbbell-chest-fly": {
+    "name": {
+      "pt": "Crucifixo reto halteres",
+      "en": "Dumbbell chest fly"
+    },
+    "aliases": [],
+    "group": "chest",
+    "movementPattern": "horizontal-adduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "chest-fly"
+  },
+  "pec-deck-fly": {
+    "name": {
+      "pt": "Crucifixo máquina",
+      "en": "Pec deck fly"
+    },
+    "aliases": [
+      "Peck deck"
+    ],
+    "group": "chest",
+    "movementPattern": "horizontal-adduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "chest-fly"
+  },
+  "band-chest-fly": {
+    "name": {
+      "pt": "Crucifixo com elástico",
+      "en": "Band chest fly"
+    },
+    "aliases": [],
+    "group": "chest",
+    "movementPattern": "horizontal-adduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "chest-fly"
+  },
+  "neutral-grip-lat-pulldown": {
+    "name": {
+      "pt": "Puxada alta neutra",
+      "en": "Neutral-grip lat pulldown"
+    },
+    "aliases": [
+      "Puxada alta pegada neutra"
+    ],
+    "group": "back",
+    "movementPattern": "vertical-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "lat-pulldown"
+  },
+  "pronated-lat-pulldown": {
+    "name": {
+      "pt": "Puxada alta pronada",
+      "en": "Pronated lat pulldown"
+    },
+    "aliases": [
+      "Puxada alta"
+    ],
+    "group": "back",
+    "movementPattern": "vertical-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "lat-pulldown"
+  },
+  "supinated-lat-pulldown": {
+    "name": {
+      "pt": "Puxada alta supinada",
+      "en": "Supinated lat pulldown"
+    },
+    "aliases": [],
+    "group": "back",
+    "movementPattern": "vertical-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "lat-pulldown"
+  },
+  "pull-up": {
+    "name": {
+      "pt": "Barra fixa pronada",
+      "en": "Pull-up"
+    },
+    "aliases": [
+      "Barra fixa / puxada alta",
+      "Barra fixa"
+    ],
+    "group": "back",
+    "movementPattern": "vertical-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "lat-pulldown"
+  },
+  "chin-up": {
+    "name": {
+      "pt": "Barra fixa supinada",
+      "en": "Chin-up"
+    },
+    "aliases": [],
+    "group": "back",
+    "movementPattern": "vertical-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "lat-pulldown"
+  },
+  "assisted-pull-up": {
+    "name": {
+      "pt": "Barra fixa assistida",
+      "en": "Assisted pull-up"
+    },
+    "aliases": [
+      "Graviton"
+    ],
+    "group": "back",
+    "movementPattern": "vertical-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "lat-pulldown"
+  },
+  "band-lat-pulldown": {
+    "name": {
+      "pt": "Puxada alta com elástico",
+      "en": "Band lat pulldown"
+    },
+    "aliases": [],
+    "group": "back",
+    "movementPattern": "vertical-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "lat-pulldown"
+  },
+  "chest-supported-machine-row": {
+    "name": {
+      "pt": "Remada apoiada máquina",
+      "en": "Chest-supported machine row"
+    },
+    "aliases": [
+      "Remada apoiada",
+      "Remada apoiada/máquina"
+    ],
+    "group": "back",
+    "movementPattern": "horizontal-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "back-row"
+  },
+  "chest-supported-dumbbell-row": {
+    "name": {
+      "pt": "Remada apoiada halteres",
+      "en": "Chest-supported dumbbell row"
+    },
+    "aliases": [],
+    "group": "back",
+    "movementPattern": "horizontal-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "back-row"
+  },
+  "seated-cable-row": {
+    "name": {
+      "pt": "Remada baixa no cabo",
+      "en": "Seated cable row"
+    },
+    "aliases": [
+      "Remada baixa"
+    ],
+    "group": "back",
+    "movementPattern": "horizontal-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "back-row"
+  },
+  "one-arm-dumbbell-row": {
+    "name": {
+      "pt": "Remada unilateral halter",
+      "en": "One-arm dumbbell row"
+    },
+    "aliases": [
+      "Remada unilateral"
+    ],
+    "group": "back",
+    "movementPattern": "horizontal-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "back-row"
+  },
+  "barbell-bent-over-row": {
+    "name": {
+      "pt": "Remada curvada barra",
+      "en": "Barbell bent-over row"
+    },
+    "aliases": [],
+    "group": "back",
+    "movementPattern": "horizontal-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "back-row"
+  },
+  "one-arm-cable-row": {
+    "name": {
+      "pt": "Remada unilateral no cabo",
+      "en": "One-arm cable row"
+    },
+    "aliases": [],
+    "group": "back",
+    "movementPattern": "horizontal-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "back-row"
+  },
+  "band-row": {
+    "name": {
+      "pt": "Remada com elástico",
+      "en": "Band row"
+    },
+    "aliases": [],
+    "group": "back",
+    "movementPattern": "horizontal-pull",
+    "mechanic": "compound",
+    "substitutionFamily": "back-row"
+  },
+  "straight-arm-cable-pulldown": {
+    "name": {
+      "pt": "Pulldown braço estendido",
+      "en": "Straight-arm cable pulldown"
+    },
+    "aliases": [],
+    "group": "back",
+    "movementPattern": "shoulder-extension",
+    "mechanic": "isolation",
+    "substitutionFamily": "lat-isolation"
+  },
+  "band-straight-arm-pulldown": {
+    "name": {
+      "pt": "Pulldown braço estendido com elástico",
+      "en": "Band straight-arm pulldown"
+    },
+    "aliases": [],
+    "group": "back",
+    "movementPattern": "shoulder-extension",
+    "mechanic": "isolation",
+    "substitutionFamily": "lat-isolation"
+  },
+  "machine-shoulder-press": {
+    "name": {
+      "pt": "Desenvolvimento máquina",
+      "en": "Machine shoulder press"
+    },
+    "aliases": [
+      "Desenvolvimento máquina / halteres",
+      "Desenvolvimento máquina ou halteres"
+    ],
+    "group": "shoulders",
+    "movementPattern": "vertical-push",
+    "mechanic": "compound",
+    "substitutionFamily": "shoulder-press"
+  },
+  "seated-dumbbell-shoulder-press": {
+    "name": {
+      "pt": "Desenvolvimento halteres sentado",
+      "en": "Seated dumbbell shoulder press"
+    },
+    "aliases": [
+      "Desenvolvimento halteres"
+    ],
+    "group": "shoulders",
+    "movementPattern": "vertical-push",
+    "mechanic": "compound",
+    "substitutionFamily": "shoulder-press"
+  },
+  "seated-barbell-shoulder-press": {
+    "name": {
+      "pt": "Desenvolvimento barra sentado",
+      "en": "Seated barbell shoulder press"
+    },
+    "aliases": [],
+    "group": "shoulders",
+    "movementPattern": "vertical-push",
+    "mechanic": "compound",
+    "substitutionFamily": "shoulder-press"
+  },
+  "smith-shoulder-press": {
+    "name": {
+      "pt": "Desenvolvimento Smith",
+      "en": "Smith shoulder press"
+    },
+    "aliases": [],
+    "group": "shoulders",
+    "movementPattern": "vertical-push",
+    "mechanic": "compound",
+    "substitutionFamily": "shoulder-press"
+  },
+  "dumbbell-lateral-raise": {
+    "name": {
+      "pt": "Elevação lateral halteres",
+      "en": "Dumbbell lateral raise"
+    },
+    "aliases": [
+      "Elevação lateral"
+    ],
+    "group": "shoulders",
+    "movementPattern": "shoulder-abduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "lateral-raise"
+  },
+  "cable-lateral-raise": {
+    "name": {
+      "pt": "Elevação lateral no cabo",
+      "en": "Cable lateral raise"
+    },
+    "aliases": [],
+    "group": "shoulders",
+    "movementPattern": "shoulder-abduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "lateral-raise"
+  },
+  "machine-lateral-raise": {
+    "name": {
+      "pt": "Elevação lateral máquina",
+      "en": "Machine lateral raise"
+    },
+    "aliases": [],
+    "group": "shoulders",
+    "movementPattern": "shoulder-abduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "lateral-raise"
+  },
+  "band-lateral-raise": {
+    "name": {
+      "pt": "Elevação lateral com elástico",
+      "en": "Band lateral raise"
+    },
+    "aliases": [],
+    "group": "shoulders",
+    "movementPattern": "shoulder-abduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "lateral-raise"
+  },
+  "reverse-pec-deck": {
+    "name": {
+      "pt": "Crucifixo inverso máquina",
+      "en": "Reverse pec deck"
+    },
+    "aliases": [
+      "Crucifixo inverso",
+      "Crucifixo inverso / peck deck"
+    ],
+    "group": "shoulders",
+    "movementPattern": "horizontal-abduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "rear-delt-fly"
+  },
+  "dumbbell-rear-delt-fly": {
+    "name": {
+      "pt": "Crucifixo inverso halteres apoiado",
+      "en": "Chest-supported dumbbell rear delt fly"
+    },
+    "aliases": [],
+    "group": "shoulders",
+    "movementPattern": "horizontal-abduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "rear-delt-fly"
+  },
+  "cable-rear-delt-fly": {
+    "name": {
+      "pt": "Crucifixo inverso no cabo",
+      "en": "Cable rear delt fly"
+    },
+    "aliases": [],
+    "group": "shoulders",
+    "movementPattern": "horizontal-abduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "rear-delt-fly"
+  },
+  "barbell-curl": {
+    "name": {
+      "pt": "Rosca direta barra",
+      "en": "Barbell curl"
+    },
+    "aliases": [
+      "Rosca direta"
+    ],
+    "group": "biceps",
+    "movementPattern": "elbow-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "supinated-curl"
+  },
+  "ez-bar-curl": {
+    "name": {
+      "pt": "Rosca direta barra W",
+      "en": "EZ-bar curl"
+    },
+    "aliases": [],
+    "group": "biceps",
+    "movementPattern": "elbow-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "supinated-curl"
+  },
+  "dumbbell-curl": {
+    "name": {
+      "pt": "Rosca direta halteres",
+      "en": "Dumbbell curl"
+    },
+    "aliases": [],
+    "group": "biceps",
+    "movementPattern": "elbow-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "supinated-curl"
+  },
+  "incline-dumbbell-curl": {
+    "name": {
+      "pt": "Rosca inclinada halteres",
+      "en": "Incline dumbbell curl"
+    },
+    "aliases": [],
+    "group": "biceps",
+    "movementPattern": "elbow-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "supinated-curl"
+  },
+  "ez-bar-preacher-curl": {
+    "name": {
+      "pt": "Rosca Scott barra W",
+      "en": "EZ-bar preacher curl"
+    },
+    "aliases": [
+      "Rosca Scott"
+    ],
+    "group": "biceps",
+    "movementPattern": "elbow-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "supinated-curl"
+  },
+  "machine-preacher-curl": {
+    "name": {
+      "pt": "Rosca Scott máquina",
+      "en": "Machine preacher curl"
+    },
+    "aliases": [],
+    "group": "biceps",
+    "movementPattern": "elbow-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "supinated-curl"
+  },
+  "cable-curl": {
+    "name": {
+      "pt": "Rosca direta no cabo",
+      "en": "Cable curl"
+    },
+    "aliases": [],
+    "group": "biceps",
+    "movementPattern": "elbow-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "supinated-curl"
+  },
+  "dumbbell-hammer-curl": {
+    "name": {
+      "pt": "Rosca martelo halteres",
+      "en": "Dumbbell hammer curl"
+    },
+    "aliases": [
+      "Rosca martelo"
+    ],
+    "group": "biceps",
+    "movementPattern": "elbow-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "neutral-curl"
+  },
+  "rope-hammer-curl": {
+    "name": {
+      "pt": "Rosca martelo corda",
+      "en": "Rope hammer curl"
+    },
+    "aliases": [],
+    "group": "biceps",
+    "movementPattern": "elbow-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "neutral-curl"
+  },
+  "rope-triceps-pushdown": {
+    "name": {
+      "pt": "Tríceps corda",
+      "en": "Rope triceps pushdown"
+    },
+    "aliases": [],
+    "group": "triceps",
+    "movementPattern": "elbow-extension",
+    "mechanic": "isolation",
+    "substitutionFamily": "triceps-pushdown"
+  },
+  "bar-triceps-pushdown": {
+    "name": {
+      "pt": "Tríceps pulley barra",
+      "en": "Bar triceps pushdown"
+    },
+    "aliases": [
+      "Tríceps pulley"
+    ],
+    "group": "triceps",
+    "movementPattern": "elbow-extension",
+    "mechanic": "isolation",
+    "substitutionFamily": "triceps-pushdown"
+  },
+  "band-triceps-pushdown": {
+    "name": {
+      "pt": "Tríceps pulley com elástico",
+      "en": "Band triceps pushdown"
+    },
+    "aliases": [],
+    "group": "triceps",
+    "movementPattern": "elbow-extension",
+    "mechanic": "isolation",
+    "substitutionFamily": "triceps-pushdown"
+  },
+  "cable-overhead-triceps-extension": {
+    "name": {
+      "pt": "Tríceps acima da cabeça no cabo",
+      "en": "Cable overhead triceps extension"
+    },
+    "aliases": [
+      "Tríceps francês no cabo"
+    ],
+    "group": "triceps",
+    "movementPattern": "elbow-extension",
+    "mechanic": "isolation",
+    "substitutionFamily": "overhead-triceps"
+  },
+  "dumbbell-overhead-triceps-extension": {
+    "name": {
+      "pt": "Tríceps francês halter",
+      "en": "Dumbbell overhead triceps extension"
+    },
+    "aliases": [],
+    "group": "triceps",
+    "movementPattern": "elbow-extension",
+    "mechanic": "isolation",
+    "substitutionFamily": "overhead-triceps"
+  },
+  "ez-bar-overhead-triceps-extension": {
+    "name": {
+      "pt": "Tríceps francês barra W",
+      "en": "EZ-bar overhead triceps extension"
+    },
+    "aliases": [],
+    "group": "triceps",
+    "movementPattern": "elbow-extension",
+    "mechanic": "isolation",
+    "substitutionFamily": "overhead-triceps"
+  },
+  "hack-squat": {
+    "name": {
+      "pt": "Hack squat",
+      "en": "Hack squat"
+    },
+    "aliases": [],
+    "group": "quadriceps",
+    "movementPattern": "knee-dominant",
+    "mechanic": "compound",
+    "substitutionFamily": "quad-compound"
+  },
+  "leg-press": {
+    "name": {
+      "pt": "Leg press",
+      "en": "Leg press"
+    },
+    "aliases": [],
+    "group": "quadriceps",
+    "movementPattern": "knee-dominant",
+    "mechanic": "compound",
+    "substitutionFamily": "quad-compound"
+  },
+  "barbell-back-squat": {
+    "name": {
+      "pt": "Agachamento livre barra",
+      "en": "Barbell back squat"
+    },
+    "aliases": [
+      "Agachamento livre",
+      "Agachamento"
+    ],
+    "group": "quadriceps",
+    "movementPattern": "knee-dominant",
+    "mechanic": "compound",
+    "substitutionFamily": "quad-compound"
+  },
+  "smith-squat": {
+    "name": {
+      "pt": "Agachamento Smith",
+      "en": "Smith squat"
+    },
+    "aliases": [],
+    "group": "quadriceps",
+    "movementPattern": "knee-dominant",
+    "mechanic": "compound",
+    "substitutionFamily": "quad-compound"
+  },
+  "goblet-squat": {
+    "name": {
+      "pt": "Agachamento goblet",
+      "en": "Goblet squat"
+    },
+    "aliases": [],
+    "group": "quadriceps",
+    "movementPattern": "knee-dominant",
+    "mechanic": "compound",
+    "substitutionFamily": "quad-compound"
+  },
+  "dumbbell-split-squat": {
+    "name": {
+      "pt": "Agachamento dividido halteres",
+      "en": "Dumbbell split squat"
+    },
+    "aliases": [],
+    "group": "quadriceps",
+    "movementPattern": "knee-dominant",
+    "mechanic": "compound",
+    "substitutionFamily": "quad-compound"
+  },
+  "machine-leg-extension": {
+    "name": {
+      "pt": "Extensora",
+      "en": "Leg extension"
+    },
+    "aliases": [
+      "Cadeira extensora"
+    ],
+    "group": "quadriceps",
+    "movementPattern": "knee-extension",
+    "mechanic": "isolation",
+    "substitutionFamily": "leg-extension"
+  },
+  "band-leg-extension": {
+    "name": {
+      "pt": "Extensora com elástico",
+      "en": "Band leg extension"
+    },
+    "aliases": [],
+    "group": "quadriceps",
+    "movementPattern": "knee-extension",
+    "mechanic": "isolation",
+    "substitutionFamily": "leg-extension"
+  },
+  "barbell-romanian-deadlift": {
+    "name": {
+      "pt": "RDL barra",
+      "en": "Barbell Romanian deadlift"
+    },
+    "aliases": [
+      "RDL / stiff",
+      "Stiff/RDL",
+      "RDL",
+      "Stiff"
+    ],
+    "group": "hamstrings",
+    "movementPattern": "hip-hinge",
+    "mechanic": "compound",
+    "substitutionFamily": "romanian-deadlift"
+  },
+  "dumbbell-romanian-deadlift": {
+    "name": {
+      "pt": "RDL halteres",
+      "en": "Dumbbell Romanian deadlift"
+    },
+    "aliases": [],
+    "group": "hamstrings",
+    "movementPattern": "hip-hinge",
+    "mechanic": "compound",
+    "substitutionFamily": "romanian-deadlift"
+  },
+  "smith-romanian-deadlift": {
+    "name": {
+      "pt": "RDL Smith",
+      "en": "Smith Romanian deadlift"
+    },
+    "aliases": [],
+    "group": "hamstrings",
+    "movementPattern": "hip-hinge",
+    "mechanic": "compound",
+    "substitutionFamily": "romanian-deadlift"
+  },
+  "seated-leg-curl": {
+    "name": {
+      "pt": "Flexora sentada",
+      "en": "Seated leg curl"
+    },
+    "aliases": [
+      "Flexora",
+      "Flexora sentada/deitada"
+    ],
+    "group": "hamstrings",
+    "movementPattern": "knee-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "leg-curl"
+  },
+  "lying-leg-curl": {
+    "name": {
+      "pt": "Flexora deitada",
+      "en": "Lying leg curl"
+    },
+    "aliases": [
+      "Mesa flexora"
+    ],
+    "group": "hamstrings",
+    "movementPattern": "knee-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "leg-curl"
+  },
+  "standing-leg-curl": {
+    "name": {
+      "pt": "Flexora em pé",
+      "en": "Standing leg curl"
+    },
+    "aliases": [],
+    "group": "hamstrings",
+    "movementPattern": "knee-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "leg-curl"
+  },
+  "band-leg-curl": {
+    "name": {
+      "pt": "Flexora com elástico",
+      "en": "Band leg curl"
+    },
+    "aliases": [],
+    "group": "hamstrings",
+    "movementPattern": "knee-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "leg-curl"
+  },
+  "slider-leg-curl": {
+    "name": {
+      "pt": "Flexora deslizante",
+      "en": "Slider leg curl"
+    },
+    "aliases": [],
+    "group": "hamstrings",
+    "movementPattern": "knee-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "leg-curl"
+  },
+  "barbell-hip-thrust": {
+    "name": {
+      "pt": "Hip thrust barra",
+      "en": "Barbell hip thrust"
+    },
+    "aliases": [
+      "Hip thrust"
+    ],
+    "group": "glutes",
+    "movementPattern": "hip-extension",
+    "mechanic": "compound",
+    "substitutionFamily": "hip-thrust"
+  },
+  "machine-hip-thrust": {
+    "name": {
+      "pt": "Hip thrust máquina",
+      "en": "Machine hip thrust"
+    },
+    "aliases": [],
+    "group": "glutes",
+    "movementPattern": "hip-extension",
+    "mechanic": "compound",
+    "substitutionFamily": "hip-thrust"
+  },
+  "dumbbell-glute-bridge": {
+    "name": {
+      "pt": "Ponte de glúteos halter",
+      "en": "Dumbbell glute bridge"
+    },
+    "aliases": [],
+    "group": "glutes",
+    "movementPattern": "hip-extension",
+    "mechanic": "compound",
+    "substitutionFamily": "hip-thrust"
+  },
+  "standing-machine-calf-raise": {
+    "name": {
+      "pt": "Panturrilha em pé máquina",
+      "en": "Standing machine calf raise"
+    },
+    "aliases": [
+      "Panturrilha",
+      "Panturrilha em pé ou sentado"
+    ],
+    "group": "calves",
+    "movementPattern": "plantar-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "standing-calf"
+  },
+  "smith-standing-calf-raise": {
+    "name": {
+      "pt": "Panturrilha em pé Smith",
+      "en": "Smith standing calf raise"
+    },
+    "aliases": [],
+    "group": "calves",
+    "movementPattern": "plantar-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "standing-calf"
+  },
+  "dumbbell-standing-calf-raise": {
+    "name": {
+      "pt": "Panturrilha em pé halteres",
+      "en": "Dumbbell standing calf raise"
+    },
+    "aliases": [],
+    "group": "calves",
+    "movementPattern": "plantar-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "standing-calf"
+  },
+  "leg-press-calf-raise": {
+    "name": {
+      "pt": "Panturrilha no leg press",
+      "en": "Leg press calf raise"
+    },
+    "aliases": [],
+    "group": "calves",
+    "movementPattern": "plantar-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "standing-calf"
+  },
+  "seated-machine-calf-raise": {
+    "name": {
+      "pt": "Panturrilha sentada máquina",
+      "en": "Seated machine calf raise"
+    },
+    "aliases": [],
+    "group": "calves",
+    "movementPattern": "plantar-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "seated-calf"
+  },
+  "seated-dumbbell-calf-raise": {
+    "name": {
+      "pt": "Panturrilha sentada halter",
+      "en": "Seated dumbbell calf raise"
+    },
+    "aliases": [],
+    "group": "calves",
+    "movementPattern": "plantar-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "seated-calf"
+  },
+  "machine-hip-adduction": {
+    "name": {
+      "pt": "Cadeira adutora",
+      "en": "Machine hip adduction"
+    },
+    "aliases": [],
+    "group": "adductors",
+    "movementPattern": "hip-adduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "adduction"
+  },
+  "cable-hip-adduction": {
+    "name": {
+      "pt": "Adução do quadril no cabo",
+      "en": "Cable hip adduction"
+    },
+    "aliases": [],
+    "group": "adductors",
+    "movementPattern": "hip-adduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "adduction"
+  },
+  "machine-hip-abduction": {
+    "name": {
+      "pt": "Cadeira abdutora",
+      "en": "Machine hip abduction"
+    },
+    "aliases": [],
+    "group": "abductors",
+    "movementPattern": "hip-abduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "abduction"
+  },
+  "band-hip-abduction": {
+    "name": {
+      "pt": "Abdução com elástico",
+      "en": "Band hip abduction"
+    },
+    "aliases": [],
+    "group": "abductors",
+    "movementPattern": "hip-abduction",
+    "mechanic": "isolation",
+    "substitutionFamily": "abduction"
+  },
+  "floor-crunch": {
+    "name": {
+      "pt": "Abdominal no solo",
+      "en": "Floor crunch"
+    },
+    "aliases": [
+      "Abdominal",
+      "Abdômen"
+    ],
+    "group": "core",
+    "movementPattern": "trunk-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "crunch"
+  },
+  "cable-crunch": {
+    "name": {
+      "pt": "Abdominal no cabo",
+      "en": "Cable crunch"
+    },
+    "aliases": [],
+    "group": "core",
+    "movementPattern": "trunk-flexion",
+    "mechanic": "isolation",
+    "substitutionFamily": "crunch"
+  },
+  "forearm-plank": {
+    "name": {
+      "pt": "Prancha antebraços",
+      "en": "Forearm plank"
+    },
+    "aliases": [],
+    "group": "core",
+    "movementPattern": "anti-extension",
+    "mechanic": "isometric",
+    "substitutionFamily": "plank"
+  },
+  "high-plank": {
+    "name": {
+      "pt": "Prancha braços estendidos",
+      "en": "High plank"
+    },
+    "aliases": [],
+    "group": "core",
+    "movementPattern": "anti-extension",
+    "mechanic": "isometric",
+    "substitutionFamily": "plank"
+  },
+  "cable-pallof-press": {
+    "name": {
+      "pt": "Pallof press no cabo",
+      "en": "Cable Pallof press"
+    },
+    "aliases": [],
+    "group": "core",
+    "movementPattern": "anti-rotation",
+    "mechanic": "isometric",
+    "substitutionFamily": "pallof"
+  },
+  "band-pallof-press": {
+    "name": {
+      "pt": "Pallof press com elástico",
+      "en": "Band Pallof press"
+    },
+    "aliases": [],
+    "group": "core",
+    "movementPattern": "anti-rotation",
+    "mechanic": "isometric",
+    "substitutionFamily": "pallof"
+  }
+}

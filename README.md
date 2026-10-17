@@ -6,7 +6,7 @@ A free, open-source workout tracker for **Android and iOS**, built with **Flutte
 
 - Cyclic workouts A → B → C, independent of weekdays. Saving an extra session preserves the expected next workout.
 - Optional weight and repetitions, hidden completed sets, drafts, immutable history and last measured performance.
-- Offline catalog of 90 exercises, muscle/equipment information, session-only similar swaps and execution searches on Google.
+- Offline catalog of 115 exercises, muscle/equipment information, session-only similar swaps and execution searches on Google.
 - Rest timer, JSON plan import, portable backups and optional HTTPS plan updates.
 - Short ChatGPT planning prompts and workout links with a complete preview before applying.
 

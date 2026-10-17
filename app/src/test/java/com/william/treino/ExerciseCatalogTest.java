@@ -14,7 +14,7 @@ public class ExerciseCatalogTest {
  JSONObject read(String name) throws Exception {return new JSONObject(new String(Files.readAllBytes(Paths.get("src/main/assets/"+name)),java.nio.charset.StandardCharsets.UTF_8));}
  JSONObject first() throws Exception {return ExerciseSession.planned(plan,0,0);}
  @Test public void bundledReferencesAndPlanResolve() throws Exception {
-  assertEquals(90,catalog.all().size());WorkoutPlan.validate(plan);
+  assertEquals(115,catalog.all().size());WorkoutPlan.validate(plan);
   for(int d=0;d<plan.getJSONArray("days").length();d++) {
    JSONArray items=plan.getJSONArray("days").getJSONObject(d).getJSONArray("exercises");
    for(int e=0;e<items.length();e++)assertNotNull(catalog.resolve(items.getJSONObject(e)));
@@ -30,10 +30,11 @@ public class ExerciseCatalogTest {
   assertTrue(ids.contains("dumbbell-romanian-deadlift"));assertFalse(ids.contains("seated-leg-curl"));assertFalse(ids.contains("barbell-romanian-deadlift"));
   for(JSONObject ex:catalog.alternatives(catalog.get("standing-machine-calf-raise")))assertFalse(ex.optString("id").equals("seated-machine-calf-raise"));
  }
- @Test public void noAlternativeIsReportedWithoutChangingMovementFamily() throws Exception {
-  assertTrue(catalog.alternatives(catalog.get("machine-leg-extension")).isEmpty());
+ @Test public void expandedAlternativesKeepMovementFamilies() throws Exception {
+  assertEquals("single-leg-machine-leg-extension",catalog.alternatives(catalog.get("machine-leg-extension")).get(0).getString("id"));
+  assertTrue(catalog.alternatives(catalog.get("dumbbell-pullover")).isEmpty());
   for(JSONObject day:iter(plan.getJSONArray("days")))for(JSONObject ex:iter(day.getJSONArray("exercises"))) {
-   JSONObject known=catalog.resolve(ex);if(!known.optString("id").equals("machine-leg-extension"))assertFalse(catalog.alternatives(known).isEmpty());
+   JSONObject known=catalog.resolve(ex);assertFalse(catalog.alternatives(known).isEmpty());
   }
  }
  List<JSONObject> iter(JSONArray array) throws Exception {List<JSONObject> items=new ArrayList<>();for(int i=0;i<array.length();i++)items.add(array.getJSONObject(i));return items;}

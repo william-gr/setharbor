@@ -26,7 +26,7 @@ Aplicativo Android gratuito e open source (MIT) para registrar treinos de muscul
 - `app/src/main/java/com/william/treino/WorkoutPlan.java`: validação de fichas JSON.
 - `app/src/main/java/com/william/treino/ExerciseCatalog.java`: catálogo offline e famílias de substituição.
 - `app/src/main/java/com/william/treino/ExerciseSession.java`: trocas por sessão, validação e snapshots.
-- `app/src/main/assets/exercise-catalog.json`: 90 exercícios com IDs estáveis, grupos, músculos e equipamentos.
+- `app/src/main/assets/exercise-catalog.json`: 115 exercícios com IDs estáveis, grupos, músculos e equipamentos.
 - `docs/EXERCISE_CATALOG.md`: contrato e regras de identidade/troca.
 - `app/src/main/assets/default-plan.json`: ficha original, usada na primeira abertura e na migração de histórico antigo.
 - `app/src/main/res`: tema e ícone vetorial.
@@ -150,6 +150,8 @@ O usuário prefere merge/push direto na `main` após todos os testes passarem. N
 5. Atualize esta documentação, README e fixtures quando mudar contratos ou comportamento.
 
 ## Catálogo e trocas
+
+Catálogo revisão 2: 115 exercícios, 13 grupos, 37 músculos. Os 90 registros da revisão 1 permanecem inalterados; a fixture Flutter congela nomes, aliases e famílias para proteger backups. Cada novo registro inclui `sourceIds`; detalhes e decisões de família em docs/EXERCISE_CATALOG_REVISION_2.md. Sincronize os assets Java/Flutter e regenere o guia com scripts/build_chatgpt_guide.py após alterações.
 
 Trocar por similar escolhe imediatamente outra opção aleatória da mesma família, grupo, movimento e mecânica, excluindo o exercício atual. Sem busca, seletor ou confirmação. Não trocar se qualquer série da posição tiver carga/reps ou check (incluindo séries ocultas). A ficha ativa não muda; rascunhos e backups guardam a troca; o snapshot do histórico guarda o exercício real. Ao salvar o treino, a próxima sessão volta à ficha ativa. Não misture cargas por posição; compare a identidade do movimento. CatalogId desconhecido é válido em uma ficha, mas não habilita substituições.
 

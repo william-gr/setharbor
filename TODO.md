@@ -54,6 +54,6 @@ Comportamento a avaliar: A → B → C → A; faltar um dia não avança a sequ�
 ## Ampliação do catálogo
 
 - [x] Analisar cobertura dos 90 exercícios por grupo, equipamento, movimento, lateralidade e substituições. Ver [análise de 2026-10-17](docs/EXERCISE_CATALOG_AUDIT.md).
-- [ ] Revisar e implementar o primeiro lote proposto de 25 candidatos, preservando IDs/aliases legados e curadoria MIT.
+- [x] Revisar e implementar o primeiro lote de 25 exercícios (115 no total), preservando os 90 registros originais; fontes por novo exercício, perfis de equipamento e regressões de identidade/trocas/backups. Ver [revisão 2](docs/EXERCISE_CATALOG_REVISION_2.md).
 - [ ] Definir registro de duração da série e resistência de elástico antes de ampliar exercícios dependentes dessas medidas.
 - [ ] Avaliar preferências de equipamento, lateralidade e apoio nas substituições.

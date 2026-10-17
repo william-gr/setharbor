@@ -1,7 +1,7 @@
 {
   "format": "setharbor-exercise-catalog",
   "schemaVersion": 1,
-  "revision": 1,
+  "revision": 2,
   "groups": [
     {
       "id": "chest",
@@ -85,6 +85,13 @@
       "name": {
         "pt": "Abdutores",
         "en": "Abductors"
+      }
+    },
+    {
+      "id": "forearms",
+      "name": {
+        "pt": "Antebraços",
+        "en": "Forearms"
       }
     }
   ],
@@ -333,6 +340,20 @@
         "pt": "Serrátil anterior",
         "en": "Serratus anterior"
       }
+    },
+    {
+      "id": "wrist-flexors",
+      "name": {
+        "pt": "Flexores do punho",
+        "en": "Wrist flexors"
+      }
+    },
+    {
+      "id": "wrist-extensors",
+      "name": {
+        "pt": "Extensores do punho",
+        "en": "Wrist extensors"
+      }
     }
   ],
   "equipment": [
@@ -580,6 +601,20 @@
         "pt": "Sem aparelho",
         "en": "No equipment"
       }
+    },
+    {
+      "id": "step-box",
+      "name": {
+        "pt": "Caixa ou step estável",
+        "en": "Stable step or box"
+      }
+    },
+    {
+      "id": "ankle-cuff",
+      "name": {
+        "pt": "Tornozeleira para cabo",
+        "en": "Cable ankle cuff"
+      }
     }
   ],
   "movementPatterns": [
@@ -735,6 +770,27 @@
       "name": {
         "pt": "Resistir à rotação do tronco",
         "en": "Anti-rotation"
+      }
+    },
+    {
+      "id": "scapular-elevation",
+      "name": {
+        "pt": "Elevação escapular",
+        "en": "Scapular elevation"
+      }
+    },
+    {
+      "id": "wrist-flexion",
+      "name": {
+        "pt": "Flexão do punho",
+        "en": "Wrist flexion"
+      }
+    },
+    {
+      "id": "wrist-extension",
+      "name": {
+        "pt": "Extensão do punho",
+        "en": "Wrist extension"
       }
     }
   ],
@@ -913,6 +969,69 @@
         "pt": "Antirrotação",
         "en": "Anti-rotation press"
       }
+    },
+    {
+      "id": "pullover",
+      "name": {
+        "pt": "Pullover",
+        "en": "Pullover"
+      }
+    },
+    {
+      "id": "hip-kickback",
+      "name": {
+        "pt": "Extensão de quadril em pé",
+        "en": "Standing hip kickback"
+      }
+    },
+    {
+      "id": "shrug",
+      "name": {
+        "pt": "Encolhimento",
+        "en": "Shrug"
+      }
+    },
+    {
+      "id": "pronated-curl",
+      "name": {
+        "pt": "Rosca pronada",
+        "en": "Pronated curl"
+      }
+    },
+    {
+      "id": "wrist-curl",
+      "name": {
+        "pt": "Flexão de punho",
+        "en": "Wrist curl"
+      }
+    },
+    {
+      "id": "wrist-extension",
+      "name": {
+        "pt": "Extensão de punho",
+        "en": "Wrist extension"
+      }
+    },
+    {
+      "id": "dead-bug",
+      "name": {
+        "pt": "Dead bug dinâmico",
+        "en": "Dynamic dead bug"
+      }
+    },
+    {
+      "id": "bird-dog",
+      "name": {
+        "pt": "Bird dog dinâmico",
+        "en": "Dynamic bird dog"
+      }
+    },
+    {
+      "id": "reverse-crunch",
+      "name": {
+        "pt": "Abdominal reverso",
+        "en": "Reverse crunch"
+      }
     }
   ],
   "sources": [
@@ -935,6 +1054,131 @@
       "id": "rdl-study",
       "title": "An Electromyographic Analysis of Romanian, Step-Romanian, and Stiff-Leg Deadlift",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8835508/"
+    },
+    {
+      "id": "reference-bodyweight-squat",
+      "title": "Bodyweight squat — ACE",
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/135/bodyweight-squat/"
+    },
+    {
+      "id": "reference-bodyweight-reverse-lunge",
+      "title": "Bodyweight reverse lunge — StrengthLog",
+      "url": "https://www.strengthlog.com/reverse-body-weight-lunges/"
+    },
+    {
+      "id": "reference-bodyweight-glute-bridge",
+      "title": "Bodyweight glute bridge — StrengthLog",
+      "url": "https://www.strengthlog.com/glute-bridge/"
+    },
+    {
+      "id": "reference-bodyweight-standing-calf-raise",
+      "title": "Bodyweight standing calf raise — StrengthLog",
+      "url": "https://www.strengthlog.com/heel-raise/"
+    },
+    {
+      "id": "reference-dumbbell-bulgarian-split-squat",
+      "title": "Dumbbell Bulgarian split squat — StrengthLog",
+      "url": "https://www.strengthlog.com/bulgarian-split-squat/"
+    },
+    {
+      "id": "reference-dumbbell-step-up",
+      "title": "Dumbbell step-up — StrengthLog",
+      "url": "https://www.strengthlog.com/step-up/"
+    },
+    {
+      "id": "reference-dumbbell-walking-lunge",
+      "title": "Dumbbell walking lunge — StrengthLog",
+      "url": "https://www.strengthlog.com/dumbbell-walking-lunge/"
+    },
+    {
+      "id": "reference-single-leg-dumbbell-romanian-deadlift",
+      "title": "Single-leg dumbbell Romanian deadlift — StrengthLog",
+      "url": "https://www.strengthlog.com/single-leg-romanian-deadlift/"
+    },
+    {
+      "id": "reference-standing-dumbbell-shoulder-press",
+      "title": "Standing dumbbell shoulder press — StrengthLog",
+      "url": "https://www.strengthlog.com/dumbbell-shoulder-press/"
+    },
+    {
+      "id": "reference-dumbbell-bent-over-row",
+      "title": "Bilateral dumbbell bent-over row — PureGym",
+      "url": "https://www.puregym.com/exercises/back/rows/dumbbell-bent-over-row/"
+    },
+    {
+      "id": "reference-dumbbell-floor-press",
+      "title": "Dumbbell floor press — StrengthLog",
+      "url": "https://www.strengthlog.com/dumbbell-floor-press/"
+    },
+    {
+      "id": "reference-cable-hip-abduction",
+      "title": "Cable hip abduction — StrengthLog",
+      "url": "https://www.strengthlog.com/cable-machine-hip-abduction/"
+    },
+    {
+      "id": "reference-side-lying-hip-abduction",
+      "title": "Side-lying hip abduction — ACE",
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/38/side-lying-hip-abduction/"
+    },
+    {
+      "id": "reference-cable-hip-kickback",
+      "title": "Cable hip kickback — StrengthLog",
+      "url": "https://www.strengthlog.com/cable-glute-kickback/"
+    },
+    {
+      "id": "reference-dumbbell-pullover",
+      "title": "Dumbbell pullover — StrengthLog",
+      "url": "https://www.strengthlog.com/dumbbell-pullover/"
+    },
+    {
+      "id": "reference-single-leg-machine-leg-extension",
+      "title": "Single-leg machine leg extension — StrengthLog",
+      "url": "https://www.strengthlog.com/one-legged-leg-extension/"
+    },
+    {
+      "id": "reference-single-leg-leg-press",
+      "title": "Single-leg leg press — NASM",
+      "url": "https://www.nasm.org/resource-center/exercise-library/single-leg-press"
+    },
+    {
+      "id": "reference-barbell-shrug",
+      "title": "Barbell shrug — StrengthLog",
+      "url": "https://www.strengthlog.com/barbell-shrug/"
+    },
+    {
+      "id": "reference-dumbbell-shrug",
+      "title": "Dumbbell shrug — StrengthLog",
+      "url": "https://www.strengthlog.com/dumbbell-shrug/"
+    },
+    {
+      "id": "reference-ez-bar-reverse-curl",
+      "title": "EZ-bar reverse curl — WorkoutLabs",
+      "url": "https://workoutlabs.com/exercise-guide/reverse-grip-ez-curl-bar-curls/"
+    },
+    {
+      "id": "reference-dumbbell-wrist-curl",
+      "title": "Dumbbell wrist curl — StrengthLog",
+      "url": "https://www.strengthlog.com/dumbbell-wrist-curl/"
+    },
+    {
+      "id": "reference-dumbbell-wrist-extension",
+      "title": "Dumbbell wrist extension — StrengthLog",
+      "url": "https://www.strengthlog.com/dumbbell-wrist-extension/"
+    },
+    {
+      "id": "reference-dead-bug",
+      "title": "Dead bug — StrengthLog",
+      "url": "https://www.strengthlog.com/dead-bugs/"
+    },
+    {
+      "id": "reference-bird-dog",
+      "title": "Bird dog — ACE",
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/14/bird-dog/"
+    },
+    {
+      "id": "reference-reverse-crunch",
+      "title": "Reverse crunch — ACE",
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/76/reverse-crunch/"
     }
   ],
   "exercises": [
@@ -3519,6 +3763,864 @@
       "support": "free",
       "loadUnit": "band",
       "notes": "Resistir à rotação do tronco, com resistência lateral."
+    },
+    {
+      "id": "bodyweight-squat",
+      "name": {
+        "pt": "Agachamento com peso corporal",
+        "en": "Bodyweight squat"
+      },
+      "aliases": [
+        "Agachamento sem carga",
+        "Air squat"
+      ],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "bodyweight"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "bodyweight",
+      "notes": "Agachamento bilateral sem carga externa. O peso corporal não deve ser preenchido como carga levantada.",
+      "sourceIds": [
+        "reference-bodyweight-squat"
+      ]
+    },
+    {
+      "id": "bodyweight-reverse-lunge",
+      "name": {
+        "pt": "Avanço reverso sem carga",
+        "en": "Bodyweight reverse lunge"
+      },
+      "aliases": [
+        "Afundo reverso sem carga"
+      ],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "bodyweight"
+      ],
+      "laterality": "unilateral",
+      "support": "free",
+      "loadUnit": "bodyweight",
+      "notes": "Dê o passo para trás e retorne à posição inicial. Repetições por perna; use a mesma contagem nos dois lados.",
+      "sourceIds": [
+        "reference-bodyweight-reverse-lunge"
+      ]
+    },
+    {
+      "id": "bodyweight-glute-bridge",
+      "name": {
+        "pt": "Ponte de glúteos sem carga",
+        "en": "Bodyweight glute bridge"
+      },
+      "aliases": [
+        "Ponte sem peso"
+      ],
+      "group": "glutes",
+      "primaryMuscles": [
+        "gluteus-maximus"
+      ],
+      "secondaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "transversus-abdominis"
+      ],
+      "movementPattern": "hip-extension",
+      "mechanic": "compound",
+      "substitutionFamily": "hip-thrust",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "bodyweight",
+      "notes": "Ponte bilateral com ombros no solo, sem banco e sem carga externa. Não registre o peso corporal como kg levantados.",
+      "sourceIds": [
+        "reference-bodyweight-glute-bridge"
+      ]
+    },
+    {
+      "id": "bodyweight-standing-calf-raise",
+      "name": {
+        "pt": "Panturrilha em pé sem carga",
+        "en": "Bodyweight standing calf raise"
+      },
+      "aliases": [
+        "Elevação de panturrilha sem peso"
+      ],
+      "group": "calves",
+      "primaryMuscles": [
+        "gastrocnemius",
+        "soleus"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "plantar-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "standing-calf",
+      "equipment": [
+        "bodyweight"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "bodyweight",
+      "notes": "Elevação bilateral dos calcanhares no chão, com joelhos estendidos. Esta variação não exige degrau nem carga externa.",
+      "sourceIds": [
+        "reference-bodyweight-standing-calf-raise"
+      ]
+    },
+    {
+      "id": "dumbbell-bulgarian-split-squat",
+      "name": {
+        "pt": "Agachamento búlgaro com halteres",
+        "en": "Dumbbell Bulgarian split squat"
+      },
+      "aliases": [
+        "Búlgaro com halteres"
+      ],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "gluteus-medius",
+        "transversus-abdominis"
+      ],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "dumbbells",
+        "flat-bench"
+      ],
+      "laterality": "unilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Pé traseiro elevado no banco; não é o agachamento dividido com ambos os pés no chão. Carga por halter e repetições por perna.",
+      "sourceIds": [
+        "reference-dumbbell-bulgarian-split-squat"
+      ]
+    },
+    {
+      "id": "dumbbell-step-up",
+      "name": {
+        "pt": "Step-up com halteres",
+        "en": "Dumbbell step-up"
+      },
+      "aliases": [
+        "Subida na caixa com halteres"
+      ],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "gluteus-medius",
+        "transversus-abdominis"
+      ],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "dumbbells",
+        "step-box"
+      ],
+      "laterality": "unilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Subida em caixa ou step firme, com um halter em cada mão. Registre carga por halter e subidas completas por perna; altura do apoio muda a amplitude.",
+      "sourceIds": [
+        "reference-dumbbell-step-up"
+      ]
+    },
+    {
+      "id": "dumbbell-walking-lunge",
+      "name": {
+        "pt": "Passada caminhando com halteres",
+        "en": "Dumbbell walking lunge"
+      },
+      "aliases": [
+        "Avanço caminhando com halteres"
+      ],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "gluteus-medius",
+        "transversus-abdominis"
+      ],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "unilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Passadas alternadas com deslocamento; requer espaço livre. Registre carga por halter e repetições por perna, sem somar os dois lados.",
+      "sourceIds": [
+        "reference-dumbbell-walking-lunge"
+      ]
+    },
+    {
+      "id": "single-leg-dumbbell-romanian-deadlift",
+      "name": {
+        "pt": "RDL unilateral com halter",
+        "en": "Single-leg dumbbell Romanian deadlift"
+      },
+      "aliases": [
+        "Terra romeno unilateral com halter"
+      ],
+      "group": "hamstrings",
+      "primaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus",
+        "gluteus-maximus"
+      ],
+      "secondaryMuscles": [
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "erector-spinae",
+        "transversus-abdominis",
+        "gluteus-medius"
+      ],
+      "movementPattern": "hip-hinge",
+      "mechanic": "compound",
+      "substitutionFamily": "romanian-deadlift",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "unilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Dobradiça de quadril sobre uma perna, com um halter na mão oposta. Registre o peso desse halter e repetições por perna; a demanda de equilíbrio difere do RDL bilateral.",
+      "sourceIds": [
+        "reference-single-leg-dumbbell-romanian-deadlift"
+      ]
+    },
+    {
+      "id": "standing-dumbbell-shoulder-press",
+      "name": {
+        "pt": "Desenvolvimento em pé com halteres",
+        "en": "Standing dumbbell shoulder press"
+      },
+      "aliases": [
+        "Desenvolvimento halteres em pé"
+      ],
+      "group": "shoulders",
+      "primaryMuscles": [
+        "deltoid-anterior"
+      ],
+      "secondaryMuscles": [
+        "deltoid-lateral",
+        "triceps-brachii",
+        "serratus-anterior"
+      ],
+      "stabilizerMuscles": [
+        "transversus-abdominis",
+        "erector-spinae"
+      ],
+      "movementPattern": "vertical-push",
+      "mechanic": "compound",
+      "substitutionFamily": "shoulder-press",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Empurre os dois halteres acima da cabeça em pé, sem impulso das pernas. Carga por halter; não exige banco e requer estabilização do tronco.",
+      "sourceIds": [
+        "reference-standing-dumbbell-shoulder-press"
+      ]
+    },
+    {
+      "id": "dumbbell-bent-over-row",
+      "name": {
+        "pt": "Remada curvada bilateral com halteres",
+        "en": "Bilateral dumbbell bent-over row"
+      },
+      "aliases": [
+        "Remada curvada com dois halteres"
+      ],
+      "group": "back",
+      "primaryMuscles": [
+        "latissimus-dorsi",
+        "rhomboids",
+        "trapezius-middle"
+      ],
+      "secondaryMuscles": [
+        "deltoid-posterior",
+        "biceps-brachii",
+        "brachialis"
+      ],
+      "stabilizerMuscles": [
+        "erector-spinae",
+        "transversus-abdominis"
+      ],
+      "movementPattern": "horizontal-pull",
+      "mechanic": "compound",
+      "substitutionFamily": "back-row",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Remada dos dois braços com tronco inclinado e sem banco. Registre carga por halter; o tronco mantém a posição durante as repetições.",
+      "sourceIds": [
+        "reference-dumbbell-bent-over-row"
+      ]
+    },
+    {
+      "id": "dumbbell-floor-press",
+      "name": {
+        "pt": "Supino no chão com halteres",
+        "en": "Dumbbell floor press"
+      },
+      "aliases": [
+        "Floor press com halteres"
+      ],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "triceps-brachii",
+        "deltoid-anterior"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "horizontal-push",
+      "mechanic": "compound",
+      "substitutionFamily": "flat-chest-press",
+      "equipment": [
+        "dumbbells",
+        "mat"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "per-dumbbell",
+      "notes": "Supino bilateral deitado no chão. O solo limita a descida dos braços; registre carga por halter e não suponha a mesma amplitude do banco.",
+      "sourceIds": [
+        "reference-dumbbell-floor-press"
+      ]
+    },
+    {
+      "id": "cable-hip-abduction",
+      "name": {
+        "pt": "Abdução de quadril no cabo",
+        "en": "Cable hip abduction"
+      },
+      "aliases": [
+        "Abdução na polia baixa"
+      ],
+      "group": "abductors",
+      "primaryMuscles": [
+        "gluteus-medius",
+        "gluteus-minimus"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [
+        "transversus-abdominis"
+      ],
+      "movementPattern": "hip-abduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "abduction",
+      "equipment": [
+        "cable",
+        "ankle-cuff"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Afaste uma perna lateralmente com tornozeleira na polia baixa. Apoio da mão na estrutura do aparelho; registre carga selecionada e repetições por perna.",
+      "sourceIds": [
+        "reference-cable-hip-abduction"
+      ]
+    },
+    {
+      "id": "side-lying-hip-abduction",
+      "name": {
+        "pt": "Abdução de quadril deitada de lado",
+        "en": "Side-lying hip abduction"
+      },
+      "aliases": [
+        "Abdução lateral no solo"
+      ],
+      "group": "abductors",
+      "primaryMuscles": [
+        "gluteus-medius",
+        "gluteus-minimus"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "hip-abduction",
+      "mechanic": "isolation",
+      "substitutionFamily": "abduction",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "bodyweight",
+      "notes": "Eleve a perna de cima deitado de lado, sem carga externa. Repetições por perna; mantenha a pelve estável para distinguir abdução de rotação do quadril.",
+      "sourceIds": [
+        "reference-side-lying-hip-abduction"
+      ]
+    },
+    {
+      "id": "cable-hip-kickback",
+      "name": {
+        "pt": "Extensão de quadril no cabo",
+        "en": "Cable hip kickback"
+      },
+      "aliases": [
+        "Coice no cabo",
+        "Glúteo na polia",
+        "Cable glute kickback"
+      ],
+      "group": "glutes",
+      "primaryMuscles": [
+        "gluteus-maximus"
+      ],
+      "secondaryMuscles": [
+        "biceps-femoris",
+        "semitendinosus",
+        "semimembranosus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [
+        "transversus-abdominis"
+      ],
+      "movementPattern": "hip-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "hip-kickback",
+      "equipment": [
+        "cable",
+        "ankle-cuff"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Leve uma perna para trás usando tornozeleira na polia baixa e apoio na estrutura do aparelho. Registre carga selecionada e repetições por perna. Família própria, sem troca automática com hip thrust.",
+      "sourceIds": [
+        "reference-cable-hip-kickback"
+      ]
+    },
+    {
+      "id": "dumbbell-pullover",
+      "name": {
+        "pt": "Pullover com halter",
+        "en": "Dumbbell pullover"
+      },
+      "aliases": [
+        "Pulôver com halter"
+      ],
+      "group": "chest",
+      "primaryMuscles": [
+        "pectoralis-major"
+      ],
+      "secondaryMuscles": [
+        "latissimus-dorsi"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "shoulder-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "pullover",
+      "equipment": [
+        "dumbbells",
+        "flat-bench"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Um halter segurado pelas duas mãos, com tronco apoiado no banco. Registre o peso do único halter. Família própria: participação de peitoral e dorsal não implica equivalência com pulldown.",
+      "sourceIds": [
+        "reference-dumbbell-pullover"
+      ]
+    },
+    {
+      "id": "single-leg-machine-leg-extension",
+      "name": {
+        "pt": "Extensora unilateral na máquina",
+        "en": "Single-leg machine leg extension"
+      },
+      "aliases": [
+        "Cadeira extensora unilateral"
+      ],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "leg-extension",
+      "equipment": [
+        "leg-extension"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Extensão de um joelho por vez, com apoio da máquina. Registre carga selecionada e repetições por perna; ajuste a carga ao trocar da versão bilateral.",
+      "sourceIds": [
+        "reference-single-leg-machine-leg-extension"
+      ]
+    },
+    {
+      "id": "single-leg-leg-press",
+      "name": {
+        "pt": "Leg press unilateral",
+        "en": "Single-leg leg press"
+      },
+      "aliases": [
+        "Leg press com uma perna"
+      ],
+      "group": "quadriceps",
+      "primaryMuscles": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "knee-dominant",
+      "mechanic": "compound",
+      "substitutionFamily": "quad-compound",
+      "equipment": [
+        "leg-press"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "total",
+      "notes": "Leg press com uma perna por vez. Registre a carga total selecionada e repetições por perna; mantenha o quadril apoiado e ajuste a carga da versão bilateral.",
+      "sourceIds": [
+        "reference-single-leg-leg-press"
+      ]
+    },
+    {
+      "id": "barbell-shrug",
+      "name": {
+        "pt": "Encolhimento com barra",
+        "en": "Barbell shrug"
+      },
+      "aliases": [
+        "Encolhimento de ombros com barra"
+      ],
+      "group": "back",
+      "primaryMuscles": [
+        "trapezius-upper"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [
+        "wrist-flexors"
+      ],
+      "movementPattern": "scapular-elevation",
+      "mechanic": "isolation",
+      "substitutionFamily": "shrug",
+      "equipment": [
+        "barbell"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Elevação dos ombros em pé, com braços estendidos. Registre barra e anilhas juntas. Não confundir com remada ou elevação lateral.",
+      "sourceIds": [
+        "reference-barbell-shrug"
+      ]
+    },
+    {
+      "id": "dumbbell-shrug",
+      "name": {
+        "pt": "Encolhimento com halteres",
+        "en": "Dumbbell shrug"
+      },
+      "aliases": [
+        "Encolhimento de ombros com halteres"
+      ],
+      "group": "back",
+      "primaryMuscles": [
+        "trapezius-upper"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [
+        "wrist-flexors"
+      ],
+      "movementPattern": "scapular-elevation",
+      "mechanic": "isolation",
+      "substitutionFamily": "shrug",
+      "equipment": [
+        "dumbbells"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "per-dumbbell",
+      "notes": "Elevação dos ombros em pé, com braços estendidos. Registre o peso de cada halter. Não confundir com remada ou elevação lateral.",
+      "sourceIds": [
+        "reference-dumbbell-shrug"
+      ]
+    },
+    {
+      "id": "ez-bar-reverse-curl",
+      "name": {
+        "pt": "Rosca inversa com barra W",
+        "en": "EZ-bar reverse curl"
+      },
+      "aliases": [
+        "Rosca pronada com barra W"
+      ],
+      "group": "forearms",
+      "primaryMuscles": [
+        "brachioradialis",
+        "brachialis"
+      ],
+      "secondaryMuscles": [
+        "biceps-brachii"
+      ],
+      "stabilizerMuscles": [
+        "wrist-extensors"
+      ],
+      "movementPattern": "elbow-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "pronated-curl",
+      "equipment": [
+        "ez-bar"
+      ],
+      "laterality": "bilateral",
+      "support": "free",
+      "loadUnit": "total",
+      "notes": "Flexione os cotovelos com pegada pronada na barra W. Registre barra e anilhas juntas; a família é diferente das roscas supinada e martelo.",
+      "sourceIds": [
+        "reference-ez-bar-reverse-curl"
+      ]
+    },
+    {
+      "id": "dumbbell-wrist-curl",
+      "name": {
+        "pt": "Flexão de punho com halter",
+        "en": "Dumbbell wrist curl"
+      },
+      "aliases": [
+        "Flexão de punho com halter unilateral"
+      ],
+      "group": "forearms",
+      "primaryMuscles": [
+        "wrist-flexors"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "wrist-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "wrist-curl",
+      "equipment": [
+        "dumbbells",
+        "flat-bench"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "per-dumbbell",
+      "notes": "Sentado no banco, apoie o antebraço na coxa com a palma voltada para cima. Mova o punho, mantendo o antebraço apoiado. Registre peso do halter e repetições por lado.",
+      "sourceIds": [
+        "reference-dumbbell-wrist-curl"
+      ]
+    },
+    {
+      "id": "dumbbell-wrist-extension",
+      "name": {
+        "pt": "Extensão de punho com halter",
+        "en": "Dumbbell wrist extension"
+      },
+      "aliases": [
+        "Extensão de punho com halter unilateral"
+      ],
+      "group": "forearms",
+      "primaryMuscles": [
+        "wrist-extensors"
+      ],
+      "secondaryMuscles": [],
+      "stabilizerMuscles": [],
+      "movementPattern": "wrist-extension",
+      "mechanic": "isolation",
+      "substitutionFamily": "wrist-extension",
+      "equipment": [
+        "dumbbells",
+        "flat-bench"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "per-dumbbell",
+      "notes": "Sentado no banco, apoie o antebraço na coxa com a palma voltada para baixo. Mova o punho, mantendo o antebraço apoiado. Registre peso do halter e repetições por lado.",
+      "sourceIds": [
+        "reference-dumbbell-wrist-extension"
+      ]
+    },
+    {
+      "id": "dead-bug",
+      "name": {
+        "pt": "Dead bug",
+        "en": "Dead bug"
+      },
+      "aliases": [
+        "Inseto morto"
+      ],
+      "group": "core",
+      "primaryMuscles": [
+        "rectus-abdominis",
+        "transversus-abdominis"
+      ],
+      "secondaryMuscles": [
+        "obliques"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "anti-extension",
+      "mechanic": "compound",
+      "substitutionFamily": "dead-bug",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "laterality": "unilateral",
+      "support": "supported",
+      "loadUnit": "bodyweight",
+      "notes": "Variação dinâmica: estenda e recolha braço e perna opostos mantendo o tronco estável no solo. Registre repetições por lado, sem somar os lados; não registre segundos no campo de repetições.",
+      "sourceIds": [
+        "reference-dead-bug"
+      ]
+    },
+    {
+      "id": "bird-dog",
+      "name": {
+        "pt": "Bird dog",
+        "en": "Bird dog"
+      },
+      "aliases": [
+        "Perdigueiro"
+      ],
+      "group": "core",
+      "primaryMuscles": [
+        "erector-spinae",
+        "transversus-abdominis"
+      ],
+      "secondaryMuscles": [
+        "gluteus-maximus",
+        "deltoid-anterior"
+      ],
+      "stabilizerMuscles": [
+        "obliques"
+      ],
+      "movementPattern": "anti-rotation",
+      "mechanic": "compound",
+      "substitutionFamily": "bird-dog",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "laterality": "unilateral",
+      "support": "free",
+      "loadUnit": "bodyweight",
+      "notes": "Variação dinâmica em quatro apoios: alcance com braço e perna opostos e retorne. Repetições por lado; evite girar o tronco. Não representa uma sustentação cronometrada.",
+      "sourceIds": [
+        "reference-bird-dog"
+      ]
+    },
+    {
+      "id": "reverse-crunch",
+      "name": {
+        "pt": "Abdominal reverso",
+        "en": "Reverse crunch"
+      },
+      "aliases": [
+        "Crunch reverso"
+      ],
+      "group": "core",
+      "primaryMuscles": [
+        "rectus-abdominis"
+      ],
+      "secondaryMuscles": [
+        "obliques"
+      ],
+      "stabilizerMuscles": [],
+      "movementPattern": "trunk-flexion",
+      "mechanic": "isolation",
+      "substitutionFamily": "reverse-crunch",
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "laterality": "bilateral",
+      "support": "supported",
+      "loadUnit": "bodyweight",
+      "notes": "Eleve a pelve de forma controlada com os joelhos dobrados, mantendo a parte superior do tronco apoiada. Conte cada elevação e retorno como uma repetição; não é apenas elevar as pernas.",
+      "sourceIds": [
+        "reference-reverse-crunch"
+      ]
     }
   ]
 }

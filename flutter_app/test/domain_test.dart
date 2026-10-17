@@ -110,7 +110,7 @@ void main() {
     );
   });
   test('catalog aliases, explicit IDs and legacy slots preserve identity', () {
-    expect(catalog.exercises.length, 90);
+    expect(catalog.exercises.length, 115);
     final slot = exercisesOf(original, 0)[0], known = catalog.resolve(slot)!;
     expect(catalog.resolve({'name': 'SUPINO RETO BARRA'})?['id'], known['id']);
     expect(

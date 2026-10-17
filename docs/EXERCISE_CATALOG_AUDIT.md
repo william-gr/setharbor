@@ -2,7 +2,7 @@
 
 **Conclusão:** 90 exercícios formam uma base útil para musculação em academia, mas a cobertura é desigual. A ampliação mais valiosa está em treino com pouco equipamento, movimentos unilaterais e famílias com poucas alternativas. Recomendo uma primeira seleção de **25 candidatos**, chegando a aproximadamente **115 exercícios após revisão**, acompanhada de melhorias na classificação. Essa quantidade é uma proposta de escopo, não uma meta científica de completude.
 
-Esta entrega é uma análise: nenhum exercício, ID, regra de troca ou contrato de dados foi alterado.
+Este documento preserva a análise da revisão 1. A implementação posterior dos 25 candidatos está registrada em [Catálogo — revisão 2](EXERCISE_CATALOG_REVISION_2.md); os números abaixo continuam descrevendo a base original.
 
 ## Base e método
 
@@ -91,7 +91,7 @@ Prioridade de produto: manter as famílias conservadoras e considerar disponibil
 
 ## Primeira expansão proposta: 25 candidatos
 
-Lista editorial para revisão, **ainda não implementada**. Os candidatos abaixo não têm entrada explícita no catálogo atual. Não devem receber automaticamente a família de um exercício parecido pelo nome.
+Lista editorial proposta nesta análise e posteriormente implementada na revisão 2, com as decisões documentadas no relatório acima. Os candidatos abaixo não tinham entrada explícita na revisão 1. Não devem receber automaticamente a família de um exercício parecido pelo nome.
 
 | Lote | Candidatos | Ganho esperado |
 | --- | --- | --- |

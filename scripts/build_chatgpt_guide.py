@@ -13,7 +13,7 @@ def render():
     labels={key:{item['id']:item['name']['pt'] for item in catalog[key]} for key in ['groups','equipment','muscles']}
     rows=[]
     for exercise in catalog['exercises']:
-        cells=[exercise['id'],exercise['name']['pt'],exercise['name']['en'],labels['groups'][exercise['group']],', '.join(labels['equipment'][v] for v in exercise['equipment']),', '.join(labels['muscles'][v] for v in exercise['primaryMuscles'])]
+        cells=[exercise['id'],exercise['name']['pt'],exercise['name']['en'],labels['groups'][exercise['group']],', '.join(labels['equipment'][v] for v in exercise['equipment']),', '.join(labels['muscles'][v] for v in exercise['primaryMuscles']),exercise['notes']]
         rows.append('<tr>'+''.join('<td>'+html.escape(value)+'</td>' for value in cells)+'</tr>')
     example=json.loads((ROOT/'e2e/fixtures/link-three-day.json').read_text())
     example['days']=example['days'][:1]
@@ -33,6 +33,7 @@ assert len(url) <= """+str(limit)
 <p>Depois de conversar, toque no link devolvido pelo ChatGPT para revisar e aplicar a ficha no SetHarbor já instalado.</p>
 <h2>Instruções para o ChatGPT</h2>
 <p>Pergunte objetivos, frequência e equipamentos antes de criar. Organize uma sequência cíclica A/B/C; faltar um dia não muda o próximo treino. Use os catalogIds exatos da tabela abaixo e adapte volume/repetições ao pedido. Ao revisar, incremente revision e preserve os IDs dos treinos mantidos para conservar o próximo da sequência. Use IDs novos para um programa novo. Ao revisar uma ficha enviada, preserve IDs de posições somente se o movimento permanecer igual. Não invente catalogIds. Se não puder consultar esta página ou executar a codificação, explique a limitação em vez de inventar um link.</p>
+<p>Considere todos os equipamentos listados, inclusive banco, caixa/step e tornozeleira. Consulte as notas: nos novos exercícios unilaterais, prescreva repetições por lado e não some os lados. Carga por halter não é a soma dos dois. As famílias indicam opções de movimento, não equivalência de carga ou disponibilidade. Estes novos exercícios usam repetições; não coloque segundos no campo de repetições registradas.</p>
 <p>Entregue um link clicável com o texto <strong>Abrir no SetHarbor</strong>, não uma solicitação para copiar JSON ou importar arquivo. Mostre também um resumo do treino para revisão. A ficha fica no fragmento do próprio link; não hospede a ficha do usuário nem envie histórico/cargas para esta página.</p>
 <h2>Contrato da ficha</h2>
 <ul><li>format: meu-treino-plan; schemaVersion: 1; revision: inteiro positivo, maior que a revisão atual quando fornecida.</li>
@@ -47,7 +48,7 @@ assert len(url) <= """+str(limit)
 <p>Retorne em Markdown: [Abrir no SetHarbor](URL_GERADA). O app valida e pede confirmação. Se abrir no navegador, a página oferece um botão para abrir o app. Treinos em andamento bloqueiam a troca; sessões anteriores são preservadas.</p>
 <h2>Catálogo offline · '''+str(len(catalog['exercises']))+''' exercícios · revisão '''+str(catalog['revision'])+'''</h2>
 <p>Dados idênticos ao catálogo do app. Consulte somente os movimentos relevantes ao equipamento/objetivo. <a href="catalog.json">Catálogo completo em JSON</a>.</p>
-<div class="table-scroll"><table><thead><tr><th>catalogId</th><th>Nome</th><th>English name</th><th>Grupo</th><th>Equipamento</th><th>Músculos principais</th></tr></thead><tbody>
+<div class="table-scroll"><table><thead><tr><th>catalogId</th><th>Nome</th><th>English name</th><th>Grupo</th><th>Equipamento</th><th>Músculos principais</th><th>Execução e registro</th></tr></thead><tbody>
 '''+ '\n'.join(rows)+'''
 </tbody></table></div>
 <p><a href="../">Teste de links e APK Trial</a> · <a href="https://github.com/william-gr/setharbor">Código aberto · MIT</a></p>

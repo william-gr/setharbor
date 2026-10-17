@@ -1,8 +1,10 @@
 # Offline exercise catalog
 
-SetHarbor bundles 90 exercises, 12 groups and 35 muscles in `app/src/main/assets/exercise-catalog.json`. The catalog is original, manually curated data distributed with the project under MIT. Portuguese and English names, aliases, primary/secondary/stabilizer muscles, equipment, movement patterns, substitution families and load units share stable IDs. Reference links are included in the JSON; no external API, paid service, images or network access is required.
+SetHarbor bundles 115 exercises, 13 groups and 37 muscles in `app/src/main/assets/exercise-catalog.json`. The catalog is original, manually curated data distributed with the project under MIT. Portuguese and English names, aliases, primary/secondary/stabilizer muscles, equipment, movement patterns, substitution families and load units share stable IDs. Reference links are included in the JSON; no external API, paid service, images or network access is required.
 
-A [coverage audit dated 2026-10-17](EXERCISE_CATALOG_AUDIT.md) quantifies current gaps and proposes the next expansion; its candidates are not yet part of the catalog.
+A [coverage audit dated 2026-10-17](EXERCISE_CATALOG_AUDIT.md) records the original 90-exercise baseline. [Revision 2](EXERCISE_CATALOG_REVISION_2.md) implements its first 25 additions, with equipment coverage, classification decisions and validation results.
+
+Revision 2 adds optional `sourceIds` on the 25 new records, referencing the root `sources` table. These are editorial references, never fetched automatically. Existing records and schema 1 remain unchanged. New descriptions are original project text; third-party images and descriptions are not bundled.
 
 ## Plans and identity
 
@@ -22,8 +24,10 @@ The current kg/repetition interface excludes elastic-band and isometric alternat
 
 Any entered kg/reps or checked set blocks switching that position, including sets hidden by the adaptation phase. Clearing the values and checks allows switching again. Other exercises' draft values remain intact.
 
-Session overrides are stored inside `draft<N>.exerciseOverrides`, keyed by plan position ID. They survive restart, rotation and backup v3. Older v1/v2 backups are still accepted. New exports use v3 so older app versions cannot silently ignore a session override and attach its weights to the planned exercise. Overrides are validated before a backup replaces state. A saved history entry contains the effective plan snapshot with actual exercise names/catalog IDs. The active plan is not changed. Saving clears that day's draft, so the next session starts with the planned exercises. Last-performance lookup uses catalog identity when known and preserves custom/legacy ID compatibility.
+Session overrides are stored inside `draft<N>.exerciseOverrides`, keyed by plan position ID. They survive restart and backups v3/v4. Current exports use v4 (including the cyclic workout cursor); imports still accept v1–v4. V3 introduced explicit overrides so older apps cannot silently attach their weights to the planned exercise. Overrides are validated before a backup replaces state. A saved history entry contains the effective plan snapshot with actual exercise names/catalog IDs. The active plan is not changed. Saving clears that day's draft, so the next session starts with the planned exercises. Last-performance lookup uses catalog identity when known and preserves custom/legacy ID compatibility.
 
 ## Validation
 
-`./gradlew testDebugUnitTest assembleDebug assembleE2e lintDebug` checks catalog references, legacy identity, movement families, data protection, session isolation, snapshot immutability and malformed overrides. E2E scenarios 31–35 exercise random swaps, restart, blocked changes, real document export/restore and load separation through the Android UI. All previous scenarios remain in the suite.
+Flutter: `flutter analyze --no-pub`, `flutter test --branch-coverage` and `python3 scripts/check_flutter_coverage.py` (the last command from the repository root). Expansion tests freeze revision-1 names/families, restore every old eligible swap and round-trip all 25 new exercises through history/backups. Android and Flutter assets must remain byte-identical.
+
+Legacy Android: `./gradlew coreCoverageVerification` checks catalog references, legacy identity, movement families, data protection, session isolation, snapshot immutability and malformed overrides. E2E scenarios 31–35 exercise random swaps, restart, blocked changes, real document export/restore and load separation through the Android UI. All previous scenarios remain in the suite.
