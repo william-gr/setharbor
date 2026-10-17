@@ -555,19 +555,18 @@ class _ExerciseCardState extends State<ExerciseCard> {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
-                if (known != null) ...[
-                  IconButton(
-                    tooltip:
-                        '${details ? 'Ocultar' : 'Mostrar'} detalhes · $slot',
-                    onPressed: () => setState(() => details = !details),
-                    icon: const Icon(Icons.info_outline),
-                  ),
+                IconButton(
+                  tooltip:
+                      '${details ? 'Ocultar' : 'Mostrar'} detalhes · $slot',
+                  onPressed: () => setState(() => details = !details),
+                  icon: const Icon(Icons.info_outline),
+                ),
+                if (known != null)
                   IconButton(
                     tooltip: 'Trocar por similar · $slot',
                     onPressed: widget.onSwap,
                     icon: const Icon(Icons.swap_horiz),
                   ),
-                ],
               ],
             ),
             if (details && known != null)
@@ -577,10 +576,11 @@ class _ExerciseCardState extends State<ExerciseCard> {
               Text(
                 'Só neste treino${details ? ' · Planejado: ${planned['name']}' : ''}',
               ),
-            TextButton(
-              onPressed: () => widget.onSearch(name),
-              child: const Text('Ver execução no Google ↗'),
-            ),
+            if (details)
+              TextButton(
+                onPressed: () => widget.onSearch(name),
+                child: const Text('Ver execução no Google ↗'),
+              ),
             Text('$count séries × ${planned['reps']} reps'),
             if (last.isNotEmpty) Text('Último: $last'),
             for (var i = 0; i < count; i++)

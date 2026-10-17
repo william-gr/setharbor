@@ -12,6 +12,8 @@ Migração automática Android: leia SharedPreferences training, valide tudo, gr
 
 Todos os contratos e invariantes abaixo continuam aplicáveis ao Flutter: identidade de movimentos, cursor, snapshots, drafts, backupsv1–v4, campos opcionais, prompt sem dados privados, preview/confirmar links e bloqueio de substituição com rascunhos. As referências a Java/Gradle/SharedPreferences diretas e aos51E2E nativos abaixo descrevem a **implementação legada preservada em app/**, não a arquitetura da UI atual.
 
+Nos cartões Flutter, Ver execução no Google fica oculto por padrão junto dos detalhes e aparece ao tocar no ícone de informação. O ícone também existe em exercícios personalizados sem catálogo para preservar o acesso à pesquisa; a troca por similar continua exclusiva dos exercícios conhecidos.
+
 ## Referência da implementação Android legada
 
 ## Objetivo

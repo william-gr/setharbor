@@ -27,6 +27,7 @@ Não marcar execução/CI como concluídos sem consultar os resultados reais.
 
 - [x] Permitir salvar séries feitas com peso/repetições opcionais e apresentar corretamente histórico/valores anteriores.
 - [x] Adicionar pesquisa de execução no Google para exercícios planejados, trocados e personalizados.
+- [x] Ocultar o link de execução nos detalhes do cartão, abrindo pelo ícone de informação, inclusive em exercícios personalizados.
 
 ## Pesquisa futura: sequência cíclica de treinos
 

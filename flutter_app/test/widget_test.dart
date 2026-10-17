@@ -40,6 +40,7 @@ void main() {
       expect(find.text('SetHarbor'), findsOneWidget);
       expect(find.text('Próximo: Treino A'), findsOneWidget);
       expect(find.textContaining('Grupo:'), findsNothing);
+      expect(find.text('Ver execução no Google ↗'), findsNothing);
       await tester.scrollUntilVisible(
         find.byTooltip('Mostrar detalhes · legacy-0-0'),
         150,
@@ -48,8 +49,10 @@ void main() {
       await tester.tap(find.byTooltip('Mostrar detalhes · legacy-0-0'));
       await tester.pumpAndSettle();
       expect(find.textContaining('Grupo:'), findsOneWidget);
+      expect(find.text('Ver execução no Google ↗'), findsOneWidget);
       await tester.tap(find.byTooltip('Ocultar detalhes · legacy-0-0'));
       await tester.pumpAndSettle();
+      expect(find.text('Ver execução no Google ↗'), findsNothing);
       final card = find.byType(ExerciseCard).first;
       final check = find
           .descendant(of: card, matching: find.byType(Checkbox))
@@ -63,6 +66,8 @@ void main() {
         400,
         scrollable: find.byType(Scrollable).first,
       );
+      await tester.ensureVisible(find.text('Concluir e salvar treino'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Concluir e salvar treino'));
       await tester.pumpAndSettle();
       expect(find.text('Salvar treino?'), findsOneWidget);
