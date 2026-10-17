@@ -50,3 +50,10 @@ Comportamento a avaliar: A → B → C → A; faltar um dia não avança a sequ�
 - [ ] Retomar a validação AndroidAPI29 posteriormente, conforme preferência do usuário. A gravação e os três testes Dart passaram; o driver HTTPS falhou ao abrir/configurar o diálogo.
 - [ ] Validar num iPhone real e configurar assinatura/distribuição iOS.
 - [ ] Validar fluxo completo do ChatGPT no iPhone, incluindo leitura do guia e retorno pelo navegador/custom scheme.
+
+## Ampliação do catálogo
+
+- [x] Analisar cobertura dos 90 exercícios por grupo, equipamento, movimento, lateralidade e substituições. Ver [análise de 2026-10-17](docs/EXERCISE_CATALOG_AUDIT.md).
+- [ ] Revisar e implementar o primeiro lote proposto de 25 candidatos, preservando IDs/aliases legados e curadoria MIT.
+- [ ] Definir registro de duração da série e resistência de elástico antes de ampliar exercícios dependentes dessas medidas.
+- [ ] Avaliar preferências de equipamento, lateralidade e apoio nas substituições.

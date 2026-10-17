@@ -2,6 +2,8 @@
 
 SetHarbor bundles 90 exercises, 12 groups and 35 muscles in `app/src/main/assets/exercise-catalog.json`. The catalog is original, manually curated data distributed with the project under MIT. Portuguese and English names, aliases, primary/secondary/stabilizer muscles, equipment, movement patterns, substitution families and load units share stable IDs. Reference links are included in the JSON; no external API, paid service, images or network access is required.
 
+A [coverage audit dated 2026-10-17](EXERCISE_CATALOG_AUDIT.md) quantifies current gaps and proposes the next expansion; its candidates are not yet part of the catalog.
+
 ## Plans and identity
 
 An exercise's `id` continues to identify its position in a plan. Optional `catalogId` identifies the actual movement across positions and days. For example:
